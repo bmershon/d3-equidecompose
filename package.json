@@ -1,0 +1,36 @@
+{
+  "name": "d3-equidecompose",
+  "version": "0.0.1",
+  "description": "Compute a layout for cutting up polygon and rearranging the pieces to form another polygon of equal area.",
+  "keywords": [
+    "d3",
+    "triangulate",
+    "geometry",
+    "equidecomposability"
+  ],
+  "homepage": "https://github.com/bmershon/d3-equidecompose",
+  "license": "MIT",
+  "author": {
+    "name": "Brooks Mershon and Joy Patel"
+  },
+  "main": "build/d3-equidecompose.js",
+  "jsnext:main": "index",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/d3-equidecompose.git"
+  },
+  "scripts": {
+    "pretest": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -f umd -g d3-polygon:d3_polygon -n d3_equidecompose -o build/d3-equidecompose.js -- index.js",
+    "test": "tape 'test/**/*-test.js'",
+    "prepublish": "npm run test && uglifyjs build/d3-equidecompose.js -c -m -o build/d3-equidecompose.min.js"
+  },
+  "dependencies": {
+    "d3-polygon": "~0.2.1"
+  },
+  "devDependencies": {
+    "json2module": "0.0",
+    "rollup": "0.25",
+    "tape": "4",
+    "uglify-js": "2"
+  }
+}
