@@ -1,10 +1,12 @@
 import {default as angle} from "./angle";
 
+// Takes array of triangle vertices and returns
+// its "canonical" rectangle as an array of polygons
 export default function(T) {
   let index = 0,
       maxAngle = -Infinity;
-  
-  // ensure we start with obtuse angle, if there is one
+
+  // Find largest angle in triangle T
   for (let i = 0; i < 3; i++) {
     let theta = 0;
     theta = angle(T[i % 3], T[(i + 1) % 3], T[(i + 2) % 3]);

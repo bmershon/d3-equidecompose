@@ -20,7 +20,9 @@
     "url": "https://github.com/d3-equidecompose.git"
   },
   "scripts": {
+    "preflight": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -f umd -g d3-polygon:d3_polygon -n d3_equidecompose -o build/d3-equidecompose.js -- partials.js",
     "pretest": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -f umd -g d3-polygon:d3_polygon -n d3_equidecompose -o build/d3-equidecompose.js -- index.js",
+    "partials": "npm run preflight && tape 'preflight/**/*-test.js'",
     "test": "tape 'test/**/*-test.js'",
     "prepublish": "npm run test && uglifyjs build/d3-equidecompose.js -c -m -o build/d3-equidecompose.min.js"
   },
