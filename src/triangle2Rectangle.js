@@ -14,5 +14,6 @@ export default function(T) {
     }
   }
 
-  return maxAngle;
+  // TODO
+  return null;
 };
