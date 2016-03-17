@@ -15,9 +15,9 @@ export default function(a, b, c, d) {
       s, t;
 
   // Cramer's Rule
-  denom = u[0]*(-v[1]) - (-v[0])*u[1];
-  s = (q[0]*(-v[1]) - (-v[0])*q[1])/(denom);
-  t = (u[0]*q[1] - q[0]*u[1])/(denom);
+  denom = u[0] * (-v[1]) - (-v[0]) * u[1];
+  s = (q[0] * (-v[1]) - (-v[0]) * q[1]) / (denom);
+  t = (u[0] * q[1] - q[0] * u[1]) / (denom);
 
   return (inDelta(s, 0.5, 0.5 - 1e-6) && inDelta(t, 0.5, 0.5 - 1e-6))
         ? add(a, scale(s, u))

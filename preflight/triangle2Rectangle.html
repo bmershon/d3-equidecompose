@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+path {
+  stroke-width: 2px;
+  stroke-linecap: butt;
+}
+
+.triangle {
+  stroke: #000;
+  fill: none;
+}
+
+.debug {
+  stroke: #000;
+}
+
+.handle {
+  cursor: move;
+  pointer-events: all;
+  stroke-width: 2px;
+  stroke: #000;
+  fill: #ff9933;
+}
+
+</style>
+<svg width="960" height="500">
+</svg>
+<script src="../build/partials.js"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var a = [100, 200], b = [600, 300], c = [300, 400],
+    A0, A1, data, polygons;
+
+data = [a, b, c];
+polygons = partials.triangle2Rectangle(data);
+
+var drag = d3.behavior.drag()
+    .origin(function(d) { return {x: d[0], y: d[1]}; })
+    .on("dragstart", dragstarted)
+    .on("drag", dragged);
+
+var color = ["#A5A6BC", "#C1C2D8", "#A5A6BC"];
+
+var svg = d3.select("svg").append("g");
+
+var line = d3.svg.line()
+            .x(function(d) { return d[0]; })
+            .y(function(d) { return d[1]; })
+            .interpolate("linear-closed");
+
+
+var triangle = svg.append("path")
+                  .attr("class", "triangle")
+                  .datum(data)
+                  .attr("d", line);
+
+var debug = svg.selectAll(".debug")
+                   .data(polygons)
+
+debug.enter().append("path")
+                  .style("fill", function(d, i) { return color[i]; })
+                  .attr("class", "debug")
+                  .attr("d", line);
+
+debug.exit().remove();
+
+var handle = svg.selectAll(".handle")
+                .data(data);
+              
+handle.enter()
+      .append("circle")
+      .attr("class", "handle")
+      .attr("r", 10)
+      .attr("cx", function(d) { return d[0]; })
+      .attr("cy", function(d) { return d[1]; })
+
+handle.call(drag);
+
+update();
+
+function update() {
+  // triangle vertices driven by dragging handles
+  polygons = partials.triangle2Rectangle(data);
+  triangle
+      .attr("d", line);
+  debug.data(polygons);
+  debug.attr("d", line);
+  handle
+      .attr("cx", function(d) { return d[0]; })
+      .attr("cy", function(d) { return d[1]; });
+}
+
+function dragstarted(d) {
+  this.parentNode.appendChild(this);
+}
+
+function dragged(d) {
+  d[0] = d3.event.x;
+  d[1] = d3.event.y;
+  update();
+}
+
+</script>
