@@ -3,7 +3,7 @@ import {default as angle} from "./angle";
 // Takes array of triangle vertices and returns
 // its "canonical" rectangle as an array of polygons
 export default function(T) {
-  let index = 0,
+  var index = 0,
       maxAngle = -Infinity;
 
   // Find largest angle in triangle T
