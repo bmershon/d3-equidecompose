@@ -3,30 +3,37 @@
 <style>
 
 path {
-  stroke-width: 2px;
   stroke-linecap: butt;
 }
 
 .triangle {
-  stroke: #000;
-  fill: none;
+  stroke-width: 1px;
+  stroke: none;
+  fill: #ff9933;
 }
 
 .debug {
-  stroke: #000;
+  stroke-width: 2px;
+  stroke: #fff;
 }
 
 .handle {
   cursor: move;
   pointer-events: all;
   stroke-width: 2px;
+  fill-opacity: 0.5;
   stroke: #000;
   fill: #ff9933;
+}
+
+.handle:hover {
+  fill-opacity: 1;
 }
 
 </style>
 <svg width="960" height="500">
 </svg>
+<script src="../node_modules/d3-polygon/build/d3-polygon.js"></script>
 <script src="../build/partials.js"></script>
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script>

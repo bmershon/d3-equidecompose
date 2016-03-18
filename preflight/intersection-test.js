@@ -4,7 +4,7 @@ var tape = require("tape"),
 
 require("../test/inDelta.js"); // add functionality to test suite
 
-tape("intersect a = [1, 1], b = [3, 2], c = [1, 4], d = [2, -1]", function(test) {
+tape("test line segment interection", function(test) {
   var a = [1, 1], b = [3, 2], c = [1, 4], d = [2, -1];
   var p = partials.intersect(a, b, c, d);
   test.ok(p, "intersection exists"); // points intersect
