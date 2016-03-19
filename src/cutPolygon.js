@@ -47,9 +47,7 @@ export default function(a, b, P) {
       i = (i + 1) % n;
     }
     P_.push(points[0]);
-  } else {
-    console.debug(points);
   }
-
+  
   return (points.length == 2) ? [_P, P_] : [];
 };
