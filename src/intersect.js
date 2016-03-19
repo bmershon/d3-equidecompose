@@ -12,14 +12,15 @@ export default function(a, b, c, d) {
       v = sub(d, c),
       q = sub(c, a),
       denom,
-      s, t;
+      s, t,
+      epsilon = 0;
 
   // Cramer's Rule
   denom = u[0] * (-v[1]) - (-v[0]) * u[1];
   s = (q[0] * (-v[1]) - (-v[0]) * q[1]) / (denom);
   t = (u[0] * q[1] - q[0] * u[1]) / (denom);
 
-  return (inDelta(s, 0.5, 0.5) && inDelta(t, 0.5, 0.5))
+  return (inDelta(s, 0.5, 0.5 + epsilon) && inDelta(t, 0.5, 0.5 + epsilon))
         ? add(a, scale(s, u))
         : null;
 }
