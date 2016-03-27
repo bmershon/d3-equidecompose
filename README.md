@@ -2,6 +2,16 @@
 
 *The library/plugin name is subject to change.*
 
+## Development
+
+To install development and runtime dependences, run the following command in the root directory:
+
+```
+npm install
+```
+
+The *node_modules/* directory is created by the node package manager to hold all the dependences for the project.
+
 ## Testing
 
 - `npm run test` automatically runs the `pretest` script, which builds everything in `index.js` and then runs the tests in the *test/* directory.
