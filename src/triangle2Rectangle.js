@@ -39,8 +39,9 @@ export default function(T) {
   ME = sub(E, M);
   G = add(M, add(MB, ME));
   H = add(M, add(MC, ME));
-  D = intersect(E, G, A, B);
-  F = intersect(E, H, A, C);
+  D = intersect(E, G, A, B); // Pivot to spin around
+  F = intersect(E, H, A, C); // Pivot to spin around
 
-  return [[B, D, G], [B, C, F, D], [C, H, F]];
+  //return [[B, D, G], [B, C, F, D], [C, H, F]];
+  return [[B, C, F, D],[D,B,G], [F, C, H]];
 };

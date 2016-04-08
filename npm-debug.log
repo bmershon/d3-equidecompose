@@ -1,0 +1,39 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'run', 'preflight' ]
+2 info using npm@3.3.6
+3 info using node@v0.12.2
+4 verbose node symlink /usr/local/bin/node
+5 verbose run-script [ 'preflight' ]
+6 info lifecycle d3-equidecompose@0.0.1~preflight: d3-equidecompose@0.0.1
+7 verbose lifecycle d3-equidecompose@0.0.1~preflight: unsafe-perm in lifecycle true
+8 verbose lifecycle d3-equidecompose@0.0.1~preflight: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/Joy/Desktop/Math290/d3-equidecompose/node_modules/.bin:/opt/local/bin:/opt/local/sbin:/Applications/android-sdk-macosx/platform-tools:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin:/usr/texbin:/usr/local/go/bin
+9 verbose lifecycle d3-equidecompose@0.0.1~preflight: CWD: /Users/Joy/Desktop/Math290/d3-equidecompose
+10 silly lifecycle d3-equidecompose@0.0.1~preflight: Args: [ '-c', 'npm run partials && tape \'preflight/**/*-test.js\'' ]
+11 silly lifecycle d3-equidecompose@0.0.1~preflight: Returned: code: 1  signal: null
+12 info lifecycle d3-equidecompose@0.0.1~preflight: Failed to exec preflight script
+13 verbose stack Error: d3-equidecompose@0.0.1 preflight: `npm run partials && tape 'preflight/**/*-test.js'`
+13 verbose stack Exit status 1
+13 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:233:16)
+13 verbose stack     at EventEmitter.emit (events.js:110:17)
+13 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+13 verbose stack     at ChildProcess.emit (events.js:110:17)
+13 verbose stack     at maybeClose (child_process.js:1015:16)
+13 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:1087:5)
+14 verbose pkgid d3-equidecompose@0.0.1
+15 verbose cwd /Users/Joy/Desktop/Math290/d3-equidecompose
+16 error Darwin 14.5.0
+17 error argv "node" "/usr/local/bin/npm" "run" "preflight"
+18 error node v0.12.2
+19 error npm  v3.3.6
+20 error code ELIFECYCLE
+21 error d3-equidecompose@0.0.1 preflight: `npm run partials && tape 'preflight/**/*-test.js'`
+21 error Exit status 1
+22 error Failed at the d3-equidecompose@0.0.1 preflight script 'npm run partials && tape 'preflight/**/*-test.js''.
+22 error This is most likely a problem with the d3-equidecompose package,
+22 error not with npm itself.
+22 error Tell the author that this fails on your system:
+22 error     npm run partials && tape 'preflight/**/*-test.js'
+22 error You can get their info via:
+22 error     npm owner ls d3-equidecompose
+22 error There is likely additional logging output above.
+23 verbose exit [ 1, true ]
