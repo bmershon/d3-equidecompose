@@ -111,8 +111,8 @@ function dragged(d) {
 }
 
 function animateTransition(){
-  var anim1 = partials.rotateTriangleAboutPivotPoint(polygons[1],0,180.0,180);
-  var anim2 = partials.rotateTriangleAboutPivotPoint(polygons[2],0,180.0,180);
+  var anim1 = partials.rotateTriangleAboutPivotPoint(polygons[1],0,180.0,180,polygons[0]);
+  var anim2 = partials.rotateTriangleAboutPivotPoint(polygons[2],0,180.0,180,polygons[0]);
   var i = 0;
   var updateAnimation = function(){
     if(i == anim1.length){
