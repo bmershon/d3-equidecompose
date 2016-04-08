@@ -113,14 +113,14 @@ function dragged(d) {
 function animateTransition(){
   var anim1 = partials.rotateTriangleAboutPivotPoint(polygons[1],0,180.0,180,polygons[0]);
   var anim2 = partials.rotateTriangleAboutPivotPoint(polygons[2],0,180.0,180,polygons[0]);
-  var i = 0;
+  var animationIndex = 0;
   var updateAnimation = function(){
-    if(i == anim1.length){
+    if(animationIndex == anim1.length){
       window.clearInterval(interval);
       return;
     }
-    polygons[1] = anim1[i];
-    polygons[2] = anim2[i];
+    polygons[1] = anim1[animationIndex];
+    polygons[2] = anim2[animationIndex];
     triangle
       .attr("d", line);
     debug.data(polygons);
@@ -128,7 +128,7 @@ function animateTransition(){
     handle
       .attr("cx", function(d) { return d[0]; })
       .attr("cy", function(d) { return d[1]; });
-    i++;
+    animationIndex++;
   }
   var interval = window.setInterval(updateAnimation,10);
 }
