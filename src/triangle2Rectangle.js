@@ -4,15 +4,18 @@ import {default as sub} from "./sub";
 import {default as scale} from "./scale";
 import {default as project} from "./project";
 import {default as intersect} from "./intersect";
+import {default as degree} from "./degree";
 import {polygonArea as area} from "d3-polygon";
 
-// Takes array of triangle vertices and returns
-// its "canonical" rectangle as an array of polygons
+// Input: array of triangle vertices has properties:
+// transforms, parent
+// Returns array of polygons with rotations and translations
+// relative to parent
 export default function(T) {
   var index = 0,
       A, B, C, D, E, F, G, H, M,
-      BC, BA, MB, MC, ME,
-
+      BC, BA, MB, MC, ME, 
+      BCFD, DGB, FCH,
       maxAngle = -Infinity;
 
   if (area(T) == 0) return [];
@@ -42,6 +45,18 @@ export default function(T) {
   D = intersect(E, G, A, B); // Pivot to spin around
   F = intersect(E, H, A, C); // Pivot to spin around
 
-  //return [[B, D, G], [B, C, F, D], [C, H, F]];
-  return [[B, C, F, D],[D,B,G], [F, C, H]];
+  BCFD = [B, C, F, D];
+  DGB = [D, G, B];
+  FCH = [F, C, H];
+
+  BCFD.parent = T;
+  BCFD.transform = {};
+
+  DGB.parent = T;
+  DGB.transform = {rotate: degree(Math.PI), pivot: D};
+
+  FCH.parent = T;
+  FCH.transform = {rotate: degree(-Math.PI), pivot: F};
+
+  return [BCFD, DGB, FCH];
 };

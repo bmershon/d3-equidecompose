@@ -1,3 +1,4 @@
+// DEPRECATED
 import {default as intersect} from "./intersect";
 
 // Return array of polygons resulting from cutting

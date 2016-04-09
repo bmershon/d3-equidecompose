@@ -1,6 +1,6 @@
 export default function(a, b) {
   if(a.length!=b.length){
-    console.log("Invalid dimensions for dot product.");
+    throw new Error("Invalid dimensions for dot product.");
     return null;
   }
   var res = 0.0;
@@ -8,5 +8,4 @@ export default function(a, b) {
     res += a[i]*b[i]; 
   }
   return res;
-  //return u[0] * v[0] + u[1] * v[1];
 }

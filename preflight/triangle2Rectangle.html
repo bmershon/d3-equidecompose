@@ -7,14 +7,16 @@ path {
 }
 
 .triangle {
-  stroke-width: 1px;
-  stroke: none;
-  fill: #ff9933;
+  pointer-events: none;
+  stroke: #000;
+  fill: none;
 }
 
-.debug {
+.figure {
+  pointer-events: none;
   stroke-width: 2px;
-  stroke: #fff;
+  fill-opacity: 0.5;
+  stroke: #000;
 }
 
 .handle {
@@ -33,7 +35,6 @@ path {
 </style>
 <svg width="960" height="500">
 </svg>
-<button type="button" onclick="animateTransition()">Animate</button>
 <script src="../node_modules/d3-polygon/build/d3-polygon.js"></script>
 <script src="../build/partials.js"></script>
 <script src="https://d3js.org/d3.v3.min.js"></script>
@@ -50,7 +51,7 @@ var drag = d3.behavior.drag()
     .on("dragstart", dragstarted)
     .on("drag", dragged);
 
-var color = ["#A5A6BC", "#C1C2D8", "#A5A6BC"];
+var color = d3.scale.category10();
 
 var svg = d3.select("svg").append("g");
 
@@ -63,16 +64,6 @@ var triangle = svg.append("path")
                   .attr("class", "triangle")
                   .datum(data)
                   .attr("d", line);
-
-var debug = svg.selectAll(".debug")
-                   .data(polygons)
-
-debug.enter().append("path")
-                  .style("fill", function(d, i) { return color[i]; })
-                  .attr("class", "debug")
-                  .attr("d", line);
-
-debug.exit().remove();
 
 var handle = svg.selectAll(".handle")
                 .data(data);
@@ -89,12 +80,26 @@ handle.call(drag);
 update();
 
 function update() {
-  // triangle vertices driven by dragging handles
+  d3.selectAll(".shape").remove();
+
   polygons = partials.triangle2Rectangle(data);
+
+  var figure = svg.append("g")
+    .selectAll("g")
+      .data(polygons)
+    .enter().append("g").attr("class", "shape")
+      .attr("transform", transform);
+
+  path = figure.append("path")
+      .style("fill", function(d, i) { return color(i); })
+      .attr("class", "figure")
+      .attr("d", line);
+
+  polygons = partials.triangle2Rectangle(data);
+  
   triangle
       .attr("d", line);
-  debug.data(polygons);
-  debug.attr("d", line);
+
   handle
       .attr("cx", function(d) { return d[0]; })
       .attr("cy", function(d) { return d[1]; });
@@ -110,27 +115,24 @@ function dragged(d) {
   update();
 }
 
-function animateTransition(){
-  var anim1 = partials.rotateTriangleAboutPivotPoint(polygons[1],0,180.0,180,polygons[0]);
-  var anim2 = partials.rotateTriangleAboutPivotPoint(polygons[2],0,180.0,180,polygons[0]);
-  var animationIndex = 0;
-  var updateAnimation = function(){
-    if(animationIndex == anim1.length){
-      window.clearInterval(interval);
-      return;
-    }
-    polygons[1] = anim1[animationIndex];
-    polygons[2] = anim2[animationIndex];
-    triangle
-      .attr("d", line);
-    debug.data(polygons);
-    debug.attr("d", line);
-    handle
-      .attr("cx", function(d) { return d[0]; })
-      .attr("cy", function(d) { return d[1]; });
-    animationIndex++;
-  }
-  var interval = window.setInterval(updateAnimation,10);
+function transform(d) {
+  var t = d.transform, pivot, rotation, translation;
+
+  rotation = (t.hasOwnProperty("rotate")) ? t.rotate : 0;
+  translation = (t.hasOwnProperty("translate")) ? t.translate : [0, 0];
+  pivot = (t.hasOwnProperty("pivot")) ? t.pivot : null;
+
+  return translate(translation) + rotate(rotation, pivot);
+}
+
+function rotate(angle, pivot) {
+  return (pivot != null)
+          ? "rotate(" + angle + "," + pivot + ")"
+          : "rotate(" + angle + ")";
+}
+
+function translate(delta) {
+  return "translate(" + delta[0] + "," + delta[1] + ")";
 }
 
 </script>
