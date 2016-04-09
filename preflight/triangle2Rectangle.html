@@ -84,7 +84,7 @@ function update() {
 
   polygons = partials.triangle2Rectangle(data);
 
-  var figure = svg.append("g")
+  var figure = svg.append("g").attr("class", "")
     .selectAll("g")
       .data(polygons)
     .enter().append("g").attr("class", "shape")
