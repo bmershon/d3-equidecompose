@@ -42,8 +42,8 @@ export default function(T) {
   ME = sub(E, M);
   G = add(M, add(MB, ME));
   H = add(M, add(MC, ME));
-  D = intersect(E, G, A, B); // Pivot to spin around
-  F = intersect(E, H, A, C); // Pivot to spin around
+  D = intersect(E, G, A, B); // pivot
+  F = intersect(E, H, A, C); // pivot
 
   BCFD = [B, C, F, D];
   DGB = [D, G, B];
@@ -51,7 +51,7 @@ export default function(T) {
 
   BCFD.parent = T;
   BCFD.transform = {};
-
+  
   DGB.parent = T;
   DGB.transform = {rotate: degree(Math.PI), pivot: D};
 
