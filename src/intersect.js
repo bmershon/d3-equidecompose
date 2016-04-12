@@ -13,7 +13,7 @@ export default function(a, b, c, d) {
       q = sub(c, a),
       denom,
       s, t,
-      epsilon = 0;
+      epsilon = 0.0;
 
   // Cramer's Rule
   denom = u[0] * (-v[1]) - (-v[0]) * u[1];

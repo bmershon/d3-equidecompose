@@ -25,7 +25,8 @@ path {
 }
 
 .debug {
-  stroke-width: 3px;
+  stroke-width: 2px;
+  fill-opacity: 0.7;
   stroke: #000;
 }
 
@@ -50,7 +51,7 @@ path {
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var a = [40, 150], b = [100, 400], c = [500, 400], d = [400, 100], e = [200, 50],
+var a = [40, 150], b = [100, 400], c = [500, 400], d = [400, 100], e = [50, 50],
     segment = [[50, 50], [750, 400]],
     A0, A1, data, polygons;
 
@@ -62,7 +63,7 @@ var drag = d3.behavior.drag()
     .on("dragstart", dragstarted)
     .on("drag", dragged);
 
-var color = ["#A5A6BC", "#C1C2D8", "#A5A6BC"];
+var color = d3.scale.category10();
 
 var svg = d3.select("svg").append("g");
 
@@ -71,63 +72,61 @@ var line = d3.svg.line()
               .y(function(d) { return d[1]; })
               .interpolate("linear-closed");
 
-var debug = svg.selectAll(".debug")
-                  .data(polygons);
 
-debug.enter().append("path")
-                  .style("fill", function(d, i) { return color[i]; })
-                  .attr("class", "debug")
-                  .attr("d", line);
 
-debug.exit().remove();
+var cut = svg.append("path")
+                .attr("class", "cut")
+                .datum(segment)
+                .attr("d", d3.svg.line());
 
-var figure = svg.append("path")
+update();
+
+function update() {
+
+  d3.selectAll(".figure").remove();
+  d3.selectAll(".vertex").remove();
+  d3.selectAll(".debug").remove();
+  d3.selectAll(".handle").remove();
+
+
+  polygons = partials.cutPolygon(segment[0], segment[1], data);
+  
+
+  var figure = svg.append("path")
                   .attr("class", "figure")
                   .datum(data)
                   .attr("d", line);
 
-var cut = svg.append("path")
-                  .attr("class", "cut")
-                  .datum(segment)
-                  .attr("d", d3.svg.line());
+  var debug = svg.selectAll(".debug")
+                    .data(polygons);
 
-var handle = svg.selectAll(".handle")
-                .data(data);      
-handle.enter()
-      .append("circle")
-      .attr("class", "handle")
-      .attr("r", 10)
-      .attr("cx", function(d) { return d[0]; })
-      .attr("cy", function(d) { return d[1]; });
+  debug.enter().append("path")
+                    .style("fill", function(d, i) { return color(i); })
+                    .attr("class", "debug")
+                    .attr("d", line);
 
-handle.exit().remove();
-handle.call(drag);
-
-var vertex = svg.selectAll(".vertex")
+  var vertex = svg.selectAll(".vertex")
                 .data([].concat.apply([], polygons));
-vertex.enter()
+
+  vertex.enter()
       .append("circle")
       .attr("class", "vertex")
       .attr("r", 5)
       .attr("cx", function(d) { return d[0]; })
       .attr("cy", function(d) { return d[1]; });
 
-vertex.exit().remove();
 
-update();
-
-function update() {
-  polygons = partials.cutPolygon(segment[0], segment[1], data);
-  
-  figure.attr("d", line);
-
-  debug.data(polygons);
-  debug.attr("d", line);
-
-  handle
+  var handle = svg.selectAll(".handle")
+                .data(data);      
+  handle.enter()
+      .append("circle")
+      .attr("class", "handle")
+      .attr("r", 10)
       .attr("cx", function(d) { return d[0]; })
       .attr("cy", function(d) { return d[1]; });
-  
+
+  handle.call(drag);
+    
   vertex.data([].concat.apply([], polygons));
   
   vertex

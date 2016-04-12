@@ -1,4 +1,3 @@
-// DEPRECATED
 import {default as intersect} from "./intersect";
 
 // Return array of polygons resulting from cutting
@@ -13,7 +12,9 @@ export default function(a, b, P) {
       e, 
       f = P[n - 1],
       bounds = [],
-      i = -1;
+      i = -1,
+      parent = P.parent,
+      transform = P.transform;
 
   while (++i < n) {
     let x;
@@ -49,6 +50,11 @@ export default function(a, b, P) {
     }
     P_.push(points[0]);
   }
+
+  _P.parent = parent;
+  _P.transform = transform;
+  P_.parent = parent;
+  P_.transform = transform;
   
   return (points.length == 2) ? [_P, P_] : [];
 };
