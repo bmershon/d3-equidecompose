@@ -13,24 +13,30 @@ export default function(a, b, P) {
       f = P[n - 1],
       bounds = [],
       i = -1,
-      parent = P.parent,
-      transform = P.transform;
+      polygons = [];
 
+  // walk through polygon edges, attempting intersections
+  // with exact vertices or line segments
   while (++i < n) {
     let x;
 
     e = f;
     f = P[i];
 
-    x = intersect(a, b, e, f);
+    // compare floating-point positions by reference
+    if (a === e || b === e) 
+      x = e;
+    else
+      x = intersect(a, b, e, f);
 
-    if (!x) continue;
+    if (!x) continue; // no intersection
     if (points.length == 2) break;
 
     points.push(x);
     bounds.push(i);
   }
 
+  // stitch together two generated polygons
   if (points.length === 2) {
     // half of polygon
     _P.push(points[0]);
@@ -41,7 +47,7 @@ export default function(a, b, P) {
     }
     _P.push(points[1]);
 
-    // other half
+    // other half of polygon
     P_.push(points[1]);
     i = bounds[1];
     while (i != bounds[0]) {
@@ -50,11 +56,14 @@ export default function(a, b, P) {
     }
     P_.push(points[0]);
   }
-
-  _P.parent = parent;
-  _P.transform = transform;
-  P_.parent = parent;
-  P_.transform = transform;
   
-  return (points.length == 2) ? [_P, P_] : [];
+  if (points.length == 2)
+    polygons.push(_P, P_);
+
+  polygons.forEach(function(d) {
+    d.parent = P.parent;
+    d.transform = P.transform;
+  });
+
+  return polygons;
 };

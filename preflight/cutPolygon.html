@@ -52,7 +52,7 @@ path {
 <script>
 
 var a = [40, 150], b = [100, 400], c = [500, 400], d = [400, 100], e = [50, 50],
-    segment = [[50, 50], [750, 400]],
+    segment = [e, [750, 400]],
     A0, A1, data, polygons;
 
 var data = [a, b, c, d, e];
@@ -72,25 +72,21 @@ var line = d3.svg.line()
               .y(function(d) { return d[1]; })
               .interpolate("linear-closed");
 
-
-
-var cut = svg.append("path")
-                .attr("class", "cut")
-                .datum(segment)
-                .attr("d", d3.svg.line());
-
 update();
 
 function update() {
-
+  d3.selectAll(".cut").remove();
   d3.selectAll(".figure").remove();
   d3.selectAll(".vertex").remove();
   d3.selectAll(".debug").remove();
   d3.selectAll(".handle").remove();
 
-
   polygons = partials.cutPolygon(segment[0], segment[1], data);
-  
+
+  var cut = svg.append("path")
+                .attr("class", "cut")
+                .datum(segment)
+                .attr("d", d3.svg.line());
 
   var figure = svg.append("path")
                   .attr("class", "figure")
