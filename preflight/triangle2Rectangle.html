@@ -12,6 +12,13 @@ path {
   fill: none;
 }
 
+.rectangle {
+  pointer-events: none;
+  stroke-dasharray: 5, 5;
+  stroke: #000;
+  fill: none;
+}
+
 .figure {
   pointer-events: none;
   stroke-width: 2px;
@@ -81,6 +88,7 @@ update();
 
 function update() {
   d3.selectAll(".shape").remove();
+  d3.selectAll(".rectangle").remove();
 
   polygons = partials.triangle2Rectangle(data);
 
@@ -95,7 +103,11 @@ function update() {
       .attr("class", "figure")
       .attr("d", line);
 
-  polygons = partials.triangle2Rectangle(data);
+
+  var rectangle = svg.append("path")
+                  .attr("class", "rectangle")
+                  .datum(polygons.rectangle)
+                  .attr("d", line);
   
   triangle
       .attr("d", line);

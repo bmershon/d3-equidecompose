@@ -16,7 +16,9 @@ export default function(T) {
       A, B, C, D, E, F, G, H, M,
       BC, BA, MB, MC, ME, 
       BCFD, DGB, FCH,
-      maxAngle = -Infinity;
+      maxAngle = -Infinity,
+      rectangle,
+      polygons;
 
   if (area(T) == 0) return [];
 
@@ -49,14 +51,20 @@ export default function(T) {
   DGB = [D, G, B];
   FCH = [F, C, H];
 
+  rectangle = [B, C, H, G];
+
   BCFD.parent = T;
   BCFD.transform = {};
-  
+
   DGB.parent = T;
   DGB.transform = {rotate: degree(Math.PI), pivot: D};
 
   FCH.parent = T;
   FCH.transform = {rotate: degree(-Math.PI), pivot: F};
 
-  return [BCFD, DGB, FCH];
+  polygons = [BCFD, DGB, FCH];
+
+  polygons.rectangle = rectangle;
+
+  return polygons;
 };

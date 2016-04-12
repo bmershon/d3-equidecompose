@@ -13,6 +13,7 @@ export default function(a, b, P) {
       f = P[n - 1],
       bounds = [],
       i = -1,
+      rectangle,
       polygons = [];
 
   // walk through polygon edges, attempting intersections
@@ -57,13 +58,15 @@ export default function(a, b, P) {
     P_.push(points[0]);
   }
   
-  if (points.length == 2)
+  if (points.length == 2) {
     polygons.push(_P, P_);
+    // transfer parent information
+    polygons.forEach(function(d) {
+      for(property in P) { d[property] = P[property]; }
+    });
+  }
 
-  polygons.forEach(function(d) {
-    d.parent = P.parent;
-    d.transform = P.transform;
-  });
+  
 
   return polygons;
 };
