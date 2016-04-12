@@ -65,8 +65,6 @@ export default function(a, b, P) {
       for(property in P) { d[property] = P[property]; }
     });
   }
-
   
-
   return polygons;
 };
