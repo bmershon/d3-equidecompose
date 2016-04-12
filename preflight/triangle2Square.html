@@ -12,6 +12,21 @@ path {
   fill: none;
 }
 
+.square {
+  pointer-events: none;
+  stroke-width: 1px;
+  stroke: #000;
+  fill: none;
+}
+
+.rectangle {
+  pointer-events: none;
+  stroke-width: 1px;
+  stroke-dasharray: 5, 5;
+  stroke: #000;
+  fill: none;
+}
+
 .figure {
   pointer-events: none;
   stroke-width: 2px;
@@ -41,10 +56,10 @@ path {
 <script>
 
 var a = [100, 200], b = [600, 300], c = [300, 400],
-    A0, A1, data, polygons;
+    A0, A1, data, rectangle, square;
 
 data = [a, b, c];
-polygons = partials.triangle2Rectangle(data);
+rectangle = partials.triangle2Rectangle(data);
 
 var drag = d3.behavior.drag()
     .origin(function(d) { return {x: d[0], y: d[1]}; })
@@ -81,12 +96,15 @@ update();
 
 function update() {
   d3.selectAll(".shape").remove();
+  d3.selectAll(".rectangle").remove();
+  d3.selectAll(".square").remove();
 
-  polygons = partials.triangle2Rectangle(data);
+  rectangle = partials.triangle2Rectangle(data);
+  square = partials.rectangle2Square(rectangle);
 
   var figure = svg.append("g").attr("class", "")
     .selectAll("g")
-      .data(polygons)
+      .data(rectangle)
     .enter().append("g").attr("class", "shape")
       .attr("transform", transform);
 
@@ -95,7 +113,15 @@ function update() {
       .attr("class", "figure")
       .attr("d", line);
 
-  polygons = partials.triangle2Rectangle(data);
+  svg.append("path")
+      .attr("class", "rectangle")
+      .datum(rectangle.rectangle)
+      .attr("d", line);
+
+ svg.append("path")
+      .attr("class", "square")
+      .datum(square.square)
+      .attr("d", line);
   
   triangle
       .attr("d", line);
