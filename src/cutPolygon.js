@@ -57,12 +57,13 @@ export default function(a, b, P) {
     }
     P_.push(points[0]);
   }
-  
-  if (points.length == 2) {
+
+  if (points.length == 2 && points[0] !== points[1]) {
     polygons.push(_P, P_);
     // transfer parent information
     polygons.forEach(function(d) {
-      for(property in P) { d[property] = P[property]; }
+      d.parent = P.parent;
+      d.transform = P.transform;
     });
   }
   
