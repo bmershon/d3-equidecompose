@@ -41,26 +41,31 @@ export default function(a, b, P) {
 
   // stitch together two generated polygons
   if (points.length === 2 && !Object.is(points[0], points[1])) {
-    // half of polygon
+    // stitch half of polygon
     _P.push(points[0]);
     i = bounds[0];
     while (i != bounds[1]) {
-      _P.push(P[i]);
+      // check point is not an EXACT intersection
+      if (!Object.is(points[0], P[i]))
+        _P.push(P[i]);
       i = (i + 1) % n;
     }
     _P.push(points[1]);
 
-    // other half of polygon
+    // stitch other half of polygon
     P_.push(points[1]);
     i = bounds[1];
     while (i != bounds[0]) {
-      P_.push(P[i]);
+      // check point is not an EXACT intersection
+      if (!Object.is(points[1], P[i]))
+        P_.push(P[i]);
       i = (i + 1) % n;
     }
     P_.push(points[0]);
 
     polygons.push(_P, P_);
-    // transfer parent information
+
+    // transfer parent properties
     polygons.forEach(function(d) {
       d.parent = P.parent;
       d.transform = P.transform;

@@ -19,7 +19,7 @@ export default function(a, b, collection) {
     }
   }
 
-  // include polygons which were not cut
+  // include polygons that were not cut into two new polygons
   polygons = polygons.concat(collection.filter(function(d, i) {
     return !indices.includes(i);
   }));
