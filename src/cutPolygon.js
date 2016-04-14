@@ -25,8 +25,10 @@ export default function(a, b, P) {
     f = P[i];
 
     // compare floating-point positions by reference
-    if (a === e || b === e) 
+    if      (a === e || b === e) 
       x = e;
+    else if (a === f || b === f)
+      x = f;
     else
       x = intersect(a, b, e, f);
 
@@ -38,7 +40,7 @@ export default function(a, b, P) {
   }
 
   // stitch together two generated polygons
-  if (points.length === 2) {
+  if (points.length === 2 && !Object.is(points[0], points[1])) {
     // half of polygon
     _P.push(points[0]);
     i = bounds[0];
@@ -56,9 +58,7 @@ export default function(a, b, P) {
       i = (i + 1) % n;
     }
     P_.push(points[0]);
-  }
 
-  if (points.length == 2 && points[0] !== points[1]) {
     polygons.push(_P, P_);
     // transfer parent information
     polygons.forEach(function(d) {

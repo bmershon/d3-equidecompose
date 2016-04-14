@@ -13,12 +13,13 @@ export default function(a, b, collection) {
 
     generated = cutPolygon(a, b, P);
 
-    if (generated.length > 0) {
+    if (generated.length == 2) {
       Array.prototype.push.apply(polygons, generated);
       indices.push(i);
     }
   }
 
+  // include polygons which were not cut
   polygons = polygons.concat(collection.filter(function(d, i) {
     return !indices.includes(i);
   }));
