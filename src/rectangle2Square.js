@@ -4,35 +4,33 @@ import {default as normalize} from "./normalize";
 import {default as scale} from "./scale";
 import {default as add} from "./add";
 import {polygonArea} from "d3-polygon";
+import {default as cutCollection} from "./cutCollection";
 
+// Takes in array of polygons forming a canonical rectangle
 export default function(collection) {
   var dist = [],
-      A, B, C, D,
-      l, w, area = 0.0, s,
-      rectangle = collection.rectangle,
+      A, B, C, D, M1, M2,
+      area, s,
+      rectangle = collection.rectangle, // bounding rectangle
       square,
-      polygons = [];
+      polygons = [],
+      epsilon = 1e-4;
 
-  A = rectangle[0];
+  A = rectangle[0]; // CCW: ABCD
+  B = rectangle[1];
+  C = rectangle[2];
+  D = rectangle[3];
 
-  for(let i = 1; i < rectangle.length; i++){
-  	dist.push({point: rectangle[i], distance:length(sub(a,rectangle[i]))});
-  }
+  area = Math.abs(polygonArea(rectangle));
+  s = Math.sqrt(area); // square side length
 
-  dist = dist.sort(function(a,b){
-  	return b.distance - a.distance;
-  });
+  // assumes escalator conditions hold
+  M1 = add(A, scale(s, normalize(sub(D, A))));
+  M2 = B;
+  console.debug(M1, M2, collection[0])
+  square = [M1, M2];
 
-  l = dist[1];
-  w = dist[2];
-  area = l.distance * w.distance;
-  //area = Math.abs(polygonArea(rectangle));
-  s = Math.sqrt(area);
-  B = add(a,scale(s, normalize(sub(l.point, A))));
-  C = add(a,scale(s, normalize(sub(w.point, A))));
-  D = add(add(a,sub(B, A)), sub(C, A));
-  
-  square = [A, B, D, C];
+  polygons = cutCollection(M1, M2, collection);
   polygons.square = square;
 
   return polygons;

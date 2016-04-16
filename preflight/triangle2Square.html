@@ -104,9 +104,9 @@ function update() {
 
   var figure = svg.append("g").attr("class", "")
     .selectAll("g")
-      .data(rectangle)
+      .data(square)
     .enter().append("g").attr("class", "shape")
-      .attr("transform", transform);
+      // .attr("transform", transform);
 
   path = figure.append("path")
       .style("fill", function(d, i) { return color(i); })
@@ -118,11 +118,11 @@ function update() {
       .datum(rectangle.rectangle)
       .attr("d", line);
 
- svg.append("path")
+  svg.append("path")
       .attr("class", "square")
       .datum(square.square)
       .attr("d", line);
-  
+
   triangle
       .attr("d", line);
 

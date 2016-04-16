@@ -25,9 +25,9 @@ export default function(a, b, P) {
     f = P[i];
 
     // compare floating-point positions by reference
-    if      (a === e || b === e) 
+    if      (a === e || b === e && !Object.is(points[0], e)) 
       x = e;
-    else if (a === f || b === f)
+    else if (a === f || b === f && !Object.is(points[0], f))
       x = f;
     else
       x = intersect(a, b, e, f);
@@ -40,28 +40,28 @@ export default function(a, b, P) {
   }
 
   // stitch together two generated polygons
-  if (points.length === 2 && !Object.is(points[0], points[1])) {
+  if (points.length == 2 && !Object.is(points[0], points[1])) {
     // stitch half of polygon
     _P.push(points[0]);
     i = bounds[0];
     while (i != bounds[1]) {
       // check point is not an EXACT intersection
-      if (!Object.is(points[0], P[i]))
+      if (!Object.is(points[0], P[i]) && ! Object.is(points[1], P[i]))
         _P.push(P[i]);
       i = (i + 1) % n;
     }
     _P.push(points[1]);
 
     // stitch other half of polygon
+    P_.push(points[0]);
     P_.push(points[1]);
     i = bounds[1];
     while (i != bounds[0]) {
       // check point is not an EXACT intersection
-      if (!Object.is(points[1], P[i]))
+      if (!Object.is(points[0], P[i]) && ! Object.is(points[1], P[i]))
         P_.push(P[i]);
       i = (i + 1) % n;
     }
-    P_.push(points[0]);
 
     polygons.push(_P, P_);
 

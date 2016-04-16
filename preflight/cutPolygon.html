@@ -51,11 +51,11 @@ path {
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var a = [40, 150], b = [100, 400], c = [500, 400], d = [400, 100], e = [50, 50],
-    segment = [e, [750, 400]],
+var a = [40, 150], b = [100, 400], d = [400, 100], e = [50, 50],
+    segment = [d, [700, 300]],
     A0, A1, data, polygons;
 
-var data = [a, b, c, d, e];
+var data = [a, b, d, e];
 var polygons = partials.cutPolygon(segment[0], segment[1], data);
 
 var drag = d3.behavior.drag()
@@ -81,7 +81,7 @@ function update() {
   d3.selectAll(".debug").remove();
   d3.selectAll(".handle").remove();
 
-  polygons = partials.cutPolygon(segment[0], segment[1], data);
+  polygons = partials.cutPolygon(segment[1], segment[0], data);
 
   var cut = svg.append("path")
                 .attr("class", "cut")
