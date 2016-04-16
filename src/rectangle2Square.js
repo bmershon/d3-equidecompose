@@ -4,6 +4,7 @@ import {default as normalize} from "./normalize";
 import {default as intersect} from "./intersect";
 import {default as scale} from "./scale";
 import {default as add} from "./add";
+import {default as polygonTranslate} from "./polygonTranslate";
 import {polygonArea, polygonCentroid, polygonContains} from "d3-polygon";
 import {default as cutCollection} from "./cutCollection";
 
@@ -39,8 +40,7 @@ export default function(collection) {
   KCF = [K, C, F]; // used to locate elevator pieces
   AFGD = [A, F, G, D];
 
-  // epsilon corrections to ensure intersection
-  polygons = cutCollection(D, add(C, scale(ε, sub(C, D))), collection);
+  polygons = cutCollection(D, add(C, scale(1, sub(C, D))), collection);
   polygons = cutCollection(A, F, polygons);
 
   // slide new polygons using elevator method
@@ -65,11 +65,3 @@ export default function(collection) {
 
   return polygons;
 };
-
-// keep polygon properties, update vertices
-function polygonTranslate(polygon, T) {
-  for (let i = 0; i < polygon.length; i++) {
-    let v = polygon[i];
-    polygon[i] = [v[0] + T[0], v[1] + T[1]];
-  }
-}
