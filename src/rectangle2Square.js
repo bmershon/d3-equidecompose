@@ -16,6 +16,7 @@ export default function(collection) {
       area, s,
       rectangle = collection.rectangle, // bounding rectangle
       square,
+      p, v, q, w,
       l = Infinity,
       polygons = [];
 
@@ -28,77 +29,83 @@ export default function(collection) {
   F = rectangle[1];
   G = rectangle[2];
 
-  // the square
+  // the square defined by [A, B, C, D]
   A = add(B, scale(s, normalize(sub(E, B))));
   C = add(B, scale(s, normalize(sub(F, B))));
   D = add(A, sub(C, B));
 
   l = length(sub(B, F));
-  console.log("original", l)
+
   // halving the canonical rectangle for the escalator method
   while (l > 2 * s) {
-    let a, b, left, halved;
+    let a, b, left, halved, slideLeft, slideUp;
 
-    a = add(E, scale(0.5, sub(G, E))); 
+    a = add(A, scale(0.5, sub(F, B))); 
     b = add(B, scale(0.5, sub(F, B)));
     l = length(sub(b, F));
-
-    console.log("chopped:", l, 2 * s)
 
     left = [A, B, b, a];
 
     // "overshoot" cut segment endpoints to ensure intersection
-    halved = cutCollection(add(a, sub(D, C)), add(b, sub(C, D)), collection);
+    halved = cutCollection(a, add(b, sub(C, D)), collection);
 
-    halved.forEach(function(d) {
+    slideUp = sub(G, F);
+    slideLeft = sub(B, b);
+
+    halved.forEach(function(d, j) {
       var centroid, T;
-
       centroid = polygonCentroid(d);
 
+      // update exact references to vertices used in exact intersections
+      d.forEach(function(V, k) { // scan vertices
+        if (Object.is(F, V)) {
+          p = j;
+          v = k;
+        } else if (Object.is(G, V)) {
+          q = j;
+          w = k;
+        }
+      });
+
       if (polygonContains(left, centroid)) { // slide "up"
-        T = sub(E, B); 
-        d.translate(T);
-        d.transforms.push({translate: scale(-1, T)}); // undo translate
+        d.translate(slideUp).transforms.push({translate: scale(-1, slideUp)}); // undo translate
       } else { // slide "left"
-        T = sub(B, b); // translate into position
-        d.translate(T);
-        d.transforms.push({translate: scale(-1, T)}); // undo translate
+        d.translate(slideLeft).transforms.push({translate: scale(-1, slideUp)}); // undo translate
       }
     });
 
-    square = [a, b]; //final cut
+    F = halved[p][v]; // updated position after transform
+    G = halved[q][w];
 
     collection = halved;
   }
 
   polygons = collection;
-  
-  // J = intersect(A, F, E, G);
-  // K = intersect(A, F, D, C)
-  // KCF = [K, C, F]; // used to locate elevator pieces
-  // AFGD = [A, F, G, D];
 
-  // polygons = cutCollection(D, add(C, scale(1, sub(C, D))), collection);
-  // polygons = cutCollection(A, F, polygons);
+  J = intersect(A, F, E, G);
+  K = intersect(A, F, D, C)
+  KCF = [K, C, F]; // used to locate elevator pieces
+  AFGD = [A, F, G, D];
 
-  // // slide new polygons using elevator method
-  // polygons.forEach(function(d) {
-  //   var centroid, T, P;
+  polygons = cutCollection(D, add(C, scale(1, sub(C, D))), collection);
+  polygons = cutCollection(A, F, polygons);
 
-  //   centroid = polygonCentroid(d);
+  // slide new polygons using elevator method
+  polygons.forEach(function(d) {
+    var centroid, T, P;
 
-  //   if (polygonContains(KCF, centroid)) {
-  //     T = sub(A, K);
-  //     d.translate(T);
-  //     d.transforms.push({translate: scale(-1, T)});
-  //   } else if (polygonContains(AFGD, centroid)) {
-  //     T = sub(A, J);
-  //     d.translate(T);
-  //     d.transforms.push({translate: scale(-1, T)});
-  //   }
-  // });
+    centroid = polygonCentroid(d);
 
-  // square = [A, B, C, D];
+    if (polygonContains(KCF, centroid)) {
+      T = sub(A, K);
+      d.translate(T).transforms.push({translate: scale(-1, T)});
+    } else if (polygonContains(AFGD, centroid)) {
+      T = sub(A, J);
+      d.translate(T).transforms.push({translate: scale(-1, T)});
+    }
+  });
+
+  square = [A, B, C, D];
   polygons.square = square;
 
   return polygons;

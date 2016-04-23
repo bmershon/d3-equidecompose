@@ -52,7 +52,7 @@ export default function(P) {
   DGB = polygon([D, G, B]);
   FCH = polygon([F, C, H]);
 
-  rectangle = polygon([B, C, H, G]);
+  rectangle = [B, C, H, G];
 
   // transforms to return polygons to previous positions
   DGB.transforms.push({rotate: degree(Math.PI), pivot: D});

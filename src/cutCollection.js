@@ -14,7 +14,7 @@ export default function(a, b, collection) {
     generated = cutPolygon(a, b, P);
 
     if (generated.length == 2) {
-      Array.prototype.push.apply(polygons, generated);
+      [].push.apply(polygons, generated);
       indices.push(i);
     }
   }

@@ -16,7 +16,7 @@ function translate(T) {
     let v = this[i];
     this[i] = [v[0] + T[0], v[1] + T[1]];
   }
-  
+
   return this;
 }
 
