@@ -6,6 +6,7 @@ import {default as scale} from "./scale";
 import {default as add} from "./add";
 import {default as polygonTranslate} from "./polygonTranslate";
 import {polygonArea, polygonCentroid, polygonContains} from "d3-polygon";
+import polygon from "./polygon";
 import {default as cutCollection} from "./cutCollection";
 
 // Takes in array of polygons forming a canonical rectangle
@@ -16,8 +17,7 @@ export default function(collection) {
       area, s,
       rectangle = collection.rectangle, // bounding rectangle
       square,
-      polygons = [],
-      ε = 1e-2;
+      polygons = [];
 
   area = Math.abs(polygonArea(rectangle));
   s = Math.sqrt(area); // square side length
@@ -45,18 +45,18 @@ export default function(collection) {
 
   // slide new polygons using elevator method
   polygons.forEach(function(d) {
-    var centroid, T;
+    var centroid, T, P;
 
     centroid = polygonCentroid(d);
 
     if (polygonContains(KCF, centroid)) {
       T = sub(A, K);
       polygonTranslate(d, T);
-      d.transform = {translate: scale(-1, T)};
+      d.transforms.push({translate: scale(-1, T)});
     } else if (polygonContains(AFGD, centroid)) {
       T = sub(A, J);
       polygonTranslate(d, T);
-      d.transform = {translate: scale(-1, T)};
+      d.transforms.push({translate: scale(-1, T)});
     }
   });
 

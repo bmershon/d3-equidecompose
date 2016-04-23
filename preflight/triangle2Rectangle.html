@@ -97,7 +97,7 @@ function update() {
     .selectAll("g")
       .data(polygons)
     .enter().append("g").attr("class", "shape")
-      .attr("transform", transform);
+      // .attr("transform", transform);
 
   path = figure.append("path")
       .style("fill", function(d, i) { return color(i); })

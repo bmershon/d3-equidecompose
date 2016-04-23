@@ -5,13 +5,14 @@ import {default as scale} from "./scale";
 import {default as project} from "./project";
 import {default as intersect} from "./intersect";
 import {default as degree} from "./degree";
+import polygon from "./polygon";
 import {polygonArea as area} from "d3-polygon";
 
 // Input: array of triangle vertices has properties:
 // transforms, parent
 // Returns array of polygons with rotations and translations
 // relative to parent
-export default function(T) {
+export default function(P) {
   var index = 0,
       A, B, C, D, E, F, G, H, M,
       BC, BA, MB, MC, ME, 
@@ -20,21 +21,21 @@ export default function(T) {
       rectangle,
       polygons;
 
-  if (area(T) == 0) return [];
+  if (area(P) == 0) return [];
 
   // Find largest angle in triangle T
   for (let i = 0; i < 3; i++) {
     let theta = 0;
-    theta = angle(T[i % 3], T[(i + 1) % 3], T[(i + 2) % 3]);
+    theta = angle(P[i % 3], P[(i + 1) % 3], P[(i + 2) % 3]);
     if (theta > maxAngle) {
       maxAngle = theta;
       index = i;
     }
   }
 
-  A = T[index];
-  B = T[(index + 1) % 3];
-  C = T[(index + 2) % 3];
+  A = P[index];
+  B = P[(index + 1) % 3];
+  C = P[(index + 2) % 3];
   BC = sub(C, B);
   BA = sub(A, B);
   M = add(B, project(BA, BC));
@@ -47,20 +48,15 @@ export default function(T) {
   D = intersect(E, G, A, B); // pivot
   F = intersect(E, H, A, C); // pivot
 
-  BCFD = [B, C, F, D];
-  DGB = [D, G, B];
-  FCH = [F, C, H];
+  BCFD = polygon([B, C, F, D]);
+  DGB = polygon([D, G, B]);
+  FCH = polygon([F, C, H]);
 
-  rectangle = [B, C, H, G];
+  rectangle = polygon([B, C, H, G]);
 
-  BCFD.parent = T;
-  BCFD.transform = {};
-
-  DGB.parent = T;
-  DGB.transform = {rotate: degree(Math.PI), pivot: D};
-
-  FCH.parent = T;
-  FCH.transform = {rotate: degree(-Math.PI), pivot: F};
+  // transforms to return polygons to previous positions
+  DGB.transforms.push({rotate: degree(Math.PI), pivot: D});
+  FCH.transforms.push({rotate: degree(-Math.PI), pivot: F});
 
   polygons = [BCFD, DGB, FCH];
 
