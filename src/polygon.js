@@ -59,7 +59,6 @@ function accumulate() {
   return P.slice(); // clone of polygon with transforms applied
 }
 
-
 // create new polygon from array of position tuples
 export default function polygon(positions) {
   var P = new Polygon();
