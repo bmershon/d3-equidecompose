@@ -11,18 +11,16 @@ function Polygon(P) {
   this.transforms = []; // public member
 }
 
-// subclass Array, add methods
-Polygon.prototype = clone(Array.prototype);
-
+Polygon.prototype = clone(Array.prototype); // subclass Array
 Polygon.prototype.translate = translate;
 Polygon.prototype.rotate = rotate;
+Polygon.prototype.accumulate = accumulate;
 
 function translate(T) {
   for (let i = 0, n = this.length; i < n; i++) {
     let v = this[i];
     this[i] = [v[0] + T[0], v[1] + T[1]];
   }
-
   return this;
 }
 
@@ -35,8 +33,7 @@ function rotate(theta, pivot) {
   }
 
   for (let i = 0, n = this.length; i < n; i++) {
-    let v = this[i];
-    v = multiply(R, v);
+    this[i] = multiply(R, this[i]);
   }
 
   if (pivot) {
@@ -44,6 +41,22 @@ function rotate(theta, pivot) {
   }
 
   return this;
+}
+
+function accumulate() {
+  let P = polygon(this),
+      n = this.transforms.length;
+
+  for (let i = n - 1; i >= 0; i--) {
+    let transform = this.transforms[i];
+    if (transform.rotate) {
+      P.rotate(transform.rotate, transform.pivot);
+    } else { // translate
+      P.translate(transform.translate);
+    }
+  }
+
+  return P.slice(); // clone of polygon with transforms applied
 }
 
 

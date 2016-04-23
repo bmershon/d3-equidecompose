@@ -1,4 +1,5 @@
 import {default as intersect} from "./intersect";
+import polygon from "./polygon";
 
 // Return array of polygons resulting from cutting
 // convex polygon P by segment ab
@@ -63,12 +64,11 @@ export default function(a, b, P) {
       i = (i + 1) % n;
     }
 
-    polygons.push(_P, P_);
+    polygons.push(polygon(_P), polygon(P_));
 
     // transfer parent properties
     polygons.forEach(function(d) {
-      d.parent = P.parent;
-      d.transform = P.transform;
+      [].push.apply(d.transforms, P.transforms);
     });
   }
   

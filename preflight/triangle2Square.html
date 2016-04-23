@@ -60,8 +60,6 @@ var a = [100, 200], b = [600, 300], c = [300, 400],
     A0, A1, data, rectangle, square;
 
 data = [a, b, c];
-data.parent = null;
-data.transform = {};
 rectangle = partials.triangle2Rectangle(data);
 
 var drag = d3.behavior.drag()
@@ -107,9 +105,8 @@ function update() {
 
   var figure = svg.append("g").attr("class", "")
     .selectAll("g")
-      .data(square) // all the polygons to make up the square
+      .data(square.map((d) => d.accumulate())) // accumulated transforms
     .enter().append("g").attr("class", "shape")
-      .attr("transform", transform);
 
   path = figure.append("path")
       .style("fill", function(d, i) { return color(i); })
@@ -142,26 +139,6 @@ function dragged(d) {
   d[0] = d3.event.x;
   d[1] = d3.event.y;
   update();
-}
-
-function transform(d) {
-  var t = d.transform, pivot, rotation, translation;
-
-  rotation = (t.hasOwnProperty("rotate")) ? t.rotate : 0;
-  translation = (t.hasOwnProperty("translate")) ? t.translate : [0, 0];
-  pivot = (t.hasOwnProperty("pivot")) ? t.pivot : null;
-
-  return translate(translation) + rotate(rotation, pivot);
-}
-
-function rotate(angle, pivot) {
-  return (pivot != null)
-          ? "rotate(" + angle + "," + pivot + ")"
-          : "rotate(" + angle + ")";
-}
-
-function translate(delta) {
-  return "translate(" + delta[0] + "," + delta[1] + ")";
 }
 
 </script>

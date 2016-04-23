@@ -4,7 +4,6 @@ import {default as normalize} from "./normalize";
 import {default as intersect} from "./intersect";
 import {default as scale} from "./scale";
 import {default as add} from "./add";
-import {default as polygonTranslate} from "./polygonTranslate";
 import {polygonArea, polygonCentroid, polygonContains} from "d3-polygon";
 import polygon from "./polygon";
 import {default as cutCollection} from "./cutCollection";
@@ -51,11 +50,11 @@ export default function(collection) {
 
     if (polygonContains(KCF, centroid)) {
       T = sub(A, K);
-      polygonTranslate(d, T);
+      d.translate(T);
       d.transforms.push({translate: scale(-1, T)});
     } else if (polygonContains(AFGD, centroid)) {
       T = sub(A, J);
-      polygonTranslate(d, T);
+      d.translate(T);
       d.transforms.push({translate: scale(-1, T)});
     }
   });
