@@ -35,7 +35,7 @@ var width = 960,
 
 var color = d3.scale.category10();
 
-var a = [20, 100], b = [100, 400], c = [400, 200], d = [500, 300], e = [100, 75];
+var a = [150, 250], b = [250, 500], c = [450, 300], d = [600, 400], e = [200, 175];
 
 var vertices = [a, b, c, d, e];
 
@@ -59,6 +59,7 @@ function redraw() {
     var rectangle, square;
     rectangle = partials.triangle2Rectangle(d);
     square = partials.rectangle2Square(rectangle).map((d) => d.accumulate());
+    // square = partials.rectangle2Square(rectangle)
     square.forEach(function(d) {
       d.i = i;
     });
