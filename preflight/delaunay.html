@@ -59,7 +59,6 @@ function redraw() {
     var rectangle, square;
     rectangle = partials.triangle2Rectangle(d);
     square = partials.rectangle2Square(rectangle).map((d) => d.accumulate());
-    // square = partials.rectangle2Square(rectangle)
     square.forEach(function(d) {
       d.i = i;
     });

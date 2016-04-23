@@ -1,30 +1,25 @@
 import {default as rotation} from "./rotation";
 import {default as multiply} from "./multiplyMatVec";
 
-function clone(obj) {
-  function F() { }
-  F.prototype = obj;
-  return new F();
-}
-
 function Polygon(P) {
   this.transforms = []; // public member
 }
 
-Polygon.prototype = clone(Array.prototype); // subclass Array
-Polygon.prototype.translate = translate;
-Polygon.prototype.rotate = rotate;
-Polygon.prototype.accumulate = accumulate;
+Polygon.prototype = Object.create(Array.prototype); // subclass Array
+Polygon.prototype.constructor = Polygon;
+Polygon.prototype.translate = translate; // modify in place
+Polygon.prototype.rotate = rotate; // modify in place
+Polygon.prototype.accumulate = accumulate; // return array of positions
 
 function translate(T) {
   for (let i = 0, n = this.length; i < n; i++) {
     let v = this[i];
     this[i] = [v[0] + T[0], v[1] + T[1]];
   }
+  
   return this;
 }
 
-// optional pivot point
 function rotate(theta, pivot) {
   var R = rotation(theta);
 
@@ -44,19 +39,20 @@ function rotate(theta, pivot) {
 }
 
 function accumulate() {
-  let P = polygon(this),
+  let P = polygon(this), // do not change THIS polygon's geometry
       n = this.transforms.length;
 
   for (let i = n - 1; i >= 0; i--) {
     let transform = this.transforms[i];
-    if (transform.rotate) {
+
+    if (transform.rotate && transform.pivot) { // pivot required
       P.rotate(transform.rotate, transform.pivot);
-    } else { // translate
+    } else if (transform.translate) {
       P.translate(transform.translate);
     }
   }
 
-  return P.slice(); // clone of polygon with transforms applied
+  return P.slice(); // return positions of only
 }
 
 // create new polygon from array of position tuples
