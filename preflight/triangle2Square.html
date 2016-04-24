@@ -13,8 +13,8 @@ path {
 }
 
 .square {
-  pointer-events: none;
-  stroke-width: 1px;
+  pointer-events none;
+  stroke-width: 2px;
   stroke-dasharray: 5, 5;
   stroke: red;
   fill: none;
@@ -30,7 +30,7 @@ path {
 
 .figure {
   pointer-events: none;
-  stroke-width: 2px;
+  stroke-width: 1px;
   fill-opacity: 0.5;
   stroke: #000;
 }
@@ -38,7 +38,7 @@ path {
 .handle {
   cursor: move;
   pointer-events: all;
-  stroke-width: 2px;
+  stroke-width: 1px;
   fill-opacity: 0.5;
   stroke: #000;
   fill: #ff9933;
@@ -56,7 +56,7 @@ path {
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var a = [100, 200], b = [600, 300], c = [300, 400],
+var a = [650, 200], b = [100, 300], c = [700, 400],
     A0, A1, data, rectangle, square;
 
 data = [a, b, c];
@@ -106,7 +106,7 @@ function update() {
   var figure = svg.append("g").attr("class", "")
     .selectAll("g")
       .data(square)
-      // .data(square.map((d) => d.accumulate())) // accumulated transforms
+      .data(square.map((d) => d.accumulate())) // accumulated transforms
     .enter().append("g").attr("class", "shape")
 
   path = figure.append("path")
