@@ -9,6 +9,7 @@ import polygon from "./polygon";
 import {default as cutCollection} from "./cutCollection";
 
 // Takes in array of polygons forming a canonical rectangle
+// expects rectangle member on collection with bounding rectangle references
 export default function(collection) {
   var dist = [],
       A, B, C, D, E, F, G, H, J, K, // follows Tralie's labeling
@@ -78,13 +79,14 @@ export default function(collection) {
 
     });
 
-  E = halved[E_Polygon[0]][E_Vertex[0]];
-  F = halved[F_Polygon[0]][F_Vertex[0]];
+    E = halved[E_Polygon[0]][E_Vertex[0]];
+    F = halved[F_Polygon[0]][F_Vertex[0]];
 
-  // make all vertices at F share the same reference (to ensure intersection)
-  for (let i = 1, n = F_Vertex.length; i < n; i++) {
-    F = halved[F_Polygon[i]][F_Vertex[i]] = halved[F_Polygon[i-1]][F_Vertex[i-1]]; 
-  }
+    // make all vertices at F share the same reference (to ensure intersection)
+    for (let i = 1, n = F_Vertex.length; i < n; i++) {
+      F = halved[F_Polygon[i]][F_Vertex[i]] = halved[F_Polygon[i-1]][F_Vertex[i-1]]; 
+    }
+
     collection = halved;
   }
   
@@ -115,8 +117,7 @@ export default function(collection) {
     }
   });
 
-  square = [A, B, C, D];
-  polygons.square = square;
+  polygons.square = [A, B, C, D]; 
 
   return polygons;
 };

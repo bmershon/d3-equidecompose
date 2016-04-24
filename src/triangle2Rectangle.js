@@ -52,15 +52,13 @@ export default function(P) {
   DGB = polygon([D, G, B]);
   FCH = polygon([F, C, H]);
 
-  rectangle = [B, C, H, G];
-
   // transforms to return polygons to previous positions
   DGB.transforms.push({rotate: degree(Math.PI), pivot: D});
   FCH.transforms.push({rotate: degree(-Math.PI), pivot: F});
 
   polygons = [BCFD, DGB, FCH];
 
-  polygons.rectangle = rectangle;
+  polygons.rectangle = [B, C, H, G];
 
   return polygons;
 };
