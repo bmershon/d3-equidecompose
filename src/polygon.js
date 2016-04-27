@@ -1,5 +1,8 @@
 import {default as rotation} from "./rotation";
+import {default as angle} from "./angle";
+import {default as sub} from "./sub";
 import {default as multiply} from "./multiplyMatVec";
+import {polygonCentroid} from "d3-polygon";
 
 function Polygon(P) {
   this.transforms = []; // public member
@@ -10,6 +13,9 @@ Polygon.prototype.constructor = Polygon;
 Polygon.prototype.translate = translate; // modify in place
 Polygon.prototype.rotate = rotate; // modify in place
 Polygon.prototype.accumulate = accumulate; // return array of positions
+Polygon.prototype.centroid = centroid;
+Polygon.prototype.theta = theta; // rotation experienced from origin to current state
+
 
 function translate(T) {
   for (let i = 0, n = this.length; i < n; i++) {
@@ -52,7 +58,25 @@ function accumulate() {
     }
   }
 
-  return P.slice(); // return positions of only
+  return polygon(P.slice()); // return positions of only
+}
+
+function centroid() {
+  return polygonCentroid(this);
+}
+
+// angle about centroid relative to original placement
+function theta() {
+  var P, Q, u, v;
+
+  if (!this) {console.log(this)}
+  P = polygon(this.slice());
+  Q = P.accumulate();
+
+  u = sub(P[0], P.centroid());
+  v = sub(Q[0], Q.centroid());
+
+  return 180 / Math.PI * angle(P.centroid(), u, v);
 }
 
 // create new polygon from array of position tuples

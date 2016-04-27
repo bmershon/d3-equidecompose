@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+path {
+  stroke-linecap: butt;
+}
+
+.origin {
+  pointer-events: none;
+  fill-opacity: 1;
+  stroke-width: 1px;
+  stroke: #000;
+  fill: none;
+}
+
+.target {
+  pointer-events: none;
+  fill-opacity: 0.6;
+  stroke-width: 1px;
+  stroke: #000;
+  fill: none;
+}
+</style>
+<svg width="960" height="500">
+</svg>
+<script src="../node_modules/d3-polygon/build/d3-polygon.js"></script>
+<script src="../build/partials.js"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var a = [750, 200], b = [400, 300], c = [800, 400],
+    A0, A1, data, polygons;
+
+data = partials.rectangle2Square(partials.triangle2Rectangle([a, b, c]));
+
+var color = d3.scale.category10();
+
+var svg = d3.select("svg").append("g");
+
+var line = d3.svg.line()
+            .x(function(d) { return d[0]; })
+            .y(function(d) { return d[1]; })
+            .interpolate("linear-closed");          
+
+var figure = svg.append("g").attr("class", "")
+  .selectAll("g")
+    .data(data.map(function(d) {
+      var c = d.centroid();
+      return partials.polygon(d.slice()).translate([-c[0], -c[1]]);
+    })) // accumulated transforms
+  .enter().append("g").attr("class", "shape")
+
+// pick up transform from original screen coordinates data
+// figure.attr("transform", function(d, i) { return transform({translate: data[i].centroid()})});
+figure.each(cycle);
+
+figure.append("path")
+  .style("fill", function(d, i) { return color(i); })
+  .attr("class", "origin")
+  .attr("d", line);
+
+function cycle(_, i) {
+  d3.select(this).transition()
+      .duration(function(d, j) { return Math.random() * j * 500 + 2000})
+      .ease("circle")
+      .attrTween("transform", function(d) {
+        var a, b, origin, target;
+
+        a = data[i];
+
+
+        origin = translate(a.centroid()) + rotate(0, a.centroid());
+        target = translate(a.accumulate().centroid()) + rotate(a.theta(), a.accumulate().centroid());
+
+        return d3.interpolateString(origin, target);
+
+      })
+      // .each("end", cycle);
+}
+
+function transform(t) {
+  var rotation, translation, pivot;
+  rotation = (t.hasOwnProperty("rotate")) ? t.rotate : 0;
+  translation = (t.hasOwnProperty("translate")) ? t.translate : [0, 0];
+  pivot = (t.hasOwnProperty("pivot")) ? t.pivot : null;
+
+  return translate(translation) + rotate(rotation, pivot);
+}
+
+function rotate(angle, pivot) {
+  return (pivot != null)
+          ? "rotate(" + angle + "," + pivot + ")"
+          : "rotate(" + angle + ")";
+}
+
+function translate(delta) {
+  return "translate(" + delta[0] + "," + delta[1] + ")";
+}
+</script>
