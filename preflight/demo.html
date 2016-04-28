@@ -7,20 +7,28 @@ path {
 }
 
 .origin {
-  pointer-events: none;
-  fill-opacity: 1;
+  cursor: pointer;
+  fill-opacity: 0.4;
   stroke-width: 1px;
   stroke: #000;
-  fill: none;
+  stroke-opacity: 0.4;
+  fill: #ccc;
 }
 
 .target {
-  pointer-events: none;
-  fill-opacity: 0.6;
+  cursor: pointer;
+  fill-opacity: 0.4;
   stroke-width: 1px;
   stroke: #000;
-  fill: none;
+  stroke-opacity: 0.4;
+  fill: #ccc;
 }
+
+.target.highlight, .origin.highlight {
+  fill-opacity: 1;
+  fill: #EB9394;
+}
+
 </style>
 <svg width="960" height="500">
 </svg>
@@ -29,11 +37,9 @@ path {
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var a = [750, 200], b = [400, 300], c = [800, 400], data, polygons;
+var a = [850, 200], b = [500, 100], c = [400, 240], data, polygons;
 
 data = partials.rectangle2Square(partials.triangle2Rectangle([a, b, c]));
-
-var color = d3.scale.category10();
 
 var svg = d3.select("svg").append("g");
 
@@ -42,57 +48,36 @@ var line = d3.svg.line()
             .y(function(d) { return d[1]; })
             .interpolate("linear-closed");          
 
-var figure = svg.append("g").attr("class", "")
+var origin = svg.append("g").attr("class", "")
   .selectAll("g")
-    .data(data.map(function(d) {
-      var c = d.centroid();
-      return partials.polygon(d.slice()).translate([-c[0], -c[1]]);
-    })) // accumulated transforms
+    .data(data.map((d) => d.clone().rotate(-180, c)))
   .enter().append("g").attr("class", "shape")
 
-// pick up transform from original screen coordinates data
-// figure.attr("transform", function(d, i) { return transform({translate: data[i].centroid()})});
-figure.each(cycle);
-
-figure.append("path")
-  .style("fill", function(d, i) { return color(i); })
+origin.append("path")
   .attr("class", "origin")
-  .attr("d", line);
+  .attr("id", (d, i) => 'polygon' + i)
+  .attr("d", line)
+  .on("mouseenter", mouseenter)
+  .on("mouseleave", mouseleave);
 
-function cycle(_, i) {
-  d3.select(this).transition()
-      .duration(function(d, j) { return Math.random() * j * 500 + 2000})
-      .ease("circle")
-      .attrTween("transform", function(d) {
-        var a, b, origin, target;
+var target = svg.append("g").attr("class", "")
+  .selectAll("g")
+    .data(data.map((d) => d.origin()))
+  .enter().append("g").attr("class", "shape")
 
-        a = data[i];
+target.append("path")
+  .attr("id", (d, i) => 'polygon' + i)
+  .attr("class", "target")
+  .attr("d", line)
+  .on("mouseenter", mouseenter)
+  .on("mouseleave", mouseleave);
 
-        origin = translate(a.centroid()) + rotate(0, a.centroid());
-        target = translate(a.accumulate().centroid()) + rotate(a.theta(), a.accumulate().centroid());
-
-        return d3.interpolateString(origin, target);
-
-      })
-      // .each("end", cycle);
+function mouseenter(d, i) {
+  d3.selectAll('#polygon' + i).classed("highlight", true);
 }
 
-function transform(t) {
-  var rotation, translation, pivot;
-  rotation = (t.hasOwnProperty("rotate")) ? t.rotate : 0;
-  translation = (t.hasOwnProperty("translate")) ? t.translate : [0, 0];
-  pivot = (t.hasOwnProperty("pivot")) ? t.pivot : null;
-
-  return translate(translation) + rotate(rotation, pivot);
-}
-
-function rotate(angle, pivot) {
-  return (pivot != null)
-          ? "rotate(" + angle + "," + pivot + ")"
-          : "rotate(" + angle + ")";
-}
-
-function translate(delta) {
-  return "translate(" + delta[0] + "," + delta[1] + ")";
+function mouseleave(d, i) {
+  d3.selectAll('.origin').classed("highlight", false);
+  d3.selectAll('.target').classed("highlight", false);
 }
 </script>

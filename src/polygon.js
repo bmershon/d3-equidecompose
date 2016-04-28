@@ -1,7 +1,8 @@
 import {default as rotation} from "./rotation";
 import {default as angle} from "./angle";
-import {default as sub} from "./sub";
 import {default as add} from "./add";
+import {default as sub} from "./sub";
+import {default as scale} from "./scale";
 import {default as multiply} from "./multiplyMatVec";
 import {polygonCentroid} from "d3-polygon";
 
@@ -15,11 +16,10 @@ Polygon.prototype = Object.create(Array.prototype); // subclass Array
 Polygon.prototype.constructor = Polygon;
 Polygon.prototype.translate = translate; // modify in place
 Polygon.prototype.rotate = rotate; // modify in place
-// Polygon.prototype.origin = origin; // return array of positions
-// Polygon.prototype.target = target; // return array of positions
-Polygon.prototype.accumulate = accumulate; // return array of positions
+Polygon.prototype.origin = origin; // return array of positions
+Polygon.prototype.target = target; // return array of positions
 Polygon.prototype.centroid = centroid;
-Polygon.prototype.theta = theta; // rotation experienced from origin to current state
+Polygon.prototype.clone = clone;
 
 function translate(T) {
   for (let i = 0, n = this.length; i < n; i++) {
@@ -48,11 +48,20 @@ function rotate(theta, pivot) {
   return this;
 }
 
-// function origin() {
-//   if (this._origin) return this._origin;
+// cache accumulated transforms
+function origin() {
+  if (this._origin) return this._origin;
 
-//   this._origin = this.accumulate()
-// }
+  this._origin = this.accumulate();
+
+  return this._origin;
+}
+
+function target() {
+  if (this._target) return this._target;
+  // TODO
+  this._target = this;
+}
 
 function accumulate() {
   let P = polygon(this), // do not change THIS polygon's geometry
@@ -68,24 +77,15 @@ function accumulate() {
     }
   }
 
-  return polygon(P.slice()); // return positions of only
+  return polygon(P.slice()).clone(); // return positions of only
 }
 
 function centroid() {
   return polygonCentroid(this);
 }
 
-// angle about centroid relative to original placement
-function theta() {
-  var P, Q, a, b;
-
-  P = polygon(this.slice());
-  Q = P.accumulate();
-
-  a = P[0];
-  b = add(sub(P.centroid(), Q.centroid()), Q[0]);
-
-  return 180 / Math.PI * angle(a, P.centroid(), b);
+function clone() {
+  return polygon(JSON.parse(JSON.stringify(this.slice())));
 }
 
 // create new polygon from array of position tuples
