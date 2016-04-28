@@ -29,8 +29,7 @@ path {
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var a = [750, 200], b = [400, 300], c = [800, 400],
-    A0, A1, data, polygons;
+var a = [750, 200], b = [400, 300], c = [800, 400], data, polygons;
 
 data = partials.rectangle2Square(partials.triangle2Rectangle([a, b, c]));
 
@@ -68,7 +67,6 @@ function cycle(_, i) {
         var a, b, origin, target;
 
         a = data[i];
-
 
         origin = translate(a.centroid()) + rotate(0, a.centroid());
         target = translate(a.accumulate().centroid()) + rotate(a.theta(), a.accumulate().centroid());

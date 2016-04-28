@@ -1,21 +1,25 @@
 import {default as rotation} from "./rotation";
 import {default as angle} from "./angle";
 import {default as sub} from "./sub";
+import {default as add} from "./add";
 import {default as multiply} from "./multiplyMatVec";
 import {polygonCentroid} from "d3-polygon";
 
 function Polygon(P) {
   this.transforms = []; // public member
+  this._origin = 
+  this._target = null;
 }
 
 Polygon.prototype = Object.create(Array.prototype); // subclass Array
 Polygon.prototype.constructor = Polygon;
 Polygon.prototype.translate = translate; // modify in place
 Polygon.prototype.rotate = rotate; // modify in place
+// Polygon.prototype.origin = origin; // return array of positions
+// Polygon.prototype.target = target; // return array of positions
 Polygon.prototype.accumulate = accumulate; // return array of positions
 Polygon.prototype.centroid = centroid;
 Polygon.prototype.theta = theta; // rotation experienced from origin to current state
-
 
 function translate(T) {
   for (let i = 0, n = this.length; i < n; i++) {
@@ -44,6 +48,12 @@ function rotate(theta, pivot) {
   return this;
 }
 
+// function origin() {
+//   if (this._origin) return this._origin;
+
+//   this._origin = this.accumulate()
+// }
+
 function accumulate() {
   let P = polygon(this), // do not change THIS polygon's geometry
       n = this.transforms.length;
@@ -67,16 +77,15 @@ function centroid() {
 
 // angle about centroid relative to original placement
 function theta() {
-  var P, Q, u, v;
+  var P, Q, a, b;
 
-  if (!this) {console.log(this)}
   P = polygon(this.slice());
   Q = P.accumulate();
 
-  u = sub(P[0], P.centroid());
-  v = sub(Q[0], Q.centroid());
+  a = P[0];
+  b = add(sub(P.centroid(), Q.centroid()), Q[0]);
 
-  return 180 / Math.PI * angle(P.centroid(), u, v);
+  return 180 / Math.PI * angle(a, P.centroid(), b);
 }
 
 // create new polygon from array of position tuples
