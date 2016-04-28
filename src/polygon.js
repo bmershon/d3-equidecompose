@@ -7,17 +7,18 @@ import {default as multiply} from "./multiplyMatVec";
 import {polygonCentroid} from "d3-polygon";
 
 function Polygon(P) {
-  this.transforms = []; // public member
+  this.transforms = [];
   this._origin = 
   this._target = null;
 }
 
 Polygon.prototype = Object.create(Array.prototype); // subclass Array
 Polygon.prototype.constructor = Polygon;
-Polygon.prototype.translate = translate; // modify in place
-Polygon.prototype.rotate = rotate; // modify in place
-Polygon.prototype.origin = origin; // return array of positions
-Polygon.prototype.target = target; // return array of positions
+Polygon.prototype.translate = translate;
+Polygon.prototype.rotate = rotate;
+Polygon.prototype.accumulate = accumulate;
+Polygon.prototype.origin = origin;
+Polygon.prototype.target = target;
 Polygon.prototype.centroid = centroid;
 Polygon.prototype.clone = clone;
 
