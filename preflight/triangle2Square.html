@@ -106,7 +106,7 @@ function update() {
   var figure = svg.append("g").attr("class", "")
     .selectAll("g")
       .data(square)
-      .data(square.map((d) => d.accumulate())) // accumulated transforms
+      // .data(square.map((d) => d.accumulate())) // accumulated transforms
     .enter().append("g").attr("class", "shape")
 
   path = figure.append("path")

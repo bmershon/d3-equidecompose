@@ -8,36 +8,42 @@ import {polygonArea, polygonCentroid, polygonContains} from "d3-polygon";
 import polygon from "./polygon";
 import {default as cutCollection} from "./cutCollection";
 
-// Takes in array of polygons forming a canonical rectangle
-// expects rectangle member on collection with bounding rectangle references
-export default function(collection, rectangle) {
+// Takes in array of polygons forming a canonical rectangle and
+// a side length x for the rectangle to be formed. Expects rectangle
+// member on collection with bounding rectangle references.
+export default function(collection, x) {
   var dist = [],
       A, B, C, D, E, F, G, H, J, K, // follows Tralie's labeling
       AFGD, KCF,
-      area, s,
+      area, width, height, s,
+      rectangle = collection.rectangle, // bounding rectangle
       square,
       slide,
       l = Infinity,
       polygons = [];
 
-  area = Math.abs(polygonArea(collection.rectangle));
-  s = Math.sqrt(area); // square side length
+  area = Math.abs(polygonArea(rectangle));
+  s = area / x;
+  height =  Math.min(s, x); // square side length
+  width = Math.max(s, x);
+
+  console.log(area, width, height);
 
   // assumes escalator conditions hold
-  B = collection.rectangle[0]; // an invariant throughout
-  E = collection.rectangle[3]; // need reference
-  F = collection.rectangle[1]; // need reference
-  G = collection.rectangle[2];
+  B = rectangle[0]; // an invariant throughout
+  E = rectangle[3]; // need reference
+  F = rectangle[1]; // need reference
+  G = rectangle[2];
 
-  // the square defined by [A, B, C, D]
-  A = add(B, scale(s, normalize(sub(E, B))));
-  C = add(B, scale(s, normalize(sub(F, B))));
+  // the rectangle (of side length x) defined by [A, B, C, D]
+  A = add(B, scale(height, normalize(sub(E, B))));
+  C = add(B, scale(width, normalize(sub(F, B))));
   D = add(A, sub(C, B));
 
   l = length(sub(B, F));
 
   // halving the canonical rectangle for the escalator method
-  while (l > 2 * s) {
+  while (l > 2 * height) {
     let a, b, left, halved, slideLeft, slideUp,
         E_Polygon = [], E_Vertex = [],
         F_Polygon = [], F_Vertex = [];
@@ -116,7 +122,7 @@ export default function(collection, rectangle) {
     }
   });
 
-  polygons.square = [A, B, C, D]; 
+  polygons.square = [D, add(C, scale(1, sub(C, D)))]; 
 
   return polygons;
 };
