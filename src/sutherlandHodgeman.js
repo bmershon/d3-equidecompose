@@ -2,6 +2,7 @@ import polygon from "./polygon";
 import {default as infiniteIntersection} from "./infiniteIntersection";
 import {default as right} from "./right"
 
+
 export default function(subject, clip){
 	var subjectPolygons = polygon(subject);
 	var clipPolygon = polygon(clip);

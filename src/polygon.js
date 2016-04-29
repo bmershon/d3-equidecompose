@@ -24,6 +24,8 @@ Polygon.prototype.centroid = centroid;
 Polygon.prototype.clone = clone;
 Polygon.prototype.containsPoint = containsPoint;
 
+
+// checks whether polygon contains this point
 function containsPoint(point){
   var myArea = 0.0;
   var pointArea = 0.0;
