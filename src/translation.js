@@ -1,4 +1,3 @@
-// DEPRECATED ???
 import {default as identity} from "./identity";
 
 export default function(delta) {

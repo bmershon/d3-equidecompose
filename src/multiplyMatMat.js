@@ -7,7 +7,7 @@ export default function(A, B) {
     throw new Error("invalid dimensions");
     return null;
   }
-  var res = [[]];
+  var res = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
   for(let i = 0; i < A.length; i++){
     for(let j = 0; j < B[0].length; j++){
       res[i][j] = dot(row(A, i), column(B, j));
