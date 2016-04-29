@@ -29,7 +29,7 @@ path {
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var a = [750, 200], b = [400, 300], c = [800, 400], data, polygons;
+var a = [750, 200], b = [100, 300], c = [800, 400], data, polygons;
 
 data = partials.rectangle2Square(partials.triangle2Rectangle([a, b, c]));
 
@@ -42,37 +42,69 @@ var line = d3.svg.line()
             .y(function(d) { return d[1]; })
             .interpolate("linear-closed");          
 
-var figure = svg.append("g").attr("class", "")
-  .selectAll("g")
-    .data(data) // accumulated transforms
-  .enter().append("g").attr("class", "shape")
+var figure = svg.append("g").attr("class", "collection")
+                  .selectAll("g")
+                  .data(data.map(function(d) {
+                    var c = d.centroid();
+                    return partials.polygon(d.slice()).translate([-c[0], -c[1]]);
+                  }))
+
+var translation = figure
+                  .enter().append("g").attr("class", "translation")
+
+var rotation = translation.append("g").attr("class", "rotation");
 
 // pick up transform from original screen coordinates data
 figure.each(cycle);
 
-figure.append("path")
+rotation.append("path")
   .style("fill", function(d, i) { return color(i); })
   .attr("class", "origin")
   .attr("d", line);
 
 function cycle(_, i) {
+
+  var variance = i * 150;
+
   d3.select(this).transition()
-      .duration(function(d, j) { return Math.random() * j * 500 + 2000})
+      .duration(function(d, j) { return variance + 1000})
       .ease("circle")
       .attrTween("transform", function(d) {
         var polygon, origin, target;
 
         polygon = data[i];
 
-        origin = matrix(polygon.matrix());
-        target = matrix(polygon.origin().matrix());
-
-        console.log(origin, target)
+        origin = translate(polygon.centroid());
+        target = translate(polygon.origin().centroid());
 
         return d3.interpolateString(origin, target);
+      });
+      .each("end", cycle);
 
-      })
-      // .each("end", cycle);
+  d3.select(this).select(".rotation").transition()
+    .duration(function(d, j) { return variance + 1000})
+    .ease("circle")
+    .attrTween("transform", function(d) {
+      var polygon, origin, target;
+
+      polygon = data[i];
+
+      origin = rotate(0);
+      target = rotate(polygon.rotation());
+
+      console.log(origin, target)
+
+      return d3.interpolateString(origin, target);
+    })
+    .each("end", cycle);
+}
+
+function translate(T) {
+  return "translate(" + T[0] + " " + T[1] + ")";
+}
+
+function rotate(angle) {
+  return "rotate(" + angle + ")";
 }
 
 function matrix(M) {
