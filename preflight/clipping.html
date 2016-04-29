@@ -33,8 +33,8 @@ var width = 960,
     triangles,
     polgyons;
 
-var vertices = d3.range(N).map(function(d) {
-  return [Math.random() * width, Math.random() * height];
+var vertices = d3.range(N).map(function(d, i) {
+  return [Math.random() * width / i, Math.random() * height/ i];
 });
 
 var svg = d3.select("body").append("svg")
@@ -51,18 +51,14 @@ var alpha = svg.selectAll(".A")
             .data(A.map(function(d) { return "M" + d.join("L") + "Z"; }), String)  
             .enter().append("path")
             .attr("class", "A")
-            .attr("d", String)
-            .on("mouseenter", mouseenter)
-            .on("mouseleave", mouseleave);
+            .attr("d", String);
 
 
 var beta = svg.selectAll(".B")
             .data(B.map(function(d) { return "M" + d.join("L") + "Z"; }), String)  
             .enter().append("path")
             .attr("class", "B")
-            .attr("d", String)
-            .on("mouseenter", mouseenter)
-            .on("mouseleave", mouseleave);
+            .attr("d", String);
 
 
 // var intersection = svg.selectAll(".B")
@@ -70,14 +66,6 @@ var beta = svg.selectAll(".B")
 //       .enter().append("path")
 //       .attr("class", "intersection")
 //       .attr("d", String);
-
-function mouseenter(d, i) {
-  d3.select(this).style("fill", "none");
-}
-
-function mouseleave(d, i) {
-  d3.select(this).style("fill", null);
-}
 
 
 </script>

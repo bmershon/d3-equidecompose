@@ -95,8 +95,6 @@ function theta() {
   b = multiply(this.origin().matrix(), a);
   b = multiply(translation(sub(this.centroid(), this.origin().centroid())), b);
 
-  console.log(a, this.centroid(), b.slice(0, 2));
-
   return 180 / Math.PI * angle(this.centroid(), a, b.slice(0, 2));
 }
 

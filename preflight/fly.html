@@ -29,9 +29,22 @@ path {
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var a = [750, 200], b = [100, 300], c = [800, 400], data, polygons;
+var N = 3,
+    data,
+    polygons,
+    width = 960,
+    centroid,
+    s = 400,
+    area,
+    height = 500;
 
-data = partials.rectangle2Square(partials.triangle2Rectangle([a, b, c]));
+var vertices = d3.range(N).map(function(d, i) {
+  return [Math.random() * width, Math.random() * height];
+});
+
+c1 = d3_polygon.polygonCentroid(vertices);
+data = partials.rectangle2Square(partials.triangle2Rectangle(vertices));
+c2 = d3_polygon.polygonCentroid(data.square);
 
 var color = d3.scale.category10();
 
@@ -43,60 +56,75 @@ var line = d3.svg.line()
             .interpolate("linear-closed");          
 
 var figure = svg.append("g").attr("class", "collection")
+                  .attr("transform", translate([width/2 - c1[0], height/2 - c1[1]]))
                   .selectAll("g")
                   .data(data.map(function(d) {
                     var c = d.centroid();
                     return partials.polygon(d.slice()).translate([-c[0], -c[1]]);
-                  }))
+                  }));
 
 var translation = figure
                   .enter().append("g").attr("class", "translation")
 
 var rotation = translation.append("g").attr("class", "rotation");
 
-// pick up transform from original screen coordinates data
-figure.each(cycle);
-
 rotation.append("path")
   .style("fill", function(d, i) { return color(i); })
   .attr("class", "origin")
   .attr("d", line);
 
-function cycle(_, i) {
+figure.each(function(d, i) {
+  var a, b;
+  a = data[i].centroid();
+  b = data[i].origin().centroid();
+  d.transform = {
+    centroid: a,
+    rotation: 0,
+    translate: [b[0] - a[0], b[1] - a[1]],
+    rotate: data[i].rotation()
+  };
+});
 
-  var variance = i * 150;
+figure.each(fly);
 
+function fly(_, i) {
+  var C, T, R, variance = i * 0;
+        
+  C = _.transform.centroid;
+  T = _.transform.translate;
+  R = _.transform.rotation;
+
+  // rigid translation
   d3.select(this).transition()
-      .duration(function(d, j) { return variance + 1000})
+      .duration(function(d, j) { return variance + 2000})
       .ease("circle")
       .attrTween("transform", function(d) {
-        var polygon, origin, target;
+        var origin, target;
 
-        polygon = data[i];
-
-        origin = translate(polygon.centroid());
-        target = translate(polygon.origin().centroid());
+        origin = translate(C);
+        target = translate([C[0] + T[0], C[1] + T[1]]);
 
         return d3.interpolateString(origin, target);
-      });
-      .each("end", cycle);
+      })
+    .each("end", fly);
 
+  // rigid rotation about polygon centroid
   d3.select(this).select(".rotation").transition()
-    .duration(function(d, j) { return variance + 1000})
+    .duration(function(d, j) { return variance + 2000})
     .ease("circle")
     .attrTween("transform", function(d) {
-      var polygon, origin, target;
+      var origin, target;
 
-      polygon = data[i];
-
-      origin = rotate(0);
-      target = rotate(polygon.rotation());
-
-      console.log(origin, target)
+      origin = rotate(R);
+      target = rotate(R + d.transform.rotate);
 
       return d3.interpolateString(origin, target);
     })
-    .each("end", cycle);
+
+  _.transform.centroid = [C[0] + T[0], C[1] + T[1]];
+  _.transform.translate = [-_.transform.translate[0], -_.transform.translate[1]]
+  _.transform.rotation = R + _.transform.rotate;
+  _.transform.rotate = -_.transform.rotate; // rotate back
 }
 
 function translate(T) {
@@ -105,17 +133,6 @@ function translate(T) {
 
 function rotate(angle) {
   return "rotate(" + angle + ")";
-}
-
-function matrix(M) {
-  var entries = [];
-  for (let j = 0; j < 3; j++) {
-    for (let i = 0; i < 2; i++) {
-      entries.push(M[i][j]);
-    }
-  }
-
-  return "matrix(" + entries.join(',') + ")";
 }
 
 </script>
