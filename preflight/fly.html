@@ -34,9 +34,8 @@ var N = 3,
     polygons,
     width = 960,
     centroid,
-    s = 400,
-    area,
-    height = 500;
+    height = 500,
+    count = 0;
 
 var vertices = d3.range(N).map(function(d, i) {
   return [Math.random() * width, Math.random() * height];
@@ -88,7 +87,7 @@ figure.each(function(d, i) {
 figure.each(fly);
 
 function fly(_, i) {
-  var C, T, R, variance = i * 0;
+  var that = this, C, T, R, variance = i * 250;
         
   C = _.transform.centroid;
   T = _.transform.translate;
@@ -96,8 +95,8 @@ function fly(_, i) {
 
   // rigid translation
   d3.select(this).transition()
-      .duration(function(d, j) { return variance + 2000})
-      .ease("circle")
+      .duration(function(d, j) { return variance + 1000})
+      .ease("cubic")
       .attrTween("transform", function(d) {
         var origin, target;
 
@@ -106,11 +105,17 @@ function fly(_, i) {
 
         return d3.interpolateString(origin, target);
       })
-    .each("end", fly);
+    .each("end", function(d, i) {
+      count++;
+      if (count == data.length) {
+        count = 0;
+        figure.each(fly);
+      }
+    });
 
   // rigid rotation about polygon centroid
   d3.select(this).select(".rotation").transition()
-    .duration(function(d, j) { return variance + 2000})
+    .duration(function(d, j) { return variance + 1000})
     .ease("circle")
     .attrTween("transform", function(d) {
       var origin, target;
@@ -121,16 +126,19 @@ function fly(_, i) {
       return d3.interpolateString(origin, target);
     })
 
+  // cache transform to undo rigid translation and rotation
   _.transform.centroid = [C[0] + T[0], C[1] + T[1]];
   _.transform.translate = [-_.transform.translate[0], -_.transform.translate[1]]
   _.transform.rotation = R + _.transform.rotate;
-  _.transform.rotate = -_.transform.rotate; // rotate back
+  _.transform.rotate = -_.transform.rotate;
 }
 
+// SVG translation string
 function translate(T) {
   return "translate(" + T[0] + " " + T[1] + ")";
 }
 
+// SVG rotation string
 function rotate(angle) {
   return "rotate(" + angle + ")";
 }
