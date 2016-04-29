@@ -2,28 +2,26 @@
 <meta charset="utf-8">
 <style>
 
+circle {
+  stroke: #aaa;
+  stroke-dasharray: 5, 5;
+  fill: none;
+}
+
 path {
   stroke-linecap: butt;
 }
 
-.origin {
-  pointer-events: none;
-  fill-opacity: 1;
-  stroke-width: 1px;
-  stroke: #000;
-  fill: none;
-}
-
-.target {
+.figure {
   pointer-events: none;
   fill-opacity: 0.6;
   stroke-width: 1px;
   stroke: #000;
   fill: none;
 }
+
 </style>
-<svg width="960" height="500">
-</svg>
+<svg width="960" height="500"></svg>
 <script src="../node_modules/d3-polygon/build/d3-polygon.js"></script>
 <script src="../build/partials.js"></script>
 <script src="https://d3js.org/d3.v3.min.js"></script>
@@ -35,15 +33,27 @@ var N = 3,
     width = 960,
     centroid,
     height = 500,
+    r = 250,
     count = 0;
 
 var vertices = d3.range(N).map(function(d, i) {
-  return [Math.random() * width, Math.random() * height];
+  var theta = Math.random() * Math.PI * 2;
+  return [(width / 2)  + r * Math.cos(theta), (height / 2)  + r * Math.sin(theta)];
 });
 
-c1 = d3_polygon.polygonCentroid(vertices);
+// polygons resulting from cutting the triangle into the square
 data = partials.rectangle2Square(partials.triangle2Rectangle(vertices));
+
+c1 = [width / 2, height / 2];
 c2 = d3_polygon.polygonCentroid(data.square);
+
+// translate square to center of viewport
+data.forEach(function(d) {
+  d.translate([(c1[0] - c2[0]), (c1[1] - c2[1])]);
+  d.transforms.push({
+    translate: [-(c1[0] - c2[0]), -(c1[1] - c2[1])]
+  });
+});
 
 var color = d3.scale.category10();
 
@@ -65,11 +75,12 @@ var figure = svg.append("g").attr("class", "collection")
 var translation = figure
                   .enter().append("g").attr("class", "translation")
 
+// nest rotation under translation group (with a rigid translation)
 var rotation = translation.append("g").attr("class", "rotation");
 
 rotation.append("path")
   .style("fill", function(d, i) { return color(i); })
-  .attr("class", "origin")
+  .attr("class", "figure")
   .attr("d", line);
 
 figure.each(function(d, i) {
@@ -84,10 +95,15 @@ figure.each(function(d, i) {
   };
 });
 
+svg.append("circle")
+    .attr("cx", width / 2)
+    .attr("cy", height / 2)
+    .attr("r", r)
+
 figure.each(fly);
 
 function fly(_, i) {
-  var that = this, C, T, R, variance = i * 250;
+  var that = this, C, T, R;
         
   C = _.transform.centroid;
   T = _.transform.translate;
@@ -95,8 +111,8 @@ function fly(_, i) {
 
   // rigid translation
   d3.select(this).transition()
-      .duration(function(d, j) { return variance + 1000})
-      .ease("cubic")
+      .duration(1000)
+      .ease("circle")
       .attrTween("transform", function(d) {
         var origin, target;
 
@@ -105,17 +121,17 @@ function fly(_, i) {
 
         return d3.interpolateString(origin, target);
       })
-    .each("end", function(d, i) {
-      count++;
-      if (count == data.length) {
-        count = 0;
-        figure.each(fly);
-      }
-    });
+      .each("end", function(d, i) {
+        count++;
+        if (count == data.length) {
+          count = 0;
+          figure.transition().delay(function(d, i) {return i * 200}).each(fly);
+        }
+      });
 
-  // rigid rotation about polygon centroid
+  // rigid rotation about polygon centroid, nested under translation group
   d3.select(this).select(".rotation").transition()
-    .duration(function(d, j) { return variance + 1000})
+    .duration(1000)
     .ease("circle")
     .attrTween("transform", function(d) {
       var origin, target;
@@ -126,7 +142,7 @@ function fly(_, i) {
       return d3.interpolateString(origin, target);
     })
 
-  // cache transform to undo rigid translation and rotation
+  // cache transform (translation and rotation about centroid) to current tween
   _.transform.centroid = [C[0] + T[0], C[1] + T[1]];
   _.transform.translate = [-_.transform.translate[0], -_.transform.translate[1]]
   _.transform.rotation = R + _.transform.rotate;
