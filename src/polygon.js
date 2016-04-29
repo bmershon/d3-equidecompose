@@ -23,7 +23,6 @@ Polygon.prototype.rotate = rotate;
 Polygon.prototype.accumulate = accumulate;
 Polygon.prototype.origin = origin;
 Polygon.prototype.centroid = centroid;
-Polygon.prototype.matrix = matrix;
 Polygon.prototype.rotation = theta;
 Polygon.prototype.clone = clone;
 
@@ -54,7 +53,7 @@ function rotate(theta, pivot) {
   return this;
 }
 
-// returns a polygon translated into the shape it came from
+// Returns a polygon translated into the shape it came from.
 function origin() {
   if (this._origin) return this._origin;
 
@@ -86,7 +85,7 @@ function accumulate() {
   return P;
 }
 
-// angle about centroid relative to original placement
+// This polygon's rigid rotation about centroid relative to original placement.
 function theta() {
   var a, b;
 
@@ -102,17 +101,11 @@ function centroid() {
   return polygonCentroid(this);
 }
 
-// returns a homogenous matrix representing the transform required
-// to place this polygon back in the original shape
-function matrix() {
-  return this._matrix;
-}
-
 function clone() {
   return polygon(JSON.parse(JSON.stringify(this.slice())));
 }
 
-// create new polygon from array of position tuples
+// Create new polygon from array of position tuples.
 export default function polygon(positions) {
   var P = new Polygon();
   P.push.apply(P, positions);
