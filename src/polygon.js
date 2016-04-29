@@ -4,6 +4,7 @@ import {default as add} from "./add";
 import {default as sub} from "./sub";
 import {default as scale} from "./scale";
 import {default as multiply} from "./multiplyMatVec";
+import {default as triangleArea} from "./triangleArea";
 import {polygonCentroid} from "d3-polygon";
 
 function Polygon(P) {
@@ -21,6 +22,25 @@ Polygon.prototype.origin = origin;
 Polygon.prototype.target = target;
 Polygon.prototype.centroid = centroid;
 Polygon.prototype.clone = clone;
+Polygon.prototype.containsPoint = containsPoint;
+
+function containsPoint(point){
+  var myArea = 0.0;
+  var pointArea = 0.0;
+  var a = point;
+  for(let i = 1; i < this.length; i++){
+    var b = this[i];
+    var c = this[(i+1 == this.length) ? 0 : i+1];
+    myArea += triangleArea(a,b,c);
+  }
+  a = this[0];
+  for(let i = 1; i < this.length-1; i++){
+    var b = this[i];
+    var c = this[i+1];
+    pointArea += triangleArea(a,b,c);
+  }
+  return Math.abs(myArea - pointArea) < 1e-8;
+}
 
 function translate(T) {
   for (let i = 0, n = this.length; i < n; i++) {

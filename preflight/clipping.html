@@ -29,7 +29,7 @@ path {
 
 var width = 960,
     height = 500,
-    N = 25,
+    N = 6,
     triangles,
     polgyons;
 
@@ -42,8 +42,12 @@ var svg = d3.select("body").append("svg")
     .attr("height", height)
 
 // geometry
-A = d3.geom.delaunay(vertices.slice(0, 10)); // array of triangles
-B = d3.geom.delaunay(vertices.slice(10, N)); // another array of triangles
+//A = d3.geom.delaunay(vertices.slice(0, 3)); // array of triangles
+//B = d3.geom.delaunay(vertices.slice(3, N)); // another array of triangles
+A = [[[198.49898337970382,2.7173610355973876],[458.42804335486113,19.07269823552604],[212.17788483205106,412.96108837299926]]];
+B = [[[11.932709934974426,382.11162023177934],[594.5137860288004,203.42264398313048],[204.12504660413367,480.2701315414405]]];
+
+
 // C = partials.clipCollection(A, B);
 
 // rendering
@@ -51,25 +55,27 @@ var alpha = svg.selectAll(".A")
             .data(A.map(function(d) { return "M" + d.join("L") + "Z"; }), String)  
             .enter().append("path")
             .attr("class", "A")
-            .attr("d", String)
-            .on("mouseenter", mouseenter)
-            .on("mouseleave", mouseleave);
+            .attr("d", String);
+            //.on("mouseenter", mouseenter)
+            //.on("mouseleave", mouseleave);
 
 
 var beta = svg.selectAll(".B")
             .data(B.map(function(d) { return "M" + d.join("L") + "Z"; }), String)  
             .enter().append("path")
             .attr("class", "B")
-            .attr("d", String)
-            .on("mouseenter", mouseenter)
-            .on("mouseleave", mouseleave);
+            .attr("d", String);
+            //.on("mouseenter", mouseenter)
+            //.on("mouseleave", mouseleave);
+console.log(A);
+console.log(B);
 
-
-// var intersection = svg.selectAll(".B")
-//       .data(C.map(function(d) { return "M" + d.join("L") + "Z"; }), String)  
-//       .enter().append("path")
-//       .attr("class", "intersection")
-//       .attr("d", String);
+C = partials.clipPolygons(A, B);
+var intersection = svg.selectAll(".C")
+      .data(C.map(function(d) { return "M" + d.join("L") + "Z"; }), String)  
+      .enter().append("path")
+      .attr("class", "intersection")
+      .attr("d", String);
 
 function mouseenter(d, i) {
   d3.select(this).style("fill", "none");
