@@ -4,6 +4,11 @@
 
 Compute the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/)* of one polygon into a polygon of equal area. A decomposition produces polygons which can be rearranged by rigid translation and rotation to form another polygon.
 
+## TODO
+
+- [ ] Use Sutherland-Hodgman clipping algorithm to clip common squares for two triangles of equal area against one another.
+- [ ] Implement generalized equidecomposition for any two simple polygon (without self-intersections or holes).
+
 #### Triangle to Square Decomposition
 
 To decompose a source triangle into a square of equal area:
