@@ -6,9 +6,12 @@ import {default as right} from "./right"
 export default function(subject, clip){
 	var subjectPolygons = polygon(subject);
 	var clipPolygon = polygon(clip);
+	var clipPolygon = polygon(clip.reverse());
 	var outputList = subjectPolygons.slice(0);
 	for(let i = 0; i < clipPolygon.length; i++){
-		var clipEdge = [clipPolygon[i],clipPolygon[(i+1 == clipPolygon.length) ? 0 : i+1]];
+		var end = (i+1 == clipPolygon.length) ? 0 : i+1;
+		var clipEdge = [clipPolygon[i],clipPolygon[end]];
+		console.log(clipEdge);
 		var inputList = outputList.slice(0);
 		outputList = [];
 		var S = inputList[inputList.length-1]; 

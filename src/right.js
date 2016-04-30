@@ -1,7 +1,8 @@
 import {default as sub} from "./sub";
 
-// tests if point u is to the right of edge e
-export default function(u, e) {
+// tests if point p is to the right of edge e
+export default function(p, e) {
+  var u = sub(p, e[0]);
   var v = sub(e[1], e[0]);
   
   //console.log(u);
