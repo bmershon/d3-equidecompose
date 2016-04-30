@@ -4,6 +4,8 @@
 
 Compute the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/)* of one polygon into a polygon of equal area.
 
+#### Triangle to Triangle
+
 To decompose a source triangle into another subject triangle of equal area:
 
 1. [Decompose](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5) the source triangle into a square.
@@ -13,6 +15,8 @@ To decompose a source triangle into another subject triangle of equal area:
 [<img alt="triangle" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/triangle.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
 [<img alt="square" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/square.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
 [<img alt="sutherland-hodgman" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/sutherland-hodgman.png" width="33%">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)
+
+#### Shape to Shape
 
 To decompose a generic simple source polygon (without holes or self intersections) into another simple subject polygon of equal area:
 
