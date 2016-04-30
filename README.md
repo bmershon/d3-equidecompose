@@ -4,7 +4,14 @@
 
 Compute the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/)* of one polygon into a polygon of equal area. A decomposition produces polygons which can be rearranged by rigid translation and rotation to form another polygon.
 
-#### Triangle to Triangle (in progress)
+#### Triangle to Square Decomposition
+
+To decompose a source triangle into a square of equal area:
+
+1. Decompose a triangle into its canonical rectangle.
+2. Decompose a canonical rectangle into a triangle using the ["escalator method"](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/#rect2rect).
+
+#### Triangle to Triangle Decomposition
 
 To decompose a source triangle into another subject triangle of equal area:
 
