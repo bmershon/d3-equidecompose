@@ -33,7 +33,7 @@ To decompose a source triangle into another subject triangle of equal area:
 
 #### Shape to Shape (in progress)
 
-To decompose a generic simple source polygon (without holes or self intersections) into another simple subject polygon of equal area:
+To decompose a simple source polygon (without holes or self intersections) into another simple subject polygon of equal area:
 
 1. Triangulate both source and subject polygons.
 2. Decompose each collection of triangles into a common square.
