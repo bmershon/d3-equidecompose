@@ -29,13 +29,13 @@ Creates a decomposition of the specified **source** polygon into the **subject**
 
 If the subject polygon is not the same area as the subject polygon, the decomposition will be computed as if the subject were scaled about with respect to its centroid so that the source and subject are of equal area.
 
-<a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subjects</b>()
-
-Returns an array of [Polygon](#polygon) objects. Each polygon is positioned within the subject polygon used to create a decomposition.
-
 <a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>sources</b>()
 
 Returns an array of [Polygon](#polygon) objects. Each polygon is positioned within the source polygon used to create a decomposition.
+
+<a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subjects</b>()
+
+Returns an array of [Polygon](#polygon) objects. Each polygon is positioned within the subject polygon used to create a decomposition.
 
 ### Polygon
 
