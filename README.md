@@ -23,7 +23,7 @@ To decompose a source triangle into a square of equal area:
 [<img alt="cut-rectangle-triangle" src="https://cloud.githubusercontent.com/assets/3190945/14405618/89bdd7ea-fe60-11e5-805a-5f7afa4e11ee.gif" width="33%">](http://bl.ocks.org/bmershon/14972d48da2c362841d6073b267c815f)
 [<img alt="triangle-to-square" src="https://cloud.githubusercontent.com/assets/3190945/14765098/cc43adf2-099f-11e6-94ae-5d768bb9767f.gif" width="33%">](http://bl.ocks.org/bmershon/14972d48da2c362841d6073b267c815f)
 
-#### Triangle to Triangle Decomposition
+#### Triangle to Triangle Decomposition (TODO)
 
 To decompose a source triangle into another subject triangle of equal area:
 
@@ -31,7 +31,7 @@ To decompose a source triangle into another subject triangle of equal area:
 2. Decompose the subject triangle into a square.
 3. Overlay the common squares and [intersect all of the polygons](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d).
 
-#### Shape to Shape (in progress)
+#### Shape to Shape Decomposition (TODO)
 
 To decompose a simple source polygon (without holes or self intersections) into another simple subject polygon of equal area:
 
@@ -53,7 +53,7 @@ Several geometry processing tools are needed in order to perform a decomposition
 
 #### Transformations
 
-In order to keep track of the translatons and rotations undergone by each polygon throughout the equidecomposition pipeline, a history of transformations is maintained by each polygon. Transformations can be accumulated to allow for interpolation between a polygon in the source shape and that same polygon's position within the subject shape.
+In order to keep track of the translatons and rotations undergone by each polygon throughout the equidecomposition pipeline, a history of transformations is maintained by each polygon. Cuts produce new polygons, the canonical rectangle requires rotations, and the escalator method introduces translations.
 
 [<img alt="triangle" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/triangle.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
 [<img alt="square" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/square.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
