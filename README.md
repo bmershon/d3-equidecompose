@@ -23,7 +23,9 @@ The *partials.js* build target and *preflight/* directory are designed for build
 
 <a name="equidecompose" href="#equidecompose">#</a> d3_equidecompose.<b>equidecompose</b>(source [,subject])
 
-Creates a decomposition of the specified **source** polygon into the **subject** polygon with the same area. If a subject is not specified, it defaults to a square of the same area as the source. If the subject polygon is not the same area as the subject polygon, the decomposition will be computed as if the subject were scaled about with respect to its centroid so that the source and subject are of equal area. Polygons are specified as arrays of vertices stored as two-element arrays (x and y coordinates.
+Creates a decomposition of the specified **source** polygon into the **subject** polygon with the same area. If a subject is not specified, it defaults to a square of the same area as the source whose centroid coincides with the centroid of the source.
+
+If the subject polygon is not the same area as the subject polygon, the decomposition will be computed as if the subject were scaled about with respect to its centroid so that the source and subject are of equal area.
 
 <a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subjects</b>()
 
