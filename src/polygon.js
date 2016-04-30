@@ -28,7 +28,6 @@ Polygon.prototype.rotation = theta;
 Polygon.prototype.clone = clone;
 Polygon.prototype.containsPoint = containsPoint;
 
-
 // checks whether polygon contains this point
 function containsPoint(point){
   var myArea = 0.0;

@@ -42,8 +42,8 @@ var svg = d3.select("body").append("svg")
     .attr("height", height)
 
 // geometry
-A = d3.geom.delaunay(vertices.slice(0, 10)); // array of triangles
-B = d3.geom.delaunay(vertices.slice(10, N)); // another array of triangles
+A = d3.geom.delaunay(vertices.slice(0, 10)).map((d) => partials.polygon(d)); // array of triangles
+B = d3.geom.delaunay(vertices.slice(10, N)).map((d) => partials.polygon(d)); // another array of triangles
 C = partials.clipCollection(A, B);
 
 // rendering
