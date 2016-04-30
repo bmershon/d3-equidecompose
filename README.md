@@ -2,7 +2,7 @@
 
 *This library is an active project for [Chris Tralie's](http://ctralie.com) Digital 3D Geometry (MATH 290) course taught at Duke University during Spring 2016.* 
 
-Compute the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/)* of one polygon into a polygon of equal area.
+Compute the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/)* of one polygon into a polygon of equal area. A decomposition produces polygons which can be rearranged by rigid translation and rotation to form another polygon.
 
 #### Triangle to Triangle
 
@@ -12,15 +12,13 @@ To decompose a source triangle into another subject triangle of equal area:
 2. Decompose the subject triangle into a square.
 3. Overlay the common squares and [intersect all of the polygons](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d).
 
-[<img alt="triangle" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/triangle.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
-[<img alt="square" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/square.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
-[<img alt="sutherland-hodgman" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/sutherland-hodgman.png" width="33%">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)
-
 [<img alt="canonical-rectangle" src="https://cloud.githubusercontent.com/assets/3190945/13858265/3b91a538-ec54-11e5-9962-d1cff01b0cff.gif" width="33%">](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/#tri2canonrect)
 [<img alt="cut-rectangle-triangle" src="https://cloud.githubusercontent.com/assets/3190945/14405618/89bdd7ea-fe60-11e5-805a-5f7afa4e11ee.gif" width="33%">](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/#tri2canonrect)
 [<img alt="triangle-to-square" src="https://cloud.githubusercontent.com/assets/3190945/14765098/cc43adf2-099f-11e6-94ae-5d768bb9767f.gif" width="33%">](http://bl.ocks.org/bmershon/14972d48da2c362841d6073b267c815f)
 
-[<img alt="cut-collection" src="https://cloud.githubusercontent.com/assets/3190945/14515082/72a69648-01c4-11e6-893c-93258826d474.gif" width="33%">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)
+[<img alt="triangle" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/triangle.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
+[<img alt="square" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/square.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
+[<img alt="sutherland-hodgman" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/sutherland-hodgman.png" width="33%">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)
 
 #### Shape to Shape
 
@@ -29,6 +27,22 @@ To decompose a generic simple source polygon (without holes or self intersection
 1. Triangulate both source and subject polygons.
 2. Decompose each collection of triangles into a common square.
 3. Intersect all polygons via [Sutherland-Hodgman clipping](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d) in the overlaid squares.
+
+#### Geometry Processing
+
+Several geometry processing tools are needed in order to perform a decomposition:
+
+1. The ability to cut a polygon with a line segment to produce new polygons.
+2. The ability to cut a collection of polygons with a line segment (possibly at exact vertex locations).
+3. The ability to intersect two collections of polygons.
+
+[<img alt="cut-collection" src="https://cloud.githubusercontent.com/assets/3190945/14515082/72a69648-01c4-11e6-893c-93258826d474.gif" width="50%">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)
+[<img alt="cut-collection" src="https://cloud.githubusercontent.com/assets/3190945/14515082/72a69648-01c4-11e6-893c-93258826d474.gif" width="50%">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)
+
+
+#### Transformations
+
+
 
 ## Development
 
