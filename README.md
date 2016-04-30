@@ -18,8 +18,7 @@ To decompose a source triangle into another subject triangle of equal area:
 
 [<img alt="triangle" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/triangle.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
 [<img alt="square" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/square.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
-[<img alt="triangle-to-square" src="https://cloud.githubusercontent.com/assets/3190945/14924562/373fb892-0e11-11e6-87e2-92582fa2fe48.gif
-="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
+[<img alt="triangle-to-square" src="https://cloud.githubusercontent.com/assets/3190945/14924562/373fb892-0e11-11e6-87e2-92582fa2fe48.gif="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
 
 #### Shape to Shape
 
