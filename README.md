@@ -18,7 +18,8 @@ To decompose a source triangle into another subject triangle of equal area:
 
 [<img alt="triangle" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/triangle.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
 [<img alt="square" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/square.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
-[<img alt="sutherland-hodgman" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/sutherland-hodgman.png" width="33%">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)
+[<img alt="triangle-to-square" src="https://cloud.githubusercontent.com/assets/3190945/14924562/373fb892-0e11-11e6-87e2-92582fa2fe48.gif
+="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
 
 #### Shape to Shape
 
@@ -36,9 +37,9 @@ Several geometry processing tools are needed in order to perform a decomposition
 2. The ability to cut a collection of polygons with a line segment (possibly at exact vertex locations).
 3. The ability to intersect two collections of polygons.
 
-[<img alt="cut-collection" src="https://cloud.githubusercontent.com/assets/3190945/14515082/72a69648-01c4-11e6-893c-93258826d474.gif" width="50%">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)
-[<img alt="cut-collection" src="https://cloud.githubusercontent.com/assets/3190945/14515082/72a69648-01c4-11e6-893c-93258826d474.gif" width="50%">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)
-
+[<img alt="cut-polygon" src="https://cloud.githubusercontent.com/assets/3190945/14469966/0261bbc0-00b5-11e6-842e-2a5cacc62ef5.gif" width="33%">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)
+[<img alt="cut-collection" src="https://cloud.githubusercontent.com/assets/3190945/14515082/72a69648-01c4-11e6-893c-93258826d474.gif" width="33%">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)
+[<img alt="sutherland-hodgman" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/sutherland-hodgman.png" width="33%">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)
 
 #### Transformations
 
