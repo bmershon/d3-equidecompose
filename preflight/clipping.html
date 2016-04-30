@@ -33,11 +33,6 @@ var width = 960,
     triangles,
     polgyons;
 
-/*var vertices = d3.range(N).map(function(d, i) {
-  return [Math.random() * width / i, Math.random() * height/ i];
-});
-*/
-
 var vertices = d3.range(N).map(function(d) {
   return [Math.random() * width, Math.random() * height];
 });
@@ -46,20 +41,10 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height)
 
-// A is red
-// B is blue
-
 // geometry
 A = d3.geom.delaunay(vertices.slice(0, 10)); // array of triangles
 B = d3.geom.delaunay(vertices.slice(10, N)); // another array of triangles
-//A = d3.geom.delaunay(vertices.slice(0, 3));
-//B = d3.geom.delaunay(vertices.slice(3, 6))
-
-//A = [[[71.91697521019883,110.0525211162453],[434.6452698161862,263.5940612200175],[959.9218024033787,440.1189774439561]]];
-//B = [[[642.6735495963941,325.4952415160016],[347.0036472932566,164.81879020098089],[136.4667915625551,253.92618978303727]]];
-//A = [[[198.49898337970382,2.7173610355973876],[458.42804335486113,19.07269823552604],[212.17788483205106,412.96108837299926]]];
-//B = [[[11.932709934974426,382.11162023177934],[594.5137860288004,203.42264398313048],[204.12504660413367,480.2701315414405]]];
-// C = partials.clipCollection(A, B);
+C = partials.clipCollection(A, B);
 
 // rendering
 var alpha = svg.selectAll(".A")
@@ -78,7 +63,6 @@ var beta = svg.selectAll(".B")
             //.on("mouseenter", mouseenter)
             //.on("mouseleave", mouseleave);
 
-C = partials.clipPolygons(A, B);
 var intersection = svg.selectAll(".C")
       .data(C.map(function(d) { return "M" + d.join("L") + "Z"; }), String)  
       .enter().append("path")

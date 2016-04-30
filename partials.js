@@ -5,5 +5,5 @@ export {default as cutPolygon} from "./src/cutPolygon";
 export {default as cutCollection} from "./src/cutCollection";
 export {default as rectangle2Square} from "./src/rectangle2Square";
 export {default as rectangle2Rectangle} from "./src/rectangle2Rectangle";
-export {default as clipPolygons} from "./src/clipPolygons";
+export {default as clipCollection} from "./src/clipCollection";
 export {default as polygon} from "./src/polygon";
