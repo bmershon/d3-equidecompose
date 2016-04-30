@@ -33,8 +33,13 @@ var width = 960,
     triangles,
     polgyons;
 
-var vertices = d3.range(N).map(function(d, i) {
+/*var vertices = d3.range(N).map(function(d, i) {
   return [Math.random() * width / i, Math.random() * height/ i];
+});
+*/
+
+var vertices = d3.range(N).map(function(d) {
+  return [Math.random() * width, Math.random() * height];
 });
 
 var svg = d3.select("body").append("svg")
