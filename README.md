@@ -10,7 +10,7 @@ To decompose a source triangle into another subjet triangle of equal area:
 2. [Decompose](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5) the subject triangle into a square.
 3. Overlay the squares and [intersect all of the polygons](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d).
 
-[<img alt="square" src="https://raw.githubusercontent.com/d3/d3-force/master/img/graph.png" width="420" height="219">](http://bl.ocks.org/mbostock/f584aa36df54c451c94a9d0798caed35)
+[<img alt="square" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/triangle-to-square.png" width="420" height="219">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
 
 ## Development
 
