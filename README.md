@@ -17,7 +17,7 @@ Compute the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lect
 To decompose a source triangle into a square of equal area:
 
 1. Decompose a triangle into its canonical rectangle.
-2. [Decompose](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5) a canonical rectangle into a triangle using the ["escalator method"](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/#rect2rect).
+2. [Decompose](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5) a canonical rectangle into a square using the ["escalator method"](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/#rect2rect).
 
 [<img alt="canonical-rectangle" src="https://cloud.githubusercontent.com/assets/3190945/13858265/3b91a538-ec54-11e5-9962-d1cff01b0cff.gif" width="33%">](http://bl.ocks.org/bmershon/14972d48da2c362841d6073b267c815f)
 [<img alt="cut-rectangle-triangle" src="https://cloud.githubusercontent.com/assets/3190945/14405618/89bdd7ea-fe60-11e5-805a-5f7afa4e11ee.gif" width="33%">](http://bl.ocks.org/bmershon/14972d48da2c362841d6073b267c815f)
