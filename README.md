@@ -21,9 +21,9 @@ The *partials.js* build target and *preflight/* directory are designed for build
 
 ## API Reference
 
-<a name="equidecompose" href="#equidecompose">#</a> d3_equidecompose.<b>equidecompose</b>(polygon, polygon)
+<a name="equidecompose" href="#equidecompose">#</a> d3_equidecompose.<b>equidecompose</b>(source [,subject])
 
-Creates a layout resulting from decomposing the first polygon into polygons which can be translated and rotated to form the second polygon.
+Creates a decomposition of the specified **source** polygon into the **subject** polygon with the same area. If a subject is not specified, it defaults to a square of the same area as the source. If the subject polygon is not the same area as the subject polygon, the decomposition will be computed as if the subject were scaled about with respect to its centroid so that the source and subject are of equal area. Polygons are specified as arrays of vertices stored as two-element arrays (x and y coordinates.
 
 <a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subjects</b>()
 
