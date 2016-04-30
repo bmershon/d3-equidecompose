@@ -31,12 +31,16 @@ If the subject polygon is not the same area as the subject polygon, the decompos
 
 <a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subjects</b>()
 
-Returns an array of [Polygon](#Polygon) objects. Each polygon is positioned within the second shape used to create a decomposition.
+Returns an array of [Polygon](#polygon) objects. Each polygon is positioned within the second shape used to create a decomposition.
 
 <a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>sources</b>()
 
-Returns an array of [Polygon](#Polygon) objects. Each polygon is positioned within the first shape used to create a decomposition.
+Returns an array of [Polygon](#polygon) objects. Each polygon is positioned within the first shape used to create a decomposition.
 
 #### Polygon
 
+A Polygon is a subclass of the JavaScript `Array` prototype.
 
+<a name="polygon_source" href="#decomposition_sources">#</a> Polygon.prototype.<b>source</b>()
+
+Returns a Polygon with vertices at positions cooresponding to this polygon's placement within the source polygon.
