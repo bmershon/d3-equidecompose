@@ -34,6 +34,36 @@ npm install
 
 The *node_modules/* directory is created by the node package manager to hold all the dependences for the project.
 
+There are two targets that are used for building a global module from source:
+
+#### Partials
+
+*partials.js* defines all the exports to be included in a `partials` global module. This module makes available functionality that would not otherwise be available in the completed d3-equidecompose module. For development purposes, this global lets *partial* functionality be tested.
+
+```html
+<script src="partials.js"></script>
+```
+
+To rebuild *partials.js*:
+
+```
+npm run partials
+```
+
+#### d3_equidecompose
+
+*index.js* defines all the exports to be included in a `d3_equidecompose` global module.
+
+```html
+<script src="d3-equidecompose.js"></script>
+```
+
+To rebuild *d3-equidecompose.js*:
+
+```
+npm run pretest
+```
+
 ## Testing
 
 - `npm run test` automatically runs the `pretest` script, which builds everything in `index.js` and then runs the tests in the *test/* directory.
