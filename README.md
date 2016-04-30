@@ -34,7 +34,10 @@ npm install
 
 The *node_modules/* directory is created by the node package manager to hold all the dependences for the project.
 
-There are two targets that are used for building a global module from source:
+There are two targets that can be built from the files in the *src/* directory:
+
+- *build/partials.js* is built from *partials.js* (exports used for testing partial functionality).
+- *build/d3-equidecompose.js* is built from *index.js* (this module's main exports).
 
 #### Partials
 
