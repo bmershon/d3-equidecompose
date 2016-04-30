@@ -121,8 +121,8 @@ If the subject polygon is not the same area as the subject polygon, the decompos
 
 <a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>sources</b>()
 
-Returns an array of [Polygon](#polygon) objects. Each polygon is positioned within the source polygon used to create a decomposition.
+Returns an array of [Polygon](#polygon) objects (a subclass of `Array`). Each polygon is positioned within the source polygon used to create a decomposition.
 
 <a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subjects</b>()
 
-Returns an array of [Polygon](#polygon) objects. Each polygon is positioned within the subject polygon used to create a decomposition.
+Returns an array of [Polygon](#polygon) objects (a subclass of `Array`). Each polygon is positioned within the subject polygon used to create a decomposition.
