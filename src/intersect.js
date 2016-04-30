@@ -5,8 +5,10 @@ import {default as scale} from "./scale";
 import {default as length} from "./length";
 import {default as normalize} from "./normalize";
 
-// Returns point of intersection of AB and CD
-// or null if segments do not intersect.
+/*
+  Returns point of intersection of AB and CD
+  or null if segments do not intersect.
+*/
 export default function(a, b, c, d) {
   var u = sub(b, a),
       v = sub(d, c),

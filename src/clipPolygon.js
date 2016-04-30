@@ -3,7 +3,9 @@ import {default as infiniteIntersection} from "./infiniteIntersection";
 import {default as right} from "./right"
 import {default as undo} from "./undo";
 
-// Sutherland-Hodgeman algorithm for subject polygon and clip polygon.
+/*
+	Sutherland-Hodgeman algorithm for subject polygon and clip polygon.
+*/
 export default function(subject, clip){
 	var clipPolygon, outputList, clipped, transforms;
 
@@ -37,7 +39,7 @@ export default function(subject, clip){
 				outputList.push(E);
 			} else if (SContains) {
 				inter = infiniteIntersection(E, S, clipPolygon[i], clipPolygon[end]);
-				if(inter != []){
+				if (inter != []){
 					outputList.push(inter);
 				}
 			}
@@ -46,6 +48,7 @@ export default function(subject, clip){
 		}
 	}
 
+	// transfer transform history
 	clipped = polygon(outputList);
 	transforms = subject.transforms.slice();
 	transforms.concat(clip.transforms.slice(0).reverse().map(undo));

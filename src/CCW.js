@@ -1,7 +1,9 @@
 import polygon from "./polygon";
 
-// Refer to: http://gamedev.stackexchange.com/questions/13229/sorting-array-of-points-in-clockwise-order
-// Orients points in counter-clockwise order.
+/*
+  Refer to: http://gamedev.stackexchange.com/questions/13229/sorting-array-of-points-in-clockwise-order
+  Orients points in counter-clockwise order.
+*/
 export default function(poly){
 	var c = poly.centroid();
 	poly.sort(function(a,b){

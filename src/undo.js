@@ -3,7 +3,9 @@ import scale from "./scale";
 import rotation from "./rotation";
 import translation from "./translation";
 
-// Returns the undo operation for a translation or rotation about a pivot.
+/*
+  Returns the undo operation for a translation or rotation about a pivot.
+*/
 export default function(transform){
   var undone;
   

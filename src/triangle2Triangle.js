@@ -3,7 +3,9 @@ import {default as rectangle2Square} from "./rectangle2Square";
 import {default as clipCollection} from "./clipCollection";
 import polygon from "./polygon";
 
-// Takes in a source and and a subject triangle;
+/*
+  Takes in a source and and a subject triangle;
+*/
 export default function(source, subject) {
   var A, B, squareA, squareB, clipped;
 

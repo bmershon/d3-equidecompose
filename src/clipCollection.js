@@ -1,8 +1,10 @@
 import {default as clipPolygon} from "./clipPolygon";
 import {default as CCW} from "./CCW";
 
-// Takes in arrays of polygons A and B and returns all intersections
-// between the two collections using the Sutherland-Hodgeman algorithm.
+/*
+	Takes in arrays of polygons A and B and returns all intersections
+ 	between the two collections using the Sutherland-Hodgeman algorithm.
+*/
 export default function(A, B){
 	var result = [];
 

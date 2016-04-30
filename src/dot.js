@@ -1,7 +1,6 @@
 /*
-Computes the dot product between 2 vectors.
+  Computes the dot product between 2 vectors.
 */
-
 export default function(a, b) {
   var res = 0.0;
 
