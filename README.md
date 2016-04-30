@@ -25,11 +25,11 @@ The *partials.js* build target and *preflight/* directory are designed for build
 
 Creates a layout resulting from decomposing the first polygon into polygons which can be translated and rotated to form the second polygon.
 
-<a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition<i>.<b>subjects</b>()
+<a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subjects</b>()
 
 Returns an array of **Polygon** objects, which are a subclass of **Array**. Each polygon is positioned within the second shape used to create a decomposition.
 
-<a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition<i>.<b>sources</b>()
+<a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>sources</b>()
 
 Returns an array of **Polygon** objects, which are a subclass of **Array**. Each polygon is positioned within the first shape used to create a decomposition.
 
