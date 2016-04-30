@@ -1,6 +1,16 @@
 # d3-equidecompose
 
-*The library/plugin name is subject to change.*
+*This library is an active project for Chris Tralie's Digital 3D Geometry (MATH 290) course taught at Duke University during Spring 2016.* 
+
+Compute the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/)* of one polygon into a polygon of equal area.
+
+To decompose a source triangle into another subjet triangle of equal area:
+
+1. [Decompose](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5) the source triangle into a square.
+2. [Decompose](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5) the subject triangle into a square.
+3. Overlay the squares and [intersect all of the polygons](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d).
+
+[<img alt="square" src="https://raw.githubusercontent.com/d3/d3-force/master/img/graph.png" width="420" height="219">](http://bl.ocks.org/mbostock/f584aa36df54c451c94a9d0798caed35)
 
 ## Development
 
