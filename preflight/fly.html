@@ -5,6 +5,7 @@
 circle {
   stroke: #aaa;
   stroke-dasharray: 5, 5;
+  stroke-width: 1px;
   fill: none;
 }
 
@@ -27,25 +28,28 @@ path {
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var N = 3,
-    data,
-    polygons,
-    width = 960,
-    centroid,
-    height = 500,
-    r = 250,
-    count = 0;
+// The global `partials` exposes methods and constructors that are internal to 
+// d3-equidecompose and the future exported global d3_equidecompose (or d3_decompose).
 
-var vertices = d3.range(N).map(function(d, i) {
+var color, svg, line, figure, translation, rotation, rotation,
+    N = 3, vertices, data, polygons,
+    width = 960,
+    height = 500,
+    centroid, r = 220,
+    count = 0; // number of completed transitions have completed
+
+// sample triangle vertices from circle centered on viewport
+vertices = d3.range(N).map(function(d, i) {
   var theta = Math.random() * Math.PI * 2;
   return [(width / 2)  + r * Math.cos(theta), (height / 2)  + r * Math.sin(theta)];
 });
 
-// polygons resulting from cutting the triangle into the square
+// Polygons resulting from cutting the triangle into the canonical rectangle
+// and the canonical rectangle into a square. Polygons are positioned in the square.
 data = partials.rectangle2Square(partials.triangle2Rectangle(vertices));
 
-c1 = [width / 2, height / 2];
-c2 = d3_polygon.polygonCentroid(data.square);
+c1 = [width / 2, height / 2]; // center of viewport
+c2 = d3_polygon.polygonCentroid(data.square); // square centroid
 
 // translate square to center of viewport
 data.forEach(function(d) {
@@ -55,16 +59,16 @@ data.forEach(function(d) {
   });
 });
 
-var color = d3.scale.category10();
+color = d3.scale.category10();
 
-var svg = d3.select("svg").append("g");
+svg = d3.select("svg").append("g");
 
-var line = d3.svg.line()
+line = d3.svg.line()
             .x(function(d) { return d[0]; })
             .y(function(d) { return d[1]; })
             .interpolate("linear-closed");          
 
-var figure = svg.append("g").attr("class", "collection")
+figure = svg.append("g").attr("class", "collection")
                   .attr("transform", translate([width/2 - c1[0], height/2 - c1[1]]))
                   .selectAll("g")
                   .data(data.map(function(_, i) {
@@ -84,12 +88,13 @@ var figure = svg.append("g").attr("class", "collection")
                     return d;
                   }));
 
-var translation = figure.enter().append("g")
+// nest translation under group to hold entire collection of polygons
+translation = figure.enter().append("g")
                     .attr("class", "translation")
                     .attr("transform", function(d) {return translate(d.transform.centroid)});
 
 // nest rotation under translation group (with a rigid translation)
-var rotation = translation.append("g").attr("class", "rotation");
+rotation = translation.append("g").attr("class", "rotation");
 
 rotation.append("path")
   .style("fill", function(d, i) { return color(i); })
@@ -102,9 +107,12 @@ svg.append("circle")
     .attr("cy", height / 2)
     .attr("r", r)
 
-figure.transition().delay(function(d, i) {return i * 200 + 1000}).each(fly);
+// looping tween of polygons from target position to orignal shape
+figure.transition()
+      .delay(function(d, i) {return i * 200 + 1000})
+      .each(tween);
 
-function fly(_, i) {
+function tween(_, i) {
   var that = this, C, T, R;
         
   C = _.transform.centroid;
@@ -127,7 +135,9 @@ function fly(_, i) {
         count++;
         if (count == data.length) {
           count = 0;
-          figure.transition().delay(function(d, i) {return i * 200 + 1000}).each(fly);
+          figure.transition()
+                .delay(function(d, i) {return i * 200 + 1000})
+                .each(tween);
         }
       });
 
@@ -144,9 +154,9 @@ function fly(_, i) {
       return d3.interpolateString(origin, target);
     })
 
-  // cache transform (translation and rotation about centroid) to current tween
+  // cache transform (translation and rotation about centroid) to reverse this tween
   _.transform.centroid = [C[0] + T[0], C[1] + T[1]];
-  _.transform.translate = [-_.transform.translate[0], -_.transform.translate[1]]
+  _.transform.translate = [-T[0], -T[1]]
   _.transform.rotation = R + _.transform.rotate;
   _.transform.rotate = -_.transform.rotate;
 }
@@ -160,5 +170,4 @@ function translate(T) {
 function rotate(angle) {
   return "rotate(" + angle + ")";
 }
-
 </script>
