@@ -1,6 +1,6 @@
 # d3-equidecompose
 
-*This library is an active project for Chris Tralie's Digital 3D Geometry (MATH 290) course taught at Duke University during Spring 2016.* 
+*This library is an active project for [Chris Tralie's](http://ctralie.com) Digital 3D Geometry (MATH 290) course taught at Duke University during Spring 2016.* 
 
 Compute the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/)* of one polygon into a polygon of equal area.
 
