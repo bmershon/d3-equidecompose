@@ -41,7 +41,7 @@ Returns an array of [Polygon](#polygon) objects. Each polygon is positioned with
 
 A Polygon is a subclass of the JavaScript `Array` prototype.
 
-<a name="new_polygon" href="#new_polygon">#</a> d3_equidecompose<b>polygon</b>([vertices])
+<a name="new_polygon" href="#new_polygon">#</a> d3_equidecompose.<b>polygon</b>([vertices])
 
 Creates a new polygon with optional array of vertices.
 
