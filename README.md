@@ -91,19 +91,3 @@ Returns an array of [Polygon](#polygon) objects. Each polygon is positioned with
 <a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subjects</b>()
 
 Returns an array of [Polygon](#polygon) objects. Each polygon is positioned within the subject polygon used to create a decomposition.
-
-### Polygon
-
-A Polygon is a subclass of the JavaScript `Array` prototype.
-
-<a name="new_polygon" href="#new_polygon">#</a> d3_equidecompose.<b>polygon</b>([vertices])
-
-Creates a new polygon with the (optional) specified array of vertices.
-
-<a name="polygon_clone" href="#polygon_clone">#</a> Polygon.prototype.<b>clone</b>()
-
-Creates a new polygon with the same vertices and positions, except with references are destroyed.
-
-<a name="polygon_source" href="#decomposition_sources">#</a> Polygon.prototype.<b>source</b>()
-
-Returns a Polygon with vertices at positions cooresponding to this polygon's placement within the source polygon.
