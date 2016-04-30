@@ -21,7 +21,7 @@ path {
 }
 
 </style>
-<svg width="960" height="500"></svg>
+<svg width="960" height="500">g</svg>
 <script src="../node_modules/d3-polygon/build/d3-polygon.js"></script>
 <script src="../build/partials.js"></script>
 <script src="https://d3js.org/d3.v3.min.js"></script>
@@ -67,13 +67,26 @@ var line = d3.svg.line()
 var figure = svg.append("g").attr("class", "collection")
                   .attr("transform", translate([width/2 - c1[0], height/2 - c1[1]]))
                   .selectAll("g")
-                  .data(data.map(function(d) {
-                    var c = d.centroid();
-                    return partials.polygon(d.slice()).translate([-c[0], -c[1]]);
+                  .data(data.map(function(_, i) {
+                    var c = _.centroid(), d, a, b;
+                        
+                    d = partials.polygon(_.slice()).translate([-c[0], -c[1]]);
+
+                    a = data[i].centroid();
+                    b = data[i].origin().centroid();
+                    d.transform = {
+                      centroid: a,
+                      rotation: 0,
+                      translate: [b[0] - a[0], b[1] - a[1]],
+                      rotate: data[i].rotation()
+                    };
+
+                    return d;
                   }));
 
-var translation = figure
-                  .enter().append("g").attr("class", "translation")
+var translation = figure.enter().append("g")
+                    .attr("class", "translation")
+                    .attr("transform", function(d) {return translate(d.transform.centroid)});
 
 // nest rotation under translation group (with a rigid translation)
 var rotation = translation.append("g").attr("class", "rotation");
@@ -83,24 +96,13 @@ rotation.append("path")
   .attr("class", "figure")
   .attr("d", line);
 
-figure.each(function(d, i) {
-  var a, b;
-  a = data[i].centroid();
-  b = data[i].origin().centroid();
-  d.transform = {
-    centroid: a,
-    rotation: 0,
-    translate: [b[0] - a[0], b[1] - a[1]],
-    rotate: data[i].rotation()
-  };
-});
-
+// circumcircle
 svg.append("circle")
     .attr("cx", width / 2)
     .attr("cy", height / 2)
     .attr("r", r)
 
-figure.each(fly);
+figure.transition().delay(function(d, i) {return i * 200 + 1000}).each(fly);
 
 function fly(_, i) {
   var that = this, C, T, R;
@@ -125,7 +127,7 @@ function fly(_, i) {
         count++;
         if (count == data.length) {
           count = 0;
-          figure.transition().delay(function(d, i) {return i * 200}).each(fly);
+          figure.transition().delay(function(d, i) {return i * 200 + 1000}).each(fly);
         }
       });
 
