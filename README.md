@@ -8,6 +8,9 @@ Compute the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lect
 
 - [ ] Use Sutherland-Hodgman clipping algorithm to clip common squares for two triangles of equal area against one another.
 - [ ] Implement generalized equidecomposition for any two simple polygon (without self-intersections or holes).
+- [ ] Complete d3-equidecompose API, including convenience methods for transforming the decomposition polygons.
+
+## Implementation
 
 #### Triangle to Square Decomposition
 
