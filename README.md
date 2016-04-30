@@ -4,13 +4,19 @@
 
 Compute the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/)* of one polygon into a polygon of equal area.
 
-To decompose a source triangle into another subjet triangle of equal area:
+To decompose a source triangle into another subject triangle of equal area:
 
 1. [Decompose](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5) the source triangle into a square.
 2. Decompose the subject triangle into a square.
-3. Overlay the squares and [intersect all of the polygons](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d).
+3. Overlay the common squares and [intersect all of the polygons](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d).
 
-[<img alt="sutherland-hodgman" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/sutherland-hodgman.png" width="420" height="219">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)[<img alt="sutherland-hodgman" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/triangle-to-square.png" width="420" height="219">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)
+To decompose a generic simple polygon (without holes or self intersections) into another simple polygon of equal area:
+
+1. Triangulate both polygons.
+2. Decompose each collection of triangles into a common square.
+3. Intersect all polygons [Sutherland-Hodgman](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d) in the overlaid squares.
+
+[<img alt="sutherland-hodgman" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/triangle-to-square.png" width="420" height="219">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)[<img alt="sutherland-hodgman" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/sutherland-hodgman.png" width="420" height="219">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
 
 ## Development
 
