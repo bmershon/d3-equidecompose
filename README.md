@@ -4,7 +4,7 @@
 
 Compute the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/)* of one polygon into a polygon of equal area. A decomposition produces polygons which can be rearranged by rigid translation and rotation to form another polygon.
 
-#### Triangle to Triangle
+#### Triangle to Triangle (in progress)
 
 To decompose a source triangle into another subject triangle of equal area:
 
@@ -16,11 +16,7 @@ To decompose a source triangle into another subject triangle of equal area:
 [<img alt="cut-rectangle-triangle" src="https://cloud.githubusercontent.com/assets/3190945/14405618/89bdd7ea-fe60-11e5-805a-5f7afa4e11ee.gif" width="33%">](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/#tri2canonrect)
 [<img alt="triangle-to-square" src="https://cloud.githubusercontent.com/assets/3190945/14765098/cc43adf2-099f-11e6-94ae-5d768bb9767f.gif" width="33%">](http://bl.ocks.org/bmershon/14972d48da2c362841d6073b267c815f)
 
-[<img alt="triangle" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/triangle.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
-[<img alt="square" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/square.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
-[<img alt="triangle-to-square" src="https://cloud.githubusercontent.com/assets/3190945/14924562/373fb892-0e11-11e6-87e2-92582fa2fe48.gif" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
-
-#### Shape to Shape
+#### Shape to Shape (in progress)
 
 To decompose a generic simple source polygon (without holes or self intersections) into another simple subject polygon of equal area:
 
@@ -42,7 +38,11 @@ Several geometry processing tools are needed in order to perform a decomposition
 
 #### Transformations
 
+In order to keep track of the translatons and rotations undergone by each polygon throughout the equidecomposition pipeline, a history of transformations is maintained by each polygon. Transformations can be accumulated to allow for interpolation between a polygon in the source shape and that same polygon's position within the subject shape.
 
+[<img alt="triangle" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/triangle.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
+[<img alt="square" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/square.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
+[<img alt="triangle-to-square" src="https://cloud.githubusercontent.com/assets/3190945/14924562/373fb892-0e11-11e6-87e2-92582fa2fe48.gif" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
 
 ## Development
 
