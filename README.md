@@ -43,7 +43,7 @@ A Polygon is a subclass of the JavaScript `Array` prototype.
 
 <a name="new_polygon" href="#new_polygon">#</a> d3_equidecompose.<b>polygon</b>([vertices])
 
-Creates a new polygon with optional array of vertices.
+Creates a new polygon with the (optional) specified array of vertices.
 
 <a name="polygon_clone" href="#polygon_clone">#</a> Polygon.prototype.<b>clone</b>()
 
