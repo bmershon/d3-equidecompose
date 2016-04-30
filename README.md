@@ -18,3 +18,19 @@ The *node_modules/* directory is created by the node package manager to hold all
 - `npm run preflight` first runs the `partials` script, which builds everything in `partials.js` and runs the tests in the *preflight/* directory.
 
 The *partials.js* build target and *preflight/* directory are designed for building and testing during early stages of development, when smaller components that are not exposed in the production module need to be tested independently.
+
+## API Reference
+
+<a name="equidecompose" href="#equidecompose">#</a> d3_equidecompose.<b>equidecompose</b>(polygon, polygon)
+
+Creates a layout resulting from decomposing the first polygon into polygons which can be translated and rotated to form the second polygon.
+
+<a name="decomposition_polygons" href="#decomposition_polygons">#</a> <i>decomposition<i>.<b>polygons</b>()
+
+Returns an array of **Polygon** objects, which are a subclass of **Array**. Each polygon is positioned within the second shape used to create a decomposition.
+
+<a name="decomposition_origin" href="#decomposition_polygons">#</a> <i>decomposition<i>.<b>origin</b>()
+
+Returns an array of **Polygon** objects, which are a subclass of **Array**. Each polygon is positioned within the first shape used to create a decomposition.
+
+
