@@ -21,6 +21,8 @@ The *partials.js* build target and *preflight/* directory are designed for build
 
 ## API Reference
 
+### Equidecomposition
+
 <a name="equidecompose" href="#equidecompose">#</a> d3_equidecompose.<b>equidecompose</b>(source [,subject])
 
 Creates a decomposition of the specified **source** polygon into the **subject** polygon with the same area. If a subject is not specified, it defaults to a square of the same area as the source whose centroid coincides with the centroid of the source.
@@ -29,10 +31,12 @@ If the subject polygon is not the same area as the subject polygon, the decompos
 
 <a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subjects</b>()
 
-Returns an array of **Polygon** objects, which are a subclass of **Array**. Each polygon is positioned within the second shape used to create a decomposition.
+Returns an array of [Polygon](#Polygon) objects. Each polygon is positioned within the second shape used to create a decomposition.
 
 <a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>sources</b>()
 
-Returns an array of **Polygon** objects, which are a subclass of **Array**. Each polygon is positioned within the first shape used to create a decomposition.
+Returns an array of [Polygon](#Polygon) objects. Each polygon is positioned within the first shape used to create a decomposition.
+
+#### Polygon
 
 
