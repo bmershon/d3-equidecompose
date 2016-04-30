@@ -109,7 +109,7 @@ npm run pretest
 
 The *partials.js* build target and *preflight/* directory are designed for building and testing during early stages of development, when smaller components that are not exposed in the production module need to be tested independently.
 
-## API Reference
+## API Reference (TODO)
 
 ### Equidecomposition
 
