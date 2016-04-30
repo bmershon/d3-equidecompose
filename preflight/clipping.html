@@ -70,7 +70,6 @@ var alpha = svg.selectAll(".A")
             //.on("mouseenter", mouseenter)
             //.on("mouseleave", mouseleave);
 
-
 var beta = svg.selectAll(".B")
             .data(B.map(function(d) { return "M" + d.join("L") + "Z"; }), String)  
             .enter().append("path")
@@ -78,8 +77,6 @@ var beta = svg.selectAll(".B")
             .attr("d", String);
             //.on("mouseenter", mouseenter)
             //.on("mouseleave", mouseleave);
-console.log(A);
-console.log(B);
 
 C = partials.clipPolygons(A, B);
 var intersection = svg.selectAll(".C")
@@ -87,6 +84,5 @@ var intersection = svg.selectAll(".C")
       .enter().append("path")
       .attr("class", "intersection")
       .attr("d", String);
-
 
 </script>

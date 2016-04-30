@@ -2,6 +2,10 @@ import {default as row} from "./row";
 import {default as column} from "./column";
 import {default as dot} from "./dot";
 
+/*
+Multiplies 2 matrices.
+*/
+
 export default function(A, B) {
   if(A[0].length != B.length){
     throw new Error("invalid dimensions");

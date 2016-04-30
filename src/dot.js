@@ -1,3 +1,7 @@
+/*
+Computes the dot product between 2 vectors.
+*/
+
 export default function(a, b) {
   if(a.length != b.length){
     throw new Error("Invalid dimensions for dot product.");

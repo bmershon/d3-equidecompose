@@ -8,10 +8,6 @@ import {default as normalize} from "./normalize";
 // Returns point of intersection of AB and CD
 // or null if segments do not intersect.
 export default function(a, b, c, d) {
-  //console.log(a);
-  //console.log(b);
-  //console.log(c);
-  //console.log(d);
   var u = sub(b, a),
       v = sub(d, c),
       q = sub(c, a),
@@ -24,9 +20,6 @@ export default function(a, b, c, d) {
   s = (q[0] * (-v[1]) - (-v[0]) * q[1]) / (denom);
   t = (u[0] * q[1] - q[0] * u[1]) / (denom);
 
-  console.log(s);
-  console.log(u);
-  console.log(a);
   return (inDelta(s, 0.5, 0.5 + epsilon) && inDelta(t, 0.5, 0.5 + epsilon))
         ? add(a, scale(s, u))
         : null;
