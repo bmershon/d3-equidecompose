@@ -41,7 +41,7 @@ There are two targets that can be built from the files in the *src/* directory:
 
 #### Partials
 
-*partials.js* defines all the exports to be included in a `partials` global module. This module makes available functionality that would not otherwise be available in the completed d3-equidecompose module. For development purposes, this global lets *partial* functionality be tested.
+The file *partials.js* defines all the exports to be included in a `partials` global module. This module makes available functionality that would not otherwise be available in the completed d3-equidecompose module. For development purposes, this global lets *partial* functionality be tested.
 
 ```html
 <script src="partials.js"></script>
@@ -55,7 +55,7 @@ npm run partials
 
 #### d3_equidecompose
 
-*index.js* defines all the exports to be included in a `d3_equidecompose` global module.
+The file *index.js* defines all the exports to be included in a `d3_equidecompose` global module.
 
 ```html
 <script src="d3-equidecompose.js"></script>
