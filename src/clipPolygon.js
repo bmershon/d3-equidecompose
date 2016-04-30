@@ -47,9 +47,9 @@ export default function(subject, clip){
 	}
 
 	clipped = polygon(outputList);
-	transforms = subject.transforms;
+	transforms = subject.transforms.slice();
 	transforms.concat(clip.transforms.slice(0).reverse().map(undo));
-	[].push.apply(clipped.transforms, subject.transforms);
+	clipped.transforms = transforms;
 
 	return clipped;
 }
