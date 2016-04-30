@@ -7,10 +7,10 @@ Compute the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lect
 To decompose a source triangle into another subjet triangle of equal area:
 
 1. [Decompose](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5) the source triangle into a square.
-2. [Decompose](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5) the subject triangle into a square.
+2. Decompose the subject triangle into a square.
 3. Overlay the squares and [intersect all of the polygons](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d).
 
-[<img alt="square" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/triangle-to-square.png" width="420" height="219">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
+[<img alt="sutherland-hodgman" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/sutherland-hodgman.png" width="420" height="219">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)[<img alt="sutherland-hodgman" src="https://github.com/bmershon/d3-equidecompose/raw/master/img/triangle-to-square.png" width="420" height="219">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)
 
 ## Development
 
