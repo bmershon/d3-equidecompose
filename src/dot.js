@@ -1,5 +1,5 @@
 export default function(a, b) {
-  if(a.length!=b.length){
+  if(a.length != b.length){
     throw new Error("Invalid dimensions for dot product.");
     return null;
   }
