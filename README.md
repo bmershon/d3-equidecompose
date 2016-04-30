@@ -37,7 +37,7 @@ Returns an array of [Polygon](#polygon) objects. Each polygon is positioned with
 
 Returns an array of [Polygon](#polygon) objects. Each polygon is positioned within the first shape used to create a decomposition.
 
-#### Polygon
+### Polygon
 
 A Polygon is a subclass of the JavaScript `Array` prototype.
 
