@@ -31,8 +31,9 @@ To decompose a source triangle into another subject triangle of equal area:
 2. Decompose the subject triangle into a square.
 3. Overlay the common squares and [intersect all of the polygons](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d).
 
-[<img alt="triangle-to-square" src="https://cloud.githubusercontent.com/assets/3190945/14940273/c5f8d960-0f3d-11e6-8988-ffad88c74f6d.png" width="100%">]()
-
+[<img alt="triangle-to-triangle" src="https://cloud.githubusercontent.com/assets/3190945/14940273/c5f8d960-0f3d-11e6-8988-ffad88c74f6d.png" width="100%">]()
+[<img alt="triangle-to-triangle" src="https://cloud.githubusercontent.com/assets/3190945/14940273/c5f8d960-0f3d-11e6-8988-ffad88c74f6d.png" width="100%">]()
+[<img alt="triangle-to-triangle" src="https://cloud.githubusercontent.com/assets/3190945/14940282/2a7315fe-0f3e-11e6-962a-7fca3dc976ca.png" width="100%">]()
 
 #### Shape to Shape Decomposition (TODO)
 
