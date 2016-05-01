@@ -43,9 +43,11 @@ To decompose a simple source polygon (without holes or self intersections) into 
 
 Several geometry processing tools are needed in order to perform a decomposition:
 
-1. The ability to cut a polygon with a line segment to produce new polygons.
-2. The ability to cut a collection of polygons with a line segment (possibly at exact vertex locations).
-3. The ability to intersect two collections of polygons.
+- Cut a polygon with a line segment to produce new polygons.
+- Cut a collection of polygons with a line segment (possibly at exact vertex locations).
+- Intersect two collections of polygons.
+- Intersect polygons at **exact** positions, without relying on floating point accuracy.
+- Transform polygons through rigid translations and rotations.
 
 [<img alt="cut-polygon" src="https://cloud.githubusercontent.com/assets/3190945/14469966/0261bbc0-00b5-11e6-842e-2a5cacc62ef5.gif" width="33%">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)
 [<img alt="cut-collection" src="https://cloud.githubusercontent.com/assets/3190945/14515082/72a69648-01c4-11e6-893c-93258826d474.gif" width="33%">](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d)
