@@ -6,7 +6,7 @@ Compute the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lect
 
 ## TODO
 
-- [ ] Use Sutherland-Hodgman clipping algorithm to clip common squares for two triangles of equal area against one another.
+- [X] Use Sutherland-Hodgman clipping algorithm to clip common squares for two triangles of equal area against one another.
 - [ ] Implement generalized equidecomposition for any two simple polygon (without self-intersections or holes).
 - [ ] Complete d3-equidecompose API, including convenience methods for transforming the decomposition polygons.
 
@@ -23,7 +23,7 @@ To decompose a source triangle into a square of equal area:
 [<img alt="cut-rectangle-triangle" src="https://cloud.githubusercontent.com/assets/3190945/14405618/89bdd7ea-fe60-11e5-805a-5f7afa4e11ee.gif" width="33%">](http://bl.ocks.org/bmershon/14972d48da2c362841d6073b267c815f)
 [<img alt="triangle-to-square" src="https://cloud.githubusercontent.com/assets/3190945/14765098/cc43adf2-099f-11e6-94ae-5d768bb9767f.gif" width="33%">](http://bl.ocks.org/bmershon/14972d48da2c362841d6073b267c815f)
 
-#### Triangle to Triangle Decomposition (TODO)
+#### Triangle to Triangle Decomposition
 
 To decompose a source triangle into another subject triangle of equal area:
 
