@@ -32,9 +32,9 @@ To decompose a source triangle into another subject triangle of equal area:
 2. Decompose the subject triangle into a square.
 3. Overlay the common squares and [intersect all of the polygons](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d).
 
-[<img alt="triangle-to-triangle" src="https://cloud.githubusercontent.com/assets/3190945/14940273/c5f8d960-0f3d-11e6-8988-ffad88c74f6d.png" width="33%">]()
-[<img alt="triangle-to-triangle" src="https://cloud.githubusercontent.com/assets/3190945/14940281/2a6b4b1c-0f3e-11e6-93fd-43a887084561.png" width="33%">]()
-[<img alt="triangle-to-triangle" src="https://cloud.githubusercontent.com/assets/3190945/14940282/2a7315fe-0f3e-11e6-962a-7fca3dc976ca.png" width="33%">]()
+[<img alt="triangle-to-triangle" src="https://cloud.githubusercontent.com/assets/3190945/14940273/c5f8d960-0f3d-11e6-8988-ffad88c74f6d.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
+[<img alt="triangle-to-triangle" src="https://cloud.githubusercontent.com/assets/3190945/14940281/2a6b4b1c-0f3e-11e6-93fd-43a887084561.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
+[<img alt="triangle-to-triangle" src="https://cloud.githubusercontent.com/assets/3190945/14940282/2a7315fe-0f3e-11e6-962a-7fca3dc976ca.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
 
 #### Shape to Shape Decomposition (TODO)
 
