@@ -58,7 +58,7 @@ Several geometry processing tools are needed in order to perform a decomposition
 - Cut a collection of polygons with a line segment (possibly at exact vertex locations).
 - Intersect two collections of polygons (using Sutherland-Hodgman clipping).
 - Intersect polygons at **exact** positions, without relying on floating point accuracy.
-- Transform polygons through rigid translations and rotations, preserving exact positioning of vertices when possible, where exact positioning is achived by equating `Object` references for vertices which will be intersected without relying on floating-point accuracy.
+- Transform polygons through rigid translations and rotations, preserving exact positioning of vertices when possible. Exact positioning is achieved by equating `Object` references for vertices which will be intersected without relying on floating-point accuracy (i.e. if one wishes to know that two vertices are coincident, check that they are the same object, rather than whether they have the same coordinates). 
 
 *Click images for interactive examples.*
 
