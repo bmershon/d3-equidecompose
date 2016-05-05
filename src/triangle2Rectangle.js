@@ -21,14 +21,14 @@ export default function(P) {
       BC, BA, MB, MC, ME, 
       BCFD, DGB, FCH,
       maxAngle = -Infinity,
-      rectangle,
-      polygons;
+      polygons,
+      theta, i;
 
   if (area(P) == 0) return [];
 
   // Find largest angle in triangle T
-  for (let i = 0; i < 3; i++) {
-    let theta = 0;
+  for (i = 0; i < 3; i++) {
+    theta = 0;
     theta = angle(P[i % 3], P[(i + 1) % 3], P[(i + 2) % 3]);
     if (theta > maxAngle) {
       maxAngle = theta;

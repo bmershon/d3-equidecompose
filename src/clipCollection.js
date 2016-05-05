@@ -1,9 +1,8 @@
 import {default as clipPolygon} from "./clipPolygon";
 import {default as counterClockwise} from "./counterClockwise";
 
-
-//  Takes in arrays of polygons and returns intersection between the
-//  collections using the Sutherland-Hodgeman algorithm.
+// Takes in arrays of polygons and returns intersection between the
+// collections using the Sutherland-Hodgeman algorithm.
 export default function(A, B){
   var result = [], clipped, i, j;
 

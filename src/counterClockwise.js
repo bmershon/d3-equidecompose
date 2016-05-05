@@ -1,6 +1,6 @@
 import polygon from "./polygon";
 
-//  In-place sort points in counter-clockwise order.
+// In-place sort points in counter-clockwise order.
 export default function(P){
   var c = P.centroid();
 

@@ -8,8 +8,6 @@ import polygon from "./polygon";
 */
 export default function(a, b, P) {
   var n = P.length,
-      start,
-      end,
       _P = [],
       P_ = [],
       points = [],
@@ -17,14 +15,12 @@ export default function(a, b, P) {
       f = P[n - 1],
       bounds = [],
       i = -1,
-      rectangle,
-      polygons = [];
+      polygons = [],
+      x;
 
   // walk through polygon edges, attempting intersections
   // with exact vertices or line segments
   while (++i < n) {
-    let x;
-
     e = f;
     f = P[i];
 

@@ -9,15 +9,17 @@ import polygon from "./polygon";
 import {default as cutCollection} from "./cutCollection";
 
 export default function(collection) {
-  var dist = [],
-      A, B, C, D, E, F, G, H, J, K, // follows Tralie's labeling
+  var A, B, C, D, E, F, G, J, K, // follows Tralie's labeling
       AFGD, KCF,
       area, s,
       rectangle = collection.rectangle, // bounding rectangle
-      square,
-      slide,
       l = Infinity,
-      polygons = [];
+      polygons = [],
+      i, n,
+      a, b, left, halved, slideLeft, slideUp,
+      E_Polygon = [], E_Vertex = [],
+      F_Polygon = [], F_Vertex = [],
+      centroid;
 
   area = Math.abs(polygonArea(rectangle));
   s = Math.sqrt(area); // square side length
@@ -37,10 +39,6 @@ export default function(collection) {
 
   // halving the canonical rectangle for the escalator method
   while (l > 2 * s) {
-    let a, b, left, halved, slideLeft, slideUp,
-        E_Polygon = [], E_Vertex = [],
-        F_Polygon = [], F_Vertex = [];
-
     a = add(A, scale(0.5, sub(F, B))); 
     b = add(B, scale(0.5, sub(F, B)));
     l = length(sub(b, F));
@@ -55,7 +53,6 @@ export default function(collection) {
 
     // translate polgons resulting from the cut (i.e., "stacking the two halves")
     halved.forEach(function(d, j) {
-      var centroid, T;
       centroid = polygonCentroid(d);
 
       // update exact references to vertices used in exact intersections
@@ -81,7 +78,7 @@ export default function(collection) {
     F = halved[F_Polygon[0]][F_Vertex[0]];
 
     // make all vertices at F share the same reference (to ensure intersection)
-    for (let i = 1, n = F_Vertex.length; i < n; i++) {
+    for (i = 1, n = F_Vertex.length; i < n; i++) {
       F = halved[F_Polygon[i]][F_Vertex[i]] = halved[F_Polygon[i-1]][F_Vertex[i-1]]; 
     }
 

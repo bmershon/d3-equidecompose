@@ -3,9 +3,7 @@ import {default as infiniteIntersection} from "./infiniteIntersection";
 import {default as right} from "./right"
 import {default as undo} from "./undo";
 
-/*
-  Sutherland-Hodgeman algorithm for subject polygon and clip polygon.
-*/
+// Sutherland-Hodgeman algorithm for subject polygon and clip polygon.
 export default function(subject, clip){
   var clipPolygon, outputList, clipped, transforms, i, j,
       end, clipEdge, inputList, S,

@@ -35,8 +35,9 @@ function containsPoint(point){
 }
 
 function translate(T) {
-  for (let i = 0, n = this.length; i < n; i++) {
-    let v = this[i];
+  var i, v, n;
+  for (i = 0, n = this.length; i < n; i++) {
+    v = this[i];
     this[i] = [v[0] + T[0], v[1] + T[1]];
   }
 
@@ -44,13 +45,13 @@ function translate(T) {
 }
 
 function rotate(theta, pivot) {
-  var R = rotation(theta);
+  var R = rotation(theta), i, n;
 
   if (pivot) {
     this.translate([-pivot[0], -pivot[1]]);
   }
 
-  for (let i = 0, n = this.length; i < n; i++) {
+  for (i = 0, n = this.length; i < n; i++) {
     this[i] = multiply(R, this[i]);
   }
 
@@ -70,13 +71,14 @@ function origin() {
 
 // Apply transform history to a clone of polygon
 function accumulate() {
-  let P = this.clone(), // do not change THIS polygon's geometry
+  var P = this.clone(), // do not change THIS polygon's geometry
       n = this.transforms.length,
-      M = identity(3);
+      M = identity(3),
+      i, transform;
 
   // most recent transforms are pushed to end of array
-  for (let i = n - 1; i >= 0; i--) {
-    let transform = this.transforms[i];
+  for (i = n - 1; i >= 0; i--) {
+    transform = this.transforms[i];
 
     if (transform.rotate && transform.pivot) { // pivot required
       P.rotate(transform.rotate, transform.pivot);

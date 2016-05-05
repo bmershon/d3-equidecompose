@@ -10,9 +10,6 @@ import {default as clipCollection} from "./clipCollection";
 import {polygonCentroid} from "d3-polygon";
 import polygon from "./polygon";
 
-/*
-  Takes in a source and and a subject triangle;
-*/
 export default function(source, subject) {
   var A, B, squareA, squareB, clipped, cA, cB;
 
