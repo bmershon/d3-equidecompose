@@ -132,7 +132,23 @@ The *partials.js* build target and *preflight/* directory are designed for build
 
 ### Equidecomposition
 
-<a name="equidecompose" href="#equidecompose">#</a> d3_equidecompose.<b>equidecompose</b>(source [,subject])
+#### Triangle to Triangle
+
+<a name="equidecompose" href="#equidecompose">#</a> d3_equidecompose.<b>triangles</b>(source [,subject])
+
+Creates a decomposition of the specified source triangle into the subject polygon.
+
+<a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>sources</b>()
+
+Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition.
+
+<a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subjects</b>()
+
+Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition.
+
+#### Polygon to Polygon
+
+<a name="equidecompose" href="#equidecompose">#</a> d3_equidecompose.<b>polygons</b>(source [,subject])
 
 Creates a decomposition of the specified **source** polygon into the **subject** polygon with the same area. If a subject is not specified, it defaults to a square of the same area as the source whose centroid coincides with the centroid of the source.
 
@@ -140,8 +156,9 @@ If the subject polygon does not have the same area as the subject polygon, the d
 
 <a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>sources</b>()
 
-Returns an array of [Polygon](#polygon) objects (a subclass of `Array`). Each polygon is positioned within the source polygon used to create a decomposition.
+Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition.
+
 
 <a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subjects</b>()
 
-Returns an array of [Polygon](#polygon) objects (a subclass of `Array`). Each polygon is positioned within the subject polygon used to create a decomposition.
+Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition.
