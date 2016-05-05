@@ -13,8 +13,7 @@ export default function(a, b, c, d) {
   var u = sub(b, a),
       v = sub(d, c),
       q = sub(c, a),
-      denom,
-      s, t,
+      denom, s, t,
       epsilon = 0.0;
 
   // Cramer's Rule

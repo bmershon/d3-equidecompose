@@ -6,45 +6,32 @@ import {default as add} from "./add";
 import {default as sub} from "./sub";
 import {default as scale} from "./scale";
 import {default as multiply} from "./multiplyMatVec";
-import {default as triangleArea} from "./triangleArea";
 import {default as Multiply} from "./multiplyMatMat";
-import {polygonCentroid} from "d3-polygon";
+import {polygonCentroid, polygonContains} from "d3-polygon";
 
+// Polygon constructor
 function Polygon(P) {
   this.transforms = [];
   this._matrix = identity(3);
-  this._origin = 
-  this._target = null;
+  this._origin = null;
 }
 
 Polygon.prototype = Object.create(Array.prototype); // subclass Array
 Polygon.prototype.constructor = Polygon;
+Polygon.prototype.centroid = centroid;
+Polygon.prototype.containsPoint = containsPoint;
 Polygon.prototype.translate = translate;
 Polygon.prototype.rotate = rotate;
 Polygon.prototype.accumulate = accumulate;
 Polygon.prototype.origin = origin;
-Polygon.prototype.centroid = centroid;
-Polygon.prototype.rotation = theta;
 Polygon.prototype.clone = clone;
-Polygon.prototype.containsPoint = containsPoint;
 
-// checks whether polygon contains this point
+function centroid() {
+  return polygonCentroid(this);
+}
+
 function containsPoint(point){
-  var myArea = 0.0;
-  var pointArea = 0.0;
-  var a = point;
-  for(let i = 1; i < this.length; i++){
-    var b = this[i];
-    var c = this[(i+1 == this.length) ? 0 : i+1];
-    myArea += triangleArea(a,b,c);
-  }
-  a = this[0];
-  for(let i = 1; i < this.length-1; i++){
-    var b = this[i];
-    var c = this[i+1];
-    pointArea += triangleArea(a,b,c);
-  }
-  return Math.abs(myArea - pointArea) < 1e-8;
+  return polygonContains(this, point);
 }
 
 function translate(T) {
@@ -74,20 +61,20 @@ function rotate(theta, pivot) {
   return this;
 }
 
-// Returns a polygon translated into the shape it came from.
+// Returns a clone of this polygon with transform history applied.
 function origin() {
   if (this._origin) return this._origin;
-
   this._origin = this.accumulate();
-
   return this._origin;
 }
 
+// Apply transform history to a clone of polygon
 function accumulate() {
   let P = this.clone(), // do not change THIS polygon's geometry
       n = this.transforms.length,
       M = identity(3);
 
+  // most recent transforms are pushed to end of array
   for (let i = n - 1; i >= 0; i--) {
     let transform = this.transforms[i];
 
@@ -106,27 +93,11 @@ function accumulate() {
   return P;
 }
 
-// This polygon's rigid rotation about centroid relative to original placement.
-function theta() {
-  var a, b;
-
-  a = this[0];
-
-  b = multiply(this.origin()._matrix, a);
-  b = multiply(translation(sub(this.centroid(), this.origin().centroid())), b);
-
-  return 180 / Math.PI * angle(this.centroid(), a, b.slice(0, 2));
-}
-
-function centroid() {
-  return polygonCentroid(this);
-}
-
 function clone() {
   return polygon(JSON.parse(JSON.stringify(this.slice())));
 }
 
-// Create new polygon from array of position tuples.
+// Create new Polygon from array of position tuples.
 export default function polygon(positions) {
   var P = new Polygon();
   P.push.apply(P, positions);

@@ -10,16 +10,19 @@ import {default as normalize} from "./normalize";
   or null if segments do not intersect.
 */
 export default function(a, b, c, d) {
-  var u = sub(b, a);
-  var v = sub(d, c);
-  var q = sub(a, c);
+  var u = sub(b, a),
+      v = sub(d, c),
+      q = sub(a, c),
+      denom, t, s;
 
   // Cramer's Rule
-  var denom = v[0] * (-u[1]) - (-u[0]) * v[1];
-  var t = (q[0] * (-u[1]) - (-u[0]) * q[1]) / (denom);
-  var s = (v[0] * q[1] - q[0] * v[1]) / (denom);
-  if(0.0 <= s && s <= 1){
-  	return add(c,scale(t,v));
+  denom = v[0] * (-u[1]) - (-u[0]) * v[1];
+  t = (q[0] * (-u[1]) - (-u[0]) * q[1]) / (denom);
+  s = (v[0] * q[1] - q[0] * v[1]) / (denom);
+  
+  if (0.0 <= s && s <= 1) {
+    return add(c,scale(t,v));
   }
+  
   return [];
 }

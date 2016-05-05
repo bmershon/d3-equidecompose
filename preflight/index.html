@@ -64,27 +64,11 @@ line = d3.svg.line()
 
 figure = svg.append("g").attr("class", "collection")
                   .selectAll("g")
-                  .data(data.map(function(_, i) {
-                    var c = _.centroid(), d, a, b;
-                        
-                    d = partials.polygon(_.slice()).translate([-c[0], -c[1]]);
-
-                    a = data[i].centroid();
-                    b = data[i].origin().centroid();
-                    d.transform = {
-                      centroid: a,
-                      rotation: 0,
-                      translate: [b[0] - a[0], b[1] - a[1]],
-                      rotate: 0
-                    };
-
-                    return d;
-                  }));
+                  .data(data);
 
 // nest translation under group to hold entire collection of polygons
 translation = figure.enter().append("g")
                     .attr("class", "translation")
-                    .attr("transform", function(d) {return translate(d.transform.centroid)});
 
 // nest rotation under translation group (with a rigid translation)
 rotation = translation.append("g").attr("class", "rotation");
@@ -99,70 +83,6 @@ svg.append("circle")
     .attr("cx", width / 2)
     .attr("cy", height / 2)
     .attr("r", r);
-
-// looping tween of polygons from target position to orignal shape
-figure.transition()
-      .delay(function(d, i) {return i * 200 + 1000})
-      .each(tween);
-
-function tween(_, i) {
-  var that = this, C, T, R;
-        
-  C = _.transform.centroid;
-  T = _.transform.translate;
-  R = _.transform.rotation;
-
-  // rigid translation
-  d3.select(this).transition()
-      .duration(1000)
-      .ease("circle")
-      .attrTween("transform", function(d) {
-        var origin, target;
-
-        origin = translate(C);
-        target = translate([C[0] + T[0], C[1] + T[1]]);
-
-        return d3.interpolateString(origin, target);
-      })
-      .each("end", function(d, i) {
-        count++;
-        if (count == data.length) {
-          count = 0;
-          figure.transition()
-                .delay(function(d, i) {return i * 200 + 1000})
-                .each(tween);
-        }
-      });
-
-  // rigid rotation about polygon centroid, nested under translation group
-  d3.select(this).select(".rotation").transition()
-    .duration(1000)
-    .ease("circle")
-    .attrTween("transform", function(d) {
-      var origin, target;
-
-      origin = rotate(R);
-      target = rotate(R + d.transform.rotate);
-
-      return d3.interpolateString(origin, target);
-    })
-
-  // cache transform (translation and rotation about centroid) to reverse this tween
-  _.transform.centroid = [C[0] + T[0], C[1] + T[1]];
-  _.transform.translate = [-T[0], -T[1]]
-  _.transform.rotation = R + _.transform.rotate;
-  _.transform.rotate = -_.transform.rotate;
-}
-
-// SVG translation string
-function translate(T) {
-  return "translate(" + T[0] + " " + T[1] + ")";
-}
-
-// SVG rotation string
-function rotate(angle) {
-  return "rotate(" + angle + ")";
-}
 
 function sample(area) {
   // sample triangle vertices from circle centered on viewport

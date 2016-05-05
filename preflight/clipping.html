@@ -9,11 +9,11 @@ path {
 }
 
 .A {
-  fill: #EB9394;
+  fill: none;
 }
 
 .B {
-  fill: #8FBBDA;
+  fill: none;
 }
 
 .intersection {
@@ -29,7 +29,7 @@ path {
 
 var width = 960,
     height = 500,
-    N = 25,
+    N = 10,
     triangles,
     polgyons;
 
@@ -42,8 +42,8 @@ var svg = d3.select("body").append("svg")
     .attr("height", height)
 
 // geometry
-A = d3.geom.delaunay(vertices.slice(0, 10)).map((d) => partials.polygon(d)); // array of triangles
-B = d3.geom.delaunay(vertices.slice(10, N)).map((d) => partials.polygon(d)); // another array of triangles
+A = d3.geom.delaunay(vertices.slice(0, 5)).map((d) => partials.polygon(d)); // array of triangles
+B = d3.geom.delaunay(vertices.slice(5, N)).map((d) => partials.polygon(d)); // another array of triangles
 C = partials.clipCollection(A, B);
 
 // rendering

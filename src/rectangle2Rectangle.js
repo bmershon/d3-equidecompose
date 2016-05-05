@@ -8,11 +8,6 @@ import {polygonArea, polygonCentroid, polygonContains} from "d3-polygon";
 import polygon from "./polygon";
 import {default as cutCollection} from "./cutCollection";
 
-/*
-  Takes in array of polygons forming a canonical rectangle and
-  a side length x for the rectangle to be formed. Expects rectangle
-  member on collection with bounding rectangle references.
-*/
 export default function(collection, x) {
   var dist = [],
       A, B, C, D, E, F, G, H, J, K, // follows Tralie's labeling
