@@ -34,7 +34,7 @@ path {
 <script>
 
 var color, svg, line, figure,
-    N = 3, vertices, data, polygons,
+    N = 3, vertices, decomposition, data, polygons,
     width = 960,
     height = 500,
     radius = 220,
@@ -43,7 +43,9 @@ var color, svg, line, figure,
 
 vertices = sample(area);
 target = sample(area);
-data = d3_equidecompose.triangles(vertices, vertices.slice().reverse()).sources();
+decomposition = d3_equidecompose.triangles(vertices, vertices.slice().reverse());
+
+data = decomposition.source();
 
 color = d3.scale.category10();
 

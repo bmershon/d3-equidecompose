@@ -5,14 +5,13 @@ export default function(A, B) {
       decomposition;
 
   return decomposition = {
-
-    sources: function() {
+    source: function() {
       return polygons.map(function(d) {
         return d.origin().slice(0);
       });
     },
 
-    subjects: function() {
+    subject: function() {
       return polygons.map(function(d) {
         return d.slice(0);
       });
