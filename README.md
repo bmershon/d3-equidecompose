@@ -160,7 +160,6 @@ If the subject polygon does not have the same area as the subject polygon, the d
 
 Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition.
 
-
 <a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subject</b>()
 
 Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition.
