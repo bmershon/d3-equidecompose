@@ -8,13 +8,6 @@ import {default as degree} from "./degree";
 import polygon from "./polygon";
 import {polygonArea as area} from "d3-polygon";
 
-/* 
-  Takes in array of triangle vertices has properties:
-  { transforms, parent }
-  
-  Returns array of polygons with rotations and translations
-  relative to parent.
-*/   
 export default function(P) {
   var index = 0,
       A, B, C, D, E, F, G, H, M,

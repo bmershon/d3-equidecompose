@@ -1,12 +1,14 @@
 {
   "name": "d3-equidecompose",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Compute a layout for cutting up polygon and rearranging the pieces to form another polygon of equal area.",
   "keywords": [
     "d3",
     "triangulate",
     "geometry",
-    "equidecomposability"
+    "shape",
+    "equidecomposability",
+    "equidecompose"
   ],
   "homepage": "https://github.com/bmershon/d3-equidecompose",
   "license": "MIT",
@@ -27,7 +29,7 @@
     "test": "tape 'test/**/*-test.js'"
   },
   "dependencies": {
-    "d3-polygon": "~0.2.1"
+    "d3-polygon": "0.2.1"
   },
   "devDependencies": {
     "json2module": "0.0",
