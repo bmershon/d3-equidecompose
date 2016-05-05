@@ -4,7 +4,7 @@
 
 -----
 
-This module implements the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/)* of one polygon into a polygon of equal area. A decomposition produces polygons which can be rearranged by rigid translation and rotation to form another polygon. This is also known as *scissor congruence*.
+This module implements the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/)* of one polygon into another polygon of equal area. A decomposition produces polygons which can be rearranged by rigid translation and rotation to form another polygon. The ability for one polygon to be arranged into another in this way is also known as *scissor congruence*.
 
 ## TODO
 
