@@ -130,9 +130,7 @@ The *partials.js* build target and *preflight/* directory are designed for build
 
 ## API Reference (TODO)
 
-### Equidecomposition
-
-#### Triangle to Triangle
+#### Decompose a Triangle into another Triangle
 
 <a name="equidecompose" href="#equidecompose">#</a> d3_equidecompose.<b>triangles</b>(source [,subject])
 
@@ -148,7 +146,7 @@ Returns an array of polygons represented as arrays of positions. Each polygon is
 
 Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition.
 
-#### Polygon to Polygon
+#### Decompose a simple Polygon into another Polygon
 
 <a name="equidecompose" href="#equidecompose">#</a> d3_equidecompose.<b>polygons</b>(source [,subject])
 
