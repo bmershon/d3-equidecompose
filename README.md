@@ -31,8 +31,6 @@ To decompose a source triangle into another subject triangle of equal area:
 2. Decompose the subject triangle into a square.
 3. Overlay the common squares and [intersect all of the polygons](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d).
 
-**N.B.**The decomposition works correctly using Sutherland-Hodgman clipping to instersect to common squares. There is a bug preventing the correct animation of triangle to triangle decomposition.
-
 *Click images for interactive examples.*
 
 [<img alt="triangle-to-triangle" src="https://cloud.githubusercontent.com/assets/3190945/14940273/c5f8d960-0f3d-11e6-8988-ffad88c74f6d.png" width="33%">](http://bl.ocks.org/bmershon/1bc8659b52b35b8a320f3fefb7275ef5)
@@ -44,16 +42,16 @@ To decompose a source triangle into another subject triangle of equal area:
 To decompose a simple source polygon (without holes or self intersections) into another simple subject polygon of equal area:
 
 1. Triangulate both source and subject polygons.
-2. Decompose each collection of triangles into a common square.
+2. Decompose each collection of triangles into a common square by stacking rectangles formed from each triangle.
 3. Intersect all polygons via [Sutherland-Hodgman clipping](http://bl.ocks.org/bmershon/73a90dd4229f8941b7f79df8b2c8505d) in the overlaid squares.
 
 #### Geometry Processing
 
-Several geometry processing tools are needed in order to perform a decomposition:
+Several geometry processing operations are needed in order to perform a decomposition:
 
-- Cut a polygon with a line segment to produce new polygons.
-- Cut a collection of polygons with a line segment (possibly at exact vertex locations).
-- Intersect two collections of polygons (using Sutherland-Hodgman clipping).
+- Cut a convex polygon with a line segment to produce new polygons.
+- Cut a collection of convex polygons with a line segment (possibly at exact vertex locations).
+- Intersect two collections of convex polygons (using Sutherland-Hodgman clipping).
 - Intersect polygons at **exact** positions, without relying on floating point accuracy.
 - Transform polygons through rigid translations and rotations, preserving exact positioning of vertices when possible. Exact positioning is achieved by equating `Object` references for vertices which will be intersected without relying on floating-point accuracy (i.e. if one wishes to know that two vertices are coincident, check that they are the same object, rather than whether they have the same coordinates). 
 
@@ -65,7 +63,7 @@ Several geometry processing tools are needed in order to perform a decomposition
 
 #### Transformations
 
-In order to keep track of the translations and rotations undergone by each polygon throughout the equidecomposition pipeline, a history of transformations is maintained by each polygon. Cuts produce new polygons, the canonical rectangle requires rotations, and the escalator method introduces translations.
+In order to keep track of the translations and rotations undergone by each polygon throughout the equidecomposition pipeline, a history of transformations is maintained by each polygon. Cuts produce new polygons, the canonical rectangle requires rotations, and the escalator method introduces translations. A history of operations can be performed in reverse to place polygons positioned in a subject polygon *P* back into a source polygon *Q*, where *P* and *Q* are polygons of equal area.
 
 *Click images for interactive examples.*
 
@@ -85,15 +83,18 @@ The *node_modules/* directory is created by the node package manager to hold all
 
 There are two targets that can be built from the files in the *src/* directory:
 
-- *build/partials.js* is built from *partials.js* (exports used for testing partial functionality).
-- *build/d3-equidecompose.js* is built from *index.js* (this module's main exports).
+- The file *build/partials.js* is built from *partials.js* and defines exports used for testing partial functionality on a global module `partials`.
+- The file *build/d3-equidecompose.js* is built from *index.js* and defines exports for this module's default global `d3_equidecompose`.
 
 #### Partials
 
-The file *partials.js* defines all the exports to be included in a `partials` global module. This module makes available functionality that would not otherwise be available in the completed d3-equidecompose module. For development purposes, this global lets *partial* functionality be tested.
+The file *partials.js* defines all the exports to be included in a global called `partials`. This module makes available functionality that would not otherwise be exported in the d3-equidecompose module. For development purposes, this global lets *partial* functionality be tested.
 
+*Using a partial (development) build of the d3-equidecompose functions.*
 ```html
 <script src="partials.js"></script>
+
+var foo = partials.foo;
 ```
 
 To rebuild *partials.js*:
@@ -106,8 +107,16 @@ npm run partials
 
 The file *index.js* defines all the exports to be included in a `d3_equidecompose` global module.
 
+*Using the d3-equidecompose module.*
 ```html
 <script src="d3-equidecompose.js"></script>
+
+var A = [a, b, c, e, f, g, h, i, j];
+var B = [k, l, m, n]; // same area as A
+
+var decomposition = d3_equidecompose.polygons(A, B);
+var source = decomposition.source(); // polygons placed in source polygon A
+var subject = decompositon.subject(); // polygons placed in subject polygon B
 ```
 
 To rebuild *d3-equidecompose.js*:
