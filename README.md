@@ -6,6 +6,8 @@
 
 This module implements the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/)* of one polygon into another polygon of equal area. A decomposition produces polygons which can be rearranged by rigid translation and rotation to form another polygon. The ability for one polygon to be arranged into another in this way is also known as *scissor congruence*.
 
+[<img alt="triangle-to-triangle" src="https://github.com/bmershon/d3-equidecompose/blob/master/img/triangle-triangle-2.png" width="100%">](http://bl.ocks.org/bmershon/14972d48da2c362841d6073b267c815f)
+
 ## Implementation
 
 #### Triangle to Square Decomposition
