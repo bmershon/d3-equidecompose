@@ -29,13 +29,11 @@ export default function(source, subject) {
     d.translate([(cA[0] - cB[0]), (cA[1] - cB[1])]);
     d.transforms.push({
       translate: [-(cA[0] - cB[0]), -(cA[1] - cB[1])],
-      type: "alignment"
     });
     d.rotate(theta(squareA, squareB), cA);
     d.transforms.push({
       rotate: -theta(squareA, squareB),
       pivot: cA,
-      type: "alignment"
     });
   });
 

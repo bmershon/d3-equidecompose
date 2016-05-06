@@ -1,7 +1,7 @@
 import {default as sub} from "./sub";
 import {default as length} from "./length";
 import {default as normalize} from "./normalize";
-import {default as intersect} from "./intersect";
+import {default as intersect} from "./infiniteIntersection";
 import {default as scale} from "./scale";
 import {default as add} from "./add";
 import {polygonArea, polygonCentroid, polygonContains} from "d3-polygon";
@@ -87,10 +87,10 @@ export default function(collection) {
   
   polygons = collection;
 
-  // Following "elevator method" assumes rectangle length < 2 x square height
+  // the "elevator method" assumes rectangle length < (2 x square height)
   G = add(F, sub(E, B));
   J = intersect(A, F, E, G);
-  K = intersect(A, F, D, C)
+  K = intersect(A, F, D, C);
   KCF = [K, C, F]; // used to locate elevator pieces
   AFGD = [A, F, G, D];
 
