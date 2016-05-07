@@ -10,7 +10,6 @@ export default function(A, B) {
         return d.origin().slice(0);
       });
     },
-
     subject: function() {
       return polygons.map(function(d) {
         return d.slice(0);

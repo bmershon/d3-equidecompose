@@ -4,36 +4,57 @@ import {default as translation} from "./translation";
 import {default as angle} from "./angle";
 import {default as add} from "./add";
 import {default as sub} from "./sub";
+import {default as scale} from "./scale";
+import {default as length} from "./length";
+import {default as cross} from "./cross";
+import degree from "./degree";
 import {default as triangle2Rectangle} from "./triangle2Rectangle";
 import {default as rectangle2Square} from "./rectangle2Square";
 import {default as clipCollection} from "./clipCollection";
-import {polygonCentroid} from "d3-polygon";
 import polygon from "./polygon";
 
 export default function(source, subject) {
-  var A, B, squareA, squareB, clipped, cA, cB;
+  var A, B,
+      squareA, squareB,
+      centroid, target, T, rotation,
+      clipped, T, theta, direction,
+      i, j, distance, min = Infinity;
 
-  // TODO rescale subject triangle about centroid in the case that
+  // TODO: rescale subject triangle about centroid in the case that
   // its area is not equal to that of the source triangle
 
   A = rectangle2Square(triangle2Rectangle(source));
   B = rectangle2Square(triangle2Rectangle(subject));
   squareA = polygon(A.square);
   squareB = polygon(B.square);
+  centroid = squareA.centroid();
+  target = squareB.centroid();
+  T = [(centroid[0] - target[0]), (centroid[1] - target[1])];
+  squareB = squareB.clone().translate(T);
 
-  cA = polygonCentroid(squareA);
-  cB = polygonCentroid(squareB);
+  // find nearest vertex coorespondence in Q for first vertex in P
+  for (i = 0, j = 0; i < 4; i++) {
+    distance = length(sub(squareA[0], squareB[i]));
+    if (distance < min) {
+      min = distance;
+      j = i;
+    }
+  }
+
+  // rotate through a minimal angle, in the correct direction
+  direction = cross(centroid, squareB[j], squareA[0])[2] > 0 ? 1 : -1;
+  theta = direction * degree(angle(centroid, squareB[j], squareA[0]));
 
   // center collection B on collection A 
   B.forEach(function(d) {
-    d.translate([(cA[0] - cB[0]), (cA[1] - cB[1])]);
+    d.translate(T);
     d.transforms.push({
-      translate: [-(cA[0] - cB[0]), -(cA[1] - cB[1])],
+      translate: scale(-1, T),
     });
-    d.rotate(theta(squareA, squareB), cA);
+    d.rotate(theta, centroid);
     d.transforms.push({
-      rotate: -theta(squareA, squareB),
-      pivot: cA,
+      rotate: -theta,
+      pivot: centroid,
     });
   });
 
@@ -46,15 +67,5 @@ export default function(source, subject) {
     p.transforms = d.transforms; // restore joined transform history
     return p;
   });
-    
   return clipped;
 };
-
-function theta(P, Q) {
-  var a, b;
-
-  a = P[0];
-  b = add(Q[0], sub(P.centroid(), Q.centroid()));
-
-  return 180 / Math.PI * angle(P.centroid(), a, b);
-}

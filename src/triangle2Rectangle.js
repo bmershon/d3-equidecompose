@@ -53,7 +53,7 @@ export default function(P) {
   FCH.transforms.push({rotate: degree(-Math.PI), pivot: F});
 
   polygons = [BCFD, DGB, FCH];
-
+  
   polygons.rectangle = [B, C, H, G];
 
   return polygons;
