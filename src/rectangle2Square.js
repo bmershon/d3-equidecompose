@@ -15,10 +15,8 @@ export default function(collection) {
       rectangle = collection.rectangle, // bounding rectangle
       l = Infinity,
       polygons = [],
-      i, n,
-      a, b, left, halved, slideLeft, slideUp,
-      E_Polygon = [], E_Vertex = [],
-      F_Polygon = [], F_Vertex = [],
+      i, n, a, b, left, halved, slideLeft, slideUp,
+      E_Polygon, E_Vertex, F_Polygon, F_Vertex,
       centroid;
 
   area = Math.abs(polygonArea(rectangle));
@@ -39,6 +37,8 @@ export default function(collection) {
 
   // halving the canonical rectangle for the escalator method
   while (l > 2 * s) {
+    E_Polygon = [], E_Vertex = [], F_Polygon = [], F_Vertex = [];
+
     a = add(A, scale(0.5, sub(F, B))); 
     b = add(B, scale(0.5, sub(F, B)));
     l = length(sub(b, F));
@@ -71,7 +71,6 @@ export default function(collection) {
       } else { // slide "left"
         d.translate(slideLeft).transforms.push({translate: scale(-1, slideLeft)}); // undo translate
       }
-
     });
 
     E = halved[E_Polygon[0]][E_Vertex[0]];
@@ -79,7 +78,7 @@ export default function(collection) {
 
     // make all vertices at F share the same reference (to ensure intersection)
     for (i = 1, n = F_Vertex.length; i < n; i++) {
-      F = halved[F_Polygon[i]][F_Vertex[i]] = halved[F_Polygon[i-1]][F_Vertex[i-1]]; 
+      F = halved[F_Polygon[i]][F_Vertex[i]] = halved[F_Polygon[i - 1]][F_Vertex[i - 1]]; 
     }
 
     collection = halved;
@@ -112,7 +111,7 @@ export default function(collection) {
     }
   });
 
-  polygons.square = [E, G]; 
+  polygons.square = [B, C, D, A]; 
 
   return polygons;
 };
