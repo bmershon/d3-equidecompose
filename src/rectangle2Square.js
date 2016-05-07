@@ -1,7 +1,7 @@
 import {default as sub} from "./sub";
 import {default as length} from "./length";
 import {default as normalize} from "./normalize";
-import {default as intersect} from "./infiniteIntersection";
+import {default as intersect} from "./intersect";
 import {default as scale} from "./scale";
 import {default as add} from "./add";
 import {polygonArea, polygonCentroid, polygonContains} from "d3-polygon";
@@ -112,7 +112,7 @@ export default function(collection) {
     }
   });
 
-  polygons.square = [A, B, C, D]; 
+  polygons.square = [E, G]; 
 
   return polygons;
 };
