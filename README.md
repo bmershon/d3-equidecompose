@@ -146,11 +146,11 @@ If the subject polygon does not have the same area as the subject polygon, the d
 
 <a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>source</b>()
 
-Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition.
+Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the subject polygon.
 
 <a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subject</b>()
 
-Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition.
+Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the source polygon.
 
 #### Polygon to Polygon
 
@@ -162,8 +162,8 @@ If the subject polygon does not have the same area as the subject polygon, the d
 
 <a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>source</b>()
 
-Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition.
+Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the subject polygon.
 
 <a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subject</b>()
 
-Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition.
+Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the source polygon.
