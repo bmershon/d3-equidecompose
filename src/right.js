@@ -1,6 +1,6 @@
 import {default as sub} from "./sub";
 
-//  Tests if point is to the right of an edge (CCW order).
+// Tests if point is to the right of an edge (CCW order).
 export default function(point, edge) {
   var u = sub(point, edge[0]),
       v = sub(edge[1], edge[0]),

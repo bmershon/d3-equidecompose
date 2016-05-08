@@ -16,7 +16,7 @@ import polygon from "./polygon";
 export default function(source, subject) {
   var A, B,
       squareA, squareB,
-      centroid, target, T, rotation,
+      centroid, target, T,
       clipped, T, theta, direction,
       i, j, distance, min = Infinity;
 
