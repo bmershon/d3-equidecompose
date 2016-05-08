@@ -6,7 +6,9 @@
 
 This module implements the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/)* of one polygon into another polygon of equal area. A decomposition produces polygons which can be rearranged by rigid translation and rotation to form another polygon. The ability for one polygon to be arranged into another in this way is also known as *scissor congruence*.
 
-[<img alt="triangle-to-triangle" src="https://github.com/bmershon/d3-equidecompose/blob/master/img/triangle-triangle-2.png" width="100%">](http://bl.ocks.org/bmershon/14972d48da2c362841d6073b267c815f)
+*Click images for interactive examples.*
+
+[<img alt="triangle-to-triangle" src="https://github.com/bmershon/d3-equidecompose/blob/master/img/triangle-triangle-2.png" width="100%">](http://bl.ocks.org/bmershon/6276c0db5b24cf6bfea02b9dd72c378d)
 
 ## Implementation
 
@@ -144,11 +146,11 @@ If the subject polygon does not have the same area as the subject polygon, the d
 
 <a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>source</b>()
 
-Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition.
+Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the subject polygon.
 
 <a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subject</b>()
 
-Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition.
+Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the source polygon.
 
 #### Polygon to Polygon
 
@@ -160,8 +162,8 @@ If the subject polygon does not have the same area as the subject polygon, the d
 
 <a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>source</b>()
 
-Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition.
+Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the subject polygon.
 
 <a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subject</b>()
 
-Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition.
+Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the source polygon.
