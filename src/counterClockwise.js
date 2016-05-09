@@ -4,8 +4,8 @@ import polygon from "./polygon";
 export default function(P){
   var c = P.centroid();
 
-  P.sort(function(a, b){
-    return  Math.atan2(b[1] - c[1], b[0] - c[0]) - Math.atan2(a[1] - c[1], a[0] - c[0]);
+  P.sort(function(a, b) {
+    return Math.atan2(b[1] - c[1], b[0] - c[0]) - Math.atan2(a[1] - c[1], a[0] - c[0]);
   });
 
   return P;

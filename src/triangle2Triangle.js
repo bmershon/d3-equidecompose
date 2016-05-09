@@ -67,5 +67,6 @@ export default function(source, subject) {
     p.transforms = d.transforms; // restore joined transform history
     return p;
   });
+
   return clipped;
 };

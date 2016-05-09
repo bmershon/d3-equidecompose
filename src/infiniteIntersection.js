@@ -17,7 +17,7 @@ export default function(a, b, c, d) {
   s = (v[0] * q[1] - q[0] * v[1]) / (denom);
   
   if (0.0 <= s && s <= 1) {
-    return add(c,scale(t,v));
+    return add(c, scale(t, v));
   }
   
   return [];

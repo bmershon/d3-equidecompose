@@ -39,7 +39,7 @@ export default function(subject, clip){
           outputList.push(inter);
         }
       }
-
+      
       S = E;
     }
   }

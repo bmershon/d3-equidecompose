@@ -10,9 +10,7 @@ export default function(A, B){
   for (i = 0; i < A.length; i++) {
     for (j = 0; j < B.length; j++) {
       clipped = clipPolygon(counterClockwise(A[i]), counterClockwise(B[j]));
-      if (clipped != null && clipped.length != 0 && clipped[0].length != 0){
-        result.push(clipped);
-      }
+      if (clipped.length != 0 && clipped[0].length != 0) result.push(clipped);
     }
   }
 
