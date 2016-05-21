@@ -20,5 +20,5 @@ export default function(a, b, c, d) {
     return add(c, scale(t, v));
   }
   
-  return [];
+  return null;
 }
