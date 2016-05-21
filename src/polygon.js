@@ -96,7 +96,8 @@ function accumulate() {
 }
 
 function clone() {
-  return polygon(JSON.parse(JSON.stringify(this.slice())));
+  var positions = JSON.parse(JSON.stringify(this.slice(0)));
+  return Object.assign(polygon(positions), this);
 }
 
 // Create new Polygon from array of position tuples.

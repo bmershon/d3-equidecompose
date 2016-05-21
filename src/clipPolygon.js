@@ -48,11 +48,14 @@ export default function(subject, clip){
     }
   }
 
-  // transfer transform history
   clipped = polygon(outputList);
-  transforms = subject.transforms.slice();
+  
+  // subject polygon's original transform history
+  transforms = subject.transforms.slice(0);
+    
+  // append reversed (and undone) transfer history of clip polygon
   clipped.target = clip.transforms.slice(0);
-  undone = clip.transforms.slice(0).reverse().map(undo);
+  undone = clip.transforms.slice(0).reverse(0).map(undo);
   transforms = transforms.concat(undone);
   clipped.transforms = transforms;
 
