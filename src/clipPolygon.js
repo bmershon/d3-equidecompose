@@ -3,18 +3,23 @@ import {default as infiniteIntersection} from "./infiniteIntersection";
 import {default as right} from "./right"
 import {default as undo} from "./undo";
 
-// Sutherland-Hodgeman algorithm for subject polygon and clip polygon.
+// Sutherland-Hodgeman algorithm for convex subject and clip polygons.
 export default function(subject, clip){
-  var clipPolygon, outputList, clipped, transforms, i, j,
-      end, clipEdge, inputList, S,
-      E, EContains, SContains, inter;
+  var inputList, outputList,
+      clipped,
+      i, j, n,
+      end, edge, 
+      E, S, // two subject vertices
+      eInside, sInside,
+      intersection,
+      undone, transforms;
 
-  clipPolygon = polygon(clip.reverse());
+  clip = clip.clone().reverse();
   outputList = subject.slice(0);
 
-  for (i = 0; i < clipPolygon.length; i++) {    
-    end = (i + 1 == clipPolygon.length) ? 0 : i + 1;
-    clipEdge = [clipPolygon[i], clipPolygon[end]];
+  for (i = 0, n = clip.length; i < n; i++) {    
+    end = (i + 1) % n;
+    edge = [clip[i], clip[end]];
     inputList = outputList.slice(0);
     outputList = [];
 
@@ -22,24 +27,23 @@ export default function(subject, clip){
 
     for (j = 0; j < inputList.length; j++) {      
       E = inputList[j];
-      EContains = !right(E, clipEdge);
-      SContains = !right(S, clipEdge);
-      
-      if (EContains){
-        if (!SContains){
-          inter = infiniteIntersection(E, S, clipPolygon[i], clipPolygon[end]);
-          if (inter != []){
-            outputList.push(inter);
+      eInside = !right(E, edge);
+      sInside = !right(S, edge);
+
+      if (eInside){
+        if (!sInside){
+          intersection = infiniteIntersection(E, S, clip[i], clip[end]);
+          if (intersection){
+            outputList.push(intersection);
           }
         }
         outputList.push(E);
-      } else if (SContains) {
-        inter = infiniteIntersection(E, S, clipPolygon[i], clipPolygon[end]);
-        if (inter.length){
-          outputList.push(inter);
+      } else if (sInside) {
+        intersection = infiniteIntersection(E, S, clip[i], clip[end]);
+        if (intersection){
+          outputList.push(intersection);
         }
       }
-      
       S = E;
     }
   }
@@ -48,7 +52,8 @@ export default function(subject, clip){
   clipped = polygon(outputList);
   transforms = subject.transforms.slice();
   clipped.target = clip.transforms.slice(0);
-  transforms = transforms.concat(clip.transforms.slice(0).reverse().map(undo));
+  undone = clip.transforms.slice(0).reverse().map(undo);
+  transforms = transforms.concat(undone);
   clipped.transforms = transforms;
 
   return clipped;
