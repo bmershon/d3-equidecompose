@@ -18,7 +18,7 @@ export default function(source, subject) {
       squareA, squareB,
       centroid, target, T,
       clipped, T, theta, direction,
-      i, j, distance, min = Infinity;
+      i = 0, j = 0, distance, min = Infinity;
 
   // TODO: rescale subject triangle about centroid in the case that
   // its area is not equal to that of the source triangle
@@ -63,10 +63,11 @@ export default function(source, subject) {
   clipped = clipped.map(function(d) {
     var p = d.clone();
     p.transforms = d.target;
-    p = p.origin(); // place in subject triangle
+    // p = p.origin(); // place in subject triangle
     p.transforms = d.transforms; // restore joined transform history
     return p;
   });
 
-  return clipped;
+  return [clipped, A.concat(B)];
+  // return clipped;
 };

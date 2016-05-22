@@ -11,7 +11,7 @@ export default function(A, B){
     for (j = 0; j < B.length; j++) {
       clipped = clipPolygon(counterClockwise(A[i]), counterClockwise(B[j]));
       if (clipped.length != 0) result.push(clipped);
-    }
+    } 
   }
 
   return result;

@@ -8,17 +8,18 @@ import {default as normalize} from "./normalize";
 export default function(a, b, c, d) {
   var u = sub(b, a),
       v = sub(d, c),
-      q = sub(a, c),
-      denom, t, s;
+      q = sub(c, a),
+      denom, s, t,
+      epsilon = 0.0;
 
   // Cramer's Rule
-  denom = v[0] * (-u[1]) - (-u[0]) * v[1];
-  t = (q[0] * (-u[1]) - (-u[0]) * q[1]) / (denom);
-  s = (v[0] * q[1] - q[0] * v[1]) / (denom);
-  
-  if (0.0 <= s && s <= 1) {
-    return add(c, scale(t, v));
-  }
-  
-  return null;
+  denom = u[0] * (-v[1]) - (-v[0]) * u[1];
+  s = (q[0] * (-v[1]) - (-v[0]) * q[1]) / (denom);
+  t = (u[0] * q[1] - q[0] * u[1]) / (denom);
+
+  console.log(s, t);
+
+  return (inDelta(s, 0.5, 0.5 + epsilon) && inDelta(t, 0.5, 0.5 + Infinity))
+        ? add(a, scale(s, u))
+        : null;
 }
