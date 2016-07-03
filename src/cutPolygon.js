@@ -1,11 +1,9 @@
 import {default as intersect} from "./intersect";
 import polygon from "./polygon";
 
-/*
-  Returns array of polygons resulting from cutting
-  convex polygon P by segment ab. If the polygon is 
-  not cut, an empty array is returned.
-*/
+// Returns array of polygons resulting from cutting
+// convex polygon P by segment ab. If the polygon is 
+// not cut, an empty array is returned.
 export default function(a, b, P) {
   var n = P.length,
       _P = [],

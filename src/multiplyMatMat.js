@@ -2,7 +2,7 @@ import {default as row} from "./row";
 import {default as column} from "./column";
 import {default as dot} from "./dot";
 
-//  Multiplies 2 matrices.
+//  Multiplies matrix A by matrix B.
 export default function(A, B) {
   var i, j,
       res = [[0, 0, 0],

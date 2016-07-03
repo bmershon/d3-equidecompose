@@ -33,16 +33,12 @@ export default function(subject, clip){
       if (eInside){
         if (!sInside){
           intersection = infiniteIntersection(E, S, clip[i], clip[end]);
-          if (intersection){
-            outputList.push(intersection);
-          }
+          outputList.push(intersection);
         }
         outputList.push(E);
       } else if (sInside) {
         intersection = infiniteIntersection(E, S, clip[i], clip[end]);
-        if (intersection){
-          outputList.push(intersection);
-        }
+        outputList.push(intersection);
       }
       S = E;
     }
