@@ -69,14 +69,14 @@ function origin() {
   return this._origin;
 }
 
-// Apply transform history to a clone of polygon
+// Apply transform history to a clone of polygon.
 function accumulate() {
-  var P = this.clone(), // do not change THIS polygon's geometry
+  var P = this.clone(),
       n = this.transforms.length,
       M = identity(3),
       i, transform;
 
-  // most recent transforms are pushed to end of array
+  // Most recent transforms are pushed to end of array.
   for (i = n - 1; i >= 0; i--) {
     transform = this.transforms[i];
 
@@ -95,6 +95,7 @@ function accumulate() {
   return P;
 }
 
+// Produces deep copy of vertex positions, shallow copy of other attributes
 function clone() {
   var positions = JSON.parse(JSON.stringify(this.slice(0)));
   return Object.assign(polygon(positions), this);

@@ -26,7 +26,7 @@
     "pretest": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -f umd -g d3-polygon:d3_polygon -n d3_equidecompose -o build/d3-equidecompose.js -- index.js",
     "preflight": "npm run partials && tape 'preflight/**/*-test.js' && uglifyjs build/partials.js -c -m -o build/partials.min.js",
     "prepublish": "npm run test && uglifyjs build/d3-equidecompose.js -c -m -o build/d3-equidecompose.min.js",
-    "test": "tape 'test/**/*-test.js'"
+    "test": "tape 'test/**/*-test.js' && eslint index.js src"
   },
   "dependencies": {
     "d3-polygon": "0.2.1"
@@ -35,6 +35,7 @@
     "json2module": "0.0",
     "rollup": "0.25",
     "tape": "4",
-    "uglify-js": "2"
+    "uglify-js": "2",
+    "eslint": "^3.0.0"
   }
 }
