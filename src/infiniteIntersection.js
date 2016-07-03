@@ -17,8 +17,6 @@ export default function(a, b, c, d) {
   s = (q[0] * (-v[1]) - (-v[0]) * q[1]) / (denom);
   t = (u[0] * q[1] - q[0] * u[1]) / (denom);
 
-  console.log(s, t);
-
   return (inDelta(s, 0.5, 0.5 + epsilon) && inDelta(t, 0.5, 0.5 + Infinity))
         ? add(a, scale(s, u))
         : null;

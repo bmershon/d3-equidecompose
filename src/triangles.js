@@ -6,12 +6,12 @@ export default function(A, B) {
 
   return decomposition = {
     source: function() {
-      return polygons[0].map(function(d) {
-        return d.slice(0);
+      return polygons.map(function(d) {
+        return d.origin().slice(0);
       });
     },
     subject: function() {
-      return polygons[1].map(function(d) {
+      return polygons.map(function(d) {
         return d.slice(0);
       });
     }

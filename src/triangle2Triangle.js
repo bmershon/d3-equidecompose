@@ -63,11 +63,10 @@ export default function(source, subject) {
   clipped = clipped.map(function(d) {
     var p = d.clone();
     p.transforms = d.target;
-    // p = p.origin(); // place in subject triangle
+    p = p.origin(); // place in subject triangle
     p.transforms = d.transforms; // restore joined transform history
     return p;
   });
 
-  return [clipped, A.concat(B)];
-  // return clipped;
+  return clipped;
 };
