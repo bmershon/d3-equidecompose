@@ -8,10 +8,12 @@ import {polygonArea, polygonCentroid, polygonContains} from "d3-polygon";
 import polygon from "./polygon";
 import {default as cutCollection} from "./cutCollection";
 
-export default function(collection) {
+// Takes in a collection of polygons forming a rectangle and produces
+// a new collection forming a rectangle of the given width.
+export default function(collection, width) {
   var A, B, C, D, E, F, G, J, K, // follows Tralie's labeling
       AFGD, KCF,
-      area, s,
+      area, height,
       rectangle = collection.rectangle, // bounding rectangle
       l = Infinity,
       polygons = [],
@@ -20,23 +22,23 @@ export default function(collection) {
       centroid;
 
   area = Math.abs(polygonArea(rectangle));
-  s = Math.sqrt(area); // square side length
+  height = area / width; // square side length
 
-  // assumes escalator conditions hold
-  B = rectangle[0]; // an invariant throughout
-  E = rectangle[3]; // need reference
-  F = rectangle[1]; // need reference
+  // Bounding rectangle for incoming collection.
+  B = rectangle[0];
+  F = rectangle[1];
   G = rectangle[2];
+  E = rectangle[3]; 
 
-  // the square defined by [A, B, C, D]
-  A = add(B, scale(s, normalize(sub(E, B))));
-  C = add(B, scale(s, normalize(sub(F, B))));
+  // The rectangle to be produced, defined by [A, B, C, D].
+  A = add(B, scale(height, normalize(sub(E, B))));
+  C = add(B, scale(width, normalize(sub(F, B))));
   D = add(A, sub(C, B));
 
   l = length(sub(B, F));
 
   // halving the canonical rectangle for the escalator method
-  while (l > 2 * s) {
+  while (l > 2 * width) {
     E_Polygon = [], E_Vertex = [], F_Polygon = [], F_Vertex = [];
 
     a = add(A, scale(0.5, sub(F, B))); 
@@ -111,7 +113,7 @@ export default function(collection) {
     }
   });
 
-  polygons.square = [B, C, D, A]; 
+  polygons.rectangle = [B, C, D, A]; 
 
   return polygons;
 };
