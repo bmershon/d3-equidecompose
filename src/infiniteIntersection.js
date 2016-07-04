@@ -17,14 +17,9 @@ export default function(a, b, c, d) {
   denom = u[0] * (-v[1]) - (-v[0]) * u[1];
   
   // Check for parallel lines
-  if (denom === 0) {
-    console.log("zero cross products");
-    console.log(a, b, c, d);
-  }
+  if (denom === 0) return [Infinity, Infinity];
 
   s = (q[0] * (-v[1]) - (-v[0]) * q[1]) / (denom);
-
-  if (isNaN(s)) console.log(s, t);
 
   return add(a, scale(s, u));
 }
