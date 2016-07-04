@@ -14,6 +14,7 @@ export default function(subject, clip){
       intersection,
       undone, transforms;
 
+  // Ensure clip polygon is traversed in clockwise order.
   clip = clip.clone().reverse();
   outputList = subject.slice(0);
 
@@ -31,13 +32,13 @@ export default function(subject, clip){
       sInside = !right(S, edge);
 
       if (eInside){
-        if (!sInside){
-          intersection = infiniteIntersection(E, S, clip[i], clip[end]);
+        if (!sInside){ // exit clip region
+          intersection = infiniteIntersection(S, E, clip[i], clip[end]);
           outputList.push(intersection);
         }
         outputList.push(E);
-      } else if (sInside) {
-        intersection = infiniteIntersection(E, S, clip[i], clip[end]);
+      } else if (sInside) { // enter clip region
+        intersection = infiniteIntersection(S, E, clip[i], clip[end]);
         outputList.push(intersection);
       }
       S = E;
