@@ -24,18 +24,25 @@ export default function(collection, width) {
   area = Math.abs(polygonArea(rectangle));
   height = area / width; // square side length
 
+
   // Bounding rectangle for incoming collection.
   B = rectangle[0];
   F = rectangle[1];
   G = rectangle[2];
   E = rectangle[3]; 
 
+  l = length(sub(B, F));
+
+  if (width > l) {
+    width = height;
+    height = area / width;
+  }
+
   // The rectangle to be produced, defined by [A, B, C, D].
   A = add(B, scale(height, normalize(sub(E, B))));
   C = add(B, scale(width, normalize(sub(F, B))));
   D = add(A, sub(C, B));
 
-  l = length(sub(B, F));
 
   // halving the canonical rectangle for the escalator method
   while (l > 2 * width) {
