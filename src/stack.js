@@ -65,6 +65,5 @@ export default function stack(boxes) {
 
   stacked.square = [B, C, D, A];
 
-  console.log("Stacked", stacked);
   return stacked;
 }
