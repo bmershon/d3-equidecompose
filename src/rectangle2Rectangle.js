@@ -24,7 +24,6 @@ export default function(collection, width) {
   area = Math.abs(polygonArea(rectangle));
   height = area / width; // square side length
 
-
   // Bounding rectangle for incoming collection.
   B = rectangle[0];
   F = rectangle[1];

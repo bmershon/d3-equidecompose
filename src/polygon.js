@@ -22,6 +22,7 @@ Polygon.prototype.centroid = centroid;
 Polygon.prototype.containsPoint = containsPoint;
 Polygon.prototype.translate = translate;
 Polygon.prototype.rotate = rotate;
+Polygon.prototype.scale = resize;
 Polygon.prototype.accumulate = accumulate;
 Polygon.prototype.origin = origin;
 Polygon.prototype.clone = clone;
@@ -36,6 +37,7 @@ function containsPoint(point){
 
 function translate(T) {
   var i, v, n;
+
   for (i = 0, n = this.length; i < n; i++) {
     v = this[i];
     this[i] = [v[0] + T[0], v[1] + T[1]];
@@ -59,6 +61,17 @@ function rotate(theta, pivot) {
     this.translate(pivot);
   }
 
+  return this;
+}
+
+function resize(factor) {
+  var i, n, v;
+  
+  for (i = 0, n = this.length; i < n; i++) {
+    v = this[i];
+    this[i] = scale(factor, this[i]);
+  }
+  
   return this;
 }
 

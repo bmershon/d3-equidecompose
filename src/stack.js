@@ -1,11 +1,6 @@
-import {default as rotation} from "./rotation";
-import {default as identity} from "./identity";
-import {default as translation} from "./translation";
 import {default as angle} from "./angle";
-import {default as add} from "./add";
 import {default as sub} from "./sub";
 import {default as scale} from "./scale";
-import {default as length} from "./length";
 import {default as cross} from "./cross";
 import degree from "./degree";
 import polygon from "./polygon";
@@ -22,7 +17,10 @@ export default function stack(boxes) {
       i, n,
       T, direction, theta;
 
-  if (boxes.length < 2) return boxes;
+  if (boxes.length < 2) {
+    stacked = boxes.slice();
+    stacked.square = stacked[0].rectangle;
+  }
 
   previous = boxes[0];
   stacked.push(previous);
@@ -60,5 +58,13 @@ export default function stack(boxes) {
     previous = current;
   }
 
+  A = stacked[n - 1].rectangle[3];
+  B = stacked[0].rectangle[0];
+  C = stacked[0].rectangle[1];
+  D = stacked[n - 1].rectangle[2];
+
+  stacked.square = [B, C, D, A];
+
+  console.log("Stacked", stacked);
   return stacked;
 }
