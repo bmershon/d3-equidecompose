@@ -137,21 +137,19 @@ The *partials.js* build target and *preflight/* directory are designed for build
 
 ## API Reference
 
-#### Triangle to Triangle
+#### Mesh to Mesh
 
-<a name="equidecompose" href="#equidecompose">#</a> d3_equidecompose.<b>triangles</b>(source [,subject])
+<a name="equidecompose" href="#equidecompose">#</a> d3_equidecompose.<b>mesh</b>(source [,subject])
 
-Creates a decomposition of the specified source triangle into the subject polygon. If a subject is not specified, it defaults to a square of the same area as the source whose centroid coincides with the centroid of the source.
-
-If the subject polygon does not have the same area as the subject polygon, the decomposition will be computed as if the subject were scaled about with respect to its centroid so that the source and subject are of equal area.
+..
 
 <a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>source</b>()
 
-Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the subject polygon.
+..
 
 <a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subject</b>()
 
-Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the source polygon.
+..
 
 #### Polygon to Polygon
 
@@ -159,7 +157,7 @@ Returns an array of polygons represented as arrays of positions. Each polygon is
 
 Creates a decomposition of the specified **source** polygon into the **subject** polygon with the same area. If a subject is not specified, it defaults to a square of the same area as the source whose centroid coincides with the centroid of the source.
 
-If the subject polygon does not have the same area as the subject polygon, the decomposition will be computed as if the subject were scaled about with respect to its centroid so that the source and subject are of equal area.
+If the subject polygon does not have the same area as the subject polygon, the decomposition will be computed as if the subject were scaled about its centroid so that the source and subject are of equal area.
 
 <a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>source</b>()
 
