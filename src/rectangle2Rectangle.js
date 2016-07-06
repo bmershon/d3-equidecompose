@@ -120,7 +120,20 @@ export default function(collection, width) {
     }
   });
 
-  polygons.rectangle = [B, C, D, A]; 
+  polygons.rectangle = (isWide([B, C, D, A]))
+                      ? [B, C, D, A]
+                      : [C, D, A, B];
 
   return polygons;
 };
+
+// Assumes BCDA orientation, where a rectangle is wide if 
+// side BC is longer than BA.
+function isWide(rectangle) {
+  var A = rectangle[3],
+      B = rectangle[0],
+      C = rectangle[1];
+
+  return length(sub(B, C)) > length(sub(B, A));
+}
+

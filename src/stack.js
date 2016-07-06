@@ -17,7 +17,7 @@ import polygon from "./polygon";
 export default function stack(boxes) {
   var previous, current,
       A, B, C, D,
-      pivot, snap, aligner,
+      pivot, snap,
       stacked = [],
       i, n,
       T, direction, theta;
@@ -25,24 +25,20 @@ export default function stack(boxes) {
   if (boxes.length < 2) return boxes;
 
   previous = boxes[0];
+  stacked.push(previous);
 
   for (i = 1, n = boxes.length; i < n; i++) {
     pivot = previous.rectangle[3];
+
     current = boxes[i];
 
-    snap = (isWide(current.rectangle))
-              ? current.rectangle[0]
-              : current.rectangle[1];
+    snap = current.rectangle[0];
     
     T = sub(pivot, snap);
     current.rectangle = polygon(current.rectangle).translate(T);
 
-    aligner = (isWide(current.rectangle))
-              ? current.rectangle[1]
-              : current.rectangle[2];
-
-    direction = cross(pivot, previous.rectangle[2], aligner)[2] > 0 ? 1 : -1;
-    theta = -1 * direction * degree(angle(pivot, previous.rectangle[2], aligner));
+    direction = cross(pivot, previous.rectangle[2], current.rectangle[1])[2] > 0 ? 1 : -1;
+    theta = -1 * direction * degree(angle(pivot, previous.rectangle[2], current.rectangle[1]));
 
     // Translate collection of polygons forming a rectangle of a given width.
     // Align a vertex and pivot rectangle to fit flush with previous collection.
@@ -66,14 +62,3 @@ export default function stack(boxes) {
 
   return stacked;
 }
-
-// Assumes BCDA orientation, where a rectangle is wide if 
-// side BC is longer than BA.
-function isWide(rectangle) {
-  var A = rectangle[3],
-      B = rectangle[0],
-      C = rectangle[1];
-      
-  return length(sub(B, C)) > length(sub(B, A));
-}
-
