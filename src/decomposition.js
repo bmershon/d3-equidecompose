@@ -63,21 +63,18 @@ function decompose(source, subject) {
   direction = cross(centroid, squareB[j], squareA[0])[2] > 0 ? 1 : -1;
   theta = direction * degree(angle(centroid, squareB[j], squareA[0]));
 
-  // // center collection B on collection A 
-  // B.forEach(function(d) {
-  //   d.translate(T);
-  //   d.transforms.push({
-  //     translate: scale(-1, T),
-  //   });
-  //   d.rotate(theta, centroid);
-  //   d.transforms.push({
-  //     rotate: -theta,
-  //     pivot: centroid,
-  //   });
-  // });
-
-  console.log(T, direction, theta);
-  return [[target, centroid]].concat(A).concat(B);
+  // center collection B on collection A 
+  B.forEach(function(d) {
+    d.translate(T);
+    d.transforms.push({
+      translate: scale(-1, T),
+    });
+    d.rotate(theta, centroid);
+    d.transforms.push({
+      rotate: -theta,
+      pivot: centroid,
+    });
+  });
 
   clipped = clipCollection(A, B);
 
@@ -139,9 +136,6 @@ function scaleCollection(factor, collection) {
 
 export default function decomposition(source, subject) {
   var polygons = decompose(source, subject);
-
-  // DEBUGGING
-  return polygons;
 
   return {
     source: function() {
