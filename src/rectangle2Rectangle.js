@@ -4,8 +4,8 @@ import {default as normalize} from "./normalize";
 import {default as intersect} from "./intersect";
 import {default as scale} from "./scale";
 import {default as add} from "./add";
-import {polygonArea, polygonCentroid, polygonContains} from "d3-polygon";
 import {default as cutCollection} from "./cutCollection";
+import {polygonArea, polygonCentroid, polygonContains} from "d3-polygon";
 
 // Takes in a collection of polygons forming a rectangle and produces
 // a new collection forming a rectangle of the given width.
