@@ -70,4 +70,4 @@ export default function(a, b, P) {
   }
   
   return polygons;
-};
+}

@@ -57,4 +57,4 @@ export default function(P) {
   polygons.rectangle = [B, C, H, G];
 
   return polygons;
-};
+}

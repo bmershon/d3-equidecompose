@@ -1,8 +1,4 @@
-import {default as rotation} from "./rotation";
-import {default as identity} from "./identity";
-import {default as translation} from "./translation";
 import {default as angle} from "./angle";
-import {default as add} from "./add";
 import {default as sub} from "./sub";
 import {default as scale} from "./scale";
 import {default as length} from "./length";
@@ -11,9 +7,10 @@ import degree from "./degree";
 import {default as triangle2Rectangle} from "./triangle2Rectangle";
 import {default as rectangle2Rectangle} from "./rectangle2Rectangle";
 import {default as clipCollection} from "./clipCollection";
-import {polygonArea} from "d3-polygon";
 import polygon from "./polygon";
 import {default as stack} from "./stack";
+import {polygonArea} from "d3-polygon";
+import {sum} from "d3-array";
 
 // Takes in source and subject meshes, returns a decomposition layout.
 function decompose(source, subject) {
@@ -87,7 +84,7 @@ function decompose(source, subject) {
   });
 
   return clipped;
-};
+}
 
 function stackable(width, triangle) {
   return rectangle2Rectangle(triangle2Rectangle(triangle), width);
@@ -102,7 +99,7 @@ function flatten(groups) {
 }
 
 function collectionCentroid(collection) {
-  var i, centroids;
+  var centroids;
 
   centroids = collection.map(function(d) {
     return polygon(d).centroid();
@@ -121,7 +118,7 @@ function collectionCentroid(collection) {
 }
 
 function collectionArea(collection) {
-  return d3.sum(collection, function(d) { return d3_polygon.polygonArea(d); });
+  return sum(collection, function(d) { return polygonArea(d); });
 }
 
 function scaleCollection(factor, collection) {
