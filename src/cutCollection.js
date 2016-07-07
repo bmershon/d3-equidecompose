@@ -23,4 +23,4 @@ export default function(a, b, collection) {
   }));
 
   return polygons;
-};
+}

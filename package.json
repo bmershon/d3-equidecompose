@@ -22,13 +22,14 @@
     "url": "https://github.com/d3-equidecompose.git"
   },
   "scripts": {
-    "partials": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -f umd -g d3-polygon:d3_polygon -n partials -o build/partials.js -- partials.js",
-    "pretest": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -f umd -g d3-polygon:d3_polygon -n d3_equidecompose -o build/d3-equidecompose.js -- index.js",
+    "partials": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -f umd -g d3-polygon:d3_polygon,d3-array:d3_array -n partials -o build/partials.js -- partials.js",
+    "pretest": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -f umd -g d3-polygon:d3_polygon,d3-array:d3_array -n d3_equidecompose -o build/d3-equidecompose.js -- index.js",
     "preflight": "npm run partials && tape 'preflight/**/*-test.js' && uglifyjs build/partials.js -c -m -o build/partials.min.js",
     "prepublish": "npm run test && uglifyjs build/d3-equidecompose.js -c -m -o build/d3-equidecompose.min.js",
     "test": "tape 'test/**/*-test.js' && eslint index.js src"
   },
   "dependencies": {
+    "d3-array": "^1.0.0",
     "d3-polygon": "0.2.1"
   },
   "devDependencies": {

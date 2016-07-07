@@ -1,16 +1,13 @@
 import {default as rotation} from "./rotation";
 import {default as identity} from "./identity";
 import {default as translation} from "./translation";
-import {default as angle} from "./angle";
-import {default as add} from "./add";
-import {default as sub} from "./sub";
 import {default as scale} from "./scale";
 import {default as multiply} from "./multiplyMatVec";
 import {default as Multiply} from "./multiplyMatMat";
 import {polygonCentroid, polygonContains} from "d3-polygon";
 
 // Polygon constructor
-function Polygon(P) {
+function Polygon() {
   this.transforms = [];
   this._matrix = identity(3);
   this._origin = null;
@@ -65,10 +62,9 @@ function rotate(theta, pivot) {
 }
 
 function resize(factor) {
-  var i, n, v;
+  var i, n;
   
   for (i = 0, n = this.length; i < n; i++) {
-    v = this[i];
     this[i] = scale(factor, this[i]);
   }
   

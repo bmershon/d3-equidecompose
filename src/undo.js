@@ -1,7 +1,4 @@
-import polygon from "./polygon";
 import scale from "./scale";
-import rotation from "./rotation";
-import translation from "./translation";
 
 // Returns the undo operation for a translation or rotation about a pivot.
 export default function(transform){

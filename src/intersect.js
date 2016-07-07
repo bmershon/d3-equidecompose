@@ -2,8 +2,6 @@ import {default as inDelta} from "./inDelta";
 import {default as add} from "./add";
 import {default as sub} from "./sub";
 import {default as scale} from "./scale";
-import {default as length} from "./length";
-import {default as normalize} from "./normalize";
 
 //  Returns point of intersection of AB and CD 
 //  or null if segments do not intersect.

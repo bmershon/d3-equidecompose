@@ -5,7 +5,6 @@ import {default as intersect} from "./intersect";
 import {default as scale} from "./scale";
 import {default as add} from "./add";
 import {polygonArea, polygonCentroid, polygonContains} from "d3-polygon";
-import polygon from "./polygon";
 import {default as cutCollection} from "./cutCollection";
 
 // Takes in a collection of polygons forming a rectangle and produces
@@ -124,7 +123,7 @@ export default function(collection, width) {
                       : [C, D, A, B];
 
   return polygons;
-};
+}
 
 // Assumes BCDA orientation, where a rectangle is wide if 
 // side BC is longer than BA.
@@ -135,4 +134,3 @@ function isWide(rectangle) {
 
   return length(sub(B, C)) > length(sub(B, A));
 }
-
