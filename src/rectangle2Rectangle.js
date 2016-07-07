@@ -8,10 +8,12 @@ import {polygonArea, polygonCentroid, polygonContains} from "d3-polygon";
 import polygon from "./polygon";
 import {default as cutCollection} from "./cutCollection";
 
-export default function(collection) {
+// Takes in a collection of polygons forming a rectangle and produces
+// a new collection forming a rectangle of the given width.
+export default function(collection, width) {
   var A, B, C, D, E, F, G, J, K, // follows Tralie's labeling
       AFGD, KCF,
-      area, s,
+      area, height,
       rectangle = collection.rectangle, // bounding rectangle
       l = Infinity,
       polygons = [],
@@ -20,23 +22,29 @@ export default function(collection) {
       centroid;
 
   area = Math.abs(polygonArea(rectangle));
-  s = Math.sqrt(area); // square side length
+  height = area / width; // square side length
 
-  // assumes escalator conditions hold
-  B = rectangle[0]; // an invariant throughout
-  E = rectangle[3]; // need reference
-  F = rectangle[1]; // need reference
+  // Bounding rectangle for incoming collection.
+  B = rectangle[0];
+  F = rectangle[1];
   G = rectangle[2];
-
-  // the square defined by [A, B, C, D]
-  A = add(B, scale(s, normalize(sub(E, B))));
-  C = add(B, scale(s, normalize(sub(F, B))));
-  D = add(A, sub(C, B));
+  E = rectangle[3]; 
 
   l = length(sub(B, F));
 
+  if (width > l) {
+    width = height;
+    height = area / width;
+  }
+
+  // The rectangle to be produced, defined by [A, B, C, D].
+  A = add(B, scale(height, normalize(sub(E, B))));
+  C = add(B, scale(width, normalize(sub(F, B))));
+  D = add(A, sub(C, B));
+
+
   // halving the canonical rectangle for the escalator method
-  while (l > 2 * s) {
+  while (l > 2 * width) {
     E_Polygon = [], E_Vertex = [], F_Polygon = [], F_Vertex = [];
 
     a = add(A, scale(0.5, sub(F, B))); 
@@ -111,7 +119,20 @@ export default function(collection) {
     }
   });
 
-  polygons.square = [B, C, D, A]; 
+  polygons.rectangle = (isWide([B, C, D, A]))
+                      ? [B, C, D, A]
+                      : [C, D, A, B];
 
   return polygons;
 };
+
+// Assumes BCDA orientation, where a rectangle is wide if 
+// side BC is longer than BA.
+function isWide(rectangle) {
+  var A = rectangle[3],
+      B = rectangle[0],
+      C = rectangle[1];
+
+  return length(sub(B, C)) > length(sub(B, A));
+}
+

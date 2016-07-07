@@ -1,0 +1,155 @@
+import {default as rotation} from "./rotation";
+import {default as identity} from "./identity";
+import {default as translation} from "./translation";
+import {default as angle} from "./angle";
+import {default as add} from "./add";
+import {default as sub} from "./sub";
+import {default as scale} from "./scale";
+import {default as length} from "./length";
+import {default as cross} from "./cross";
+import degree from "./degree";
+import {default as triangle2Rectangle} from "./triangle2Rectangle";
+import {default as rectangle2Rectangle} from "./rectangle2Rectangle";
+import {default as clipCollection} from "./clipCollection";
+import {polygonArea} from "d3-polygon";
+import polygon from "./polygon";
+import {default as stack} from "./stack";
+
+// Takes in source and subject meshes, returns a decomposition layout.
+function decompose(source, subject) {
+  var A, B,
+      sourceStack, subjectStack,
+      squareA, squareB,
+      centroid, target, T,
+      clipped, theta, direction,
+      i = 0, j = 0, distance, min = Infinity,
+      factor, area, width;
+
+  source = source.map(function(d) { return polygon(d); });
+  subject = subject.map(function(d) { return polygon(d); });
+
+  area = collectionArea(source);
+  width = Math.sqrt(area);
+  factor = Math.sqrt(area / collectionArea(subject) );
+
+  scaleCollection(factor, subject);
+
+  sourceStack = stack(source.map(function(d) {return stackable(width, d); }));
+  subjectStack = stack(subject.map(function(d) {return stackable(width, d); }));
+
+  A = flatten(sourceStack);
+  B = flatten(subjectStack);
+
+  A.square = sourceStack.square;
+  B.square = subjectStack.square;
+
+  squareA = polygon(A.square);
+  squareB = polygon(B.square);
+  centroid = squareA.centroid();
+  target = squareB.centroid();
+  T = [(centroid[0] - target[0]), (centroid[1] - target[1])];
+  squareB = squareB.clone().translate(T);
+
+  // find nearest vertex coorespondence in Q for first vertex in P
+  for (i = 0, j = 0; i < 4; i++) {
+    distance = length(sub(squareA[0], squareB[i]));
+    if (distance < min) {
+      min = distance;
+      j = i;
+    }
+  }
+
+  // rotate through a minimal angle, in the correct direction
+  direction = cross(centroid, squareB[j], squareA[0])[2] > 0 ? 1 : -1;
+  theta = direction * degree(angle(centroid, squareB[j], squareA[0]));
+
+  // center collection B on collection A 
+  B.forEach(function(d) {
+    d.translate(T);
+    d.transforms.push({
+      translate: scale(-1, T),
+    });
+    d.rotate(theta, centroid);
+    d.transforms.push({
+      rotate: -theta,
+      pivot: centroid,
+    });
+  });
+
+  clipped = clipCollection(A, B);
+
+  clipped = clipped.map(function(d) {
+    var p = d.clone();
+    p.transforms = d.target;
+    p = p.origin(); // place in subject triangle
+    p.transforms = d.transforms; // restore joined transform history
+    return p;
+  });
+
+  return clipped;
+};
+
+function stackable(width, triangle) {
+  return rectangle2Rectangle(triangle2Rectangle(triangle), width);
+}
+
+function flatten(groups) {
+  var flattened = [];
+  groups.forEach(function(d) {
+    [].push.apply(flattened, d);
+  });
+  return flattened;
+}
+
+function collectionCentroid(collection) {
+  var i, centroids;
+
+  centroids = collection.map(function(d) {
+    return polygon(d).centroid();
+  });
+
+  if (centroids.length == 1) {
+    return centroids[0];
+  }
+
+  if (centroids.length == 2) {
+    return [(centroids[0][0] + centroids[1][0]) / 2,
+            (centroids[0][1] + centroids[1][1]) / 2];
+  }
+  
+  return polygon(centroids).centroid();
+}
+
+function collectionArea(collection) {
+  return d3.sum(collection, function(d) { return d3_polygon.polygonArea(d); });
+}
+
+function scaleCollection(factor, collection) {
+  var C = collectionCentroid(collection);
+  collection.forEach(function(d) {
+    d.translate(scale(-1, C));
+    d.scale(factor);
+    d.translate(C);
+  });
+  return collection;
+}
+
+export default function decomposition(source, subject) {
+  var polygons = decompose(source, subject);
+
+  return {
+    source: function() {
+      return polygons.map(function(d) {
+        return d.origin().slice(0);
+      });
+    },
+    subject: function() {
+      return polygons.map(function(d) {
+        return d.slice(0);
+      });
+    },
+    scale: function() {
+      return polygons.scale;
+    }
+  }
+}
