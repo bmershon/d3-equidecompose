@@ -1,11 +1,11 @@
-import {default as angle} from "./angle";
-import {default as add} from "./add";
-import {default as sub} from "./sub";
-import {default as scale} from "./scale";
-import {default as project} from "./project";
-import {default as intersect} from "./intersect";
-import {default as degree} from "./degree";
-import polygon from "./polygon";
+import {default as angle} from "../vector/angle";
+import {default as add} from "../vector/add";
+import {default as sub} from "../vector/sub";
+import {default as scale} from "../vector/scale";
+import {default as project} from "../vector/project";
+import {default as intersect} from "../geom/intersect";
+import {default as degree} from "../matrix/degree";
+import polygon from "../geom/polygon";
 import {polygonArea as area} from "d3-polygon";
 
 export default function(P) {

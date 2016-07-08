@@ -1,14 +1,14 @@
-import {default as angle} from "./angle";
-import {default as sub} from "./sub";
-import {default as scale} from "./scale";
-import {default as length} from "./length";
-import {default as cross} from "./cross";
-import degree from "./degree";
+import {default as angle} from "../vector/angle";
+import {default as sub} from "../vector/sub";
+import {default as scale} from "../vector/scale";
+import {default as length} from "../vector/length";
+import {default as cross} from "../vector/cross";
+import {default as degree} from "../matrix/degree";
 import {default as triangle2Rectangle} from "./triangle2Rectangle";
 import {default as rectangle2Rectangle} from "./rectangle2Rectangle";
-import {default as clipCollection} from "./clipCollection";
-import polygon from "./polygon";
-import {default as stack} from "./stack";
+import {default as clipCollection} from "../geom/clipCollection";
+import polygon from "../geom/polygon";
+import {default as stack} from "../equidecompose/stack";
 import {polygonArea} from "d3-polygon";
 import {sum} from "d3-array";
 

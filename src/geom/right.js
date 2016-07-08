@@ -1,4 +1,4 @@
-import cross from "./cross";
+import cross from "../vector/cross";
 
 // Tests if point is to the right of an edge (CCW order).
 export default function(point, edge) {

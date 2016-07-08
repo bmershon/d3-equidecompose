@@ -1,11 +1,11 @@
-import {default as sub} from "./sub";
-import {default as length} from "./length";
-import {default as normalize} from "./normalize";
-import {default as intersect} from "./intersect";
-import {default as scale} from "./scale";
-import {default as add} from "./add";
+import {default as sub} from "../vector/sub";
+import {default as length} from "../vector/length";
+import {default as normalize} from "../vector/normalize";
+import {default as scale} from "../vector/scale";
+import {default as add} from "../vector/add";
+import {default as intersect} from "../geom/intersect";
+import {default as cutCollection} from "../geom/cutCollection";
 import {polygonArea, polygonCentroid, polygonContains} from "d3-polygon";
-import {default as cutCollection} from "./cutCollection";
 
 // Takes in a collection of polygons forming a rectangle and produces
 // a new collection forming a rectangle of the given width.

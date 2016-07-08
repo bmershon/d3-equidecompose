@@ -1,5 +1,5 @@
 import {default as row} from "./row";
-import {default as dot} from "./dot";
+import {default as dot} from "../vector/dot";
 
 //  Multiplies matrix A by vector b.
 export default function(A, b) {

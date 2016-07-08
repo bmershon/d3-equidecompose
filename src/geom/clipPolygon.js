@@ -1,7 +1,7 @@
 import polygon from "./polygon";
 import {default as infiniteIntersection} from "./infiniteIntersection";
 import {default as right} from "./right"
-import {default as undo} from "./undo";
+import {default as undo} from "../equidecompose/undo";
 
 // Sutherland-Hodgeman algorithm for convex subject and clip polygons.
 export default function(subject, clip){
