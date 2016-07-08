@@ -1,4 +1,5 @@
 import {default as decomposition} from "./decomposition";
+import {default as earcut} from "../triangulation/earcut.js";
 
 // Takes in two meshes (triangulations), 
 // scales the subject as necessary, and
@@ -11,6 +12,5 @@ export function equidecomposeMesh(source, subject) {
 // scales the subject as necessary, and returns 
 // a decomposition object.
 export function equidecomposePolygon(source, subject) {
-  // TODO: triangulate source and subject
-  return decomposition(source, subject);
+  return decomposition(earcut.flatten(source), earcut.flatten(subject));
 }
