@@ -1,1 +1,1 @@
-export {equidecomposeMesh, equidecomposePolygon} from "./src/equidecompose";
+export {equidecomposeMesh, equidecomposePolygon} from "./src/equidecompose/equidecompose";

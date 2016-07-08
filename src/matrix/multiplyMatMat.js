@@ -1,6 +1,6 @@
 import {default as row} from "./row";
 import {default as column} from "./column";
-import {default as dot} from "./dot";
+import {default as dot} from "../vector/dot";
 
 //  Multiplies matrix A by matrix B.
 export default function(A, B) {

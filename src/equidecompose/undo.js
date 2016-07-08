@@ -1,4 +1,4 @@
-import scale from "./scale";
+import scale from "../vector/scale";
 
 // Returns the undo operation for a translation or rotation about a pivot.
 export default function(transform){
