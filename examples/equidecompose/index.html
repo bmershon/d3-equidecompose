@@ -27,7 +27,7 @@ var svg,
     width = 960,
     height = 500,
     color,
-    N = 4,
+    N = 6,
     sourceVertices, subjectVertices,
     sourceCentroid, subjectCentroid,
     source, subject,
@@ -38,7 +38,7 @@ color = d3.scale.category10();
 
 // Random Delaunay triangulation
 sourceVertices = d3.range(N).map(function(d) {
-  return [width / 3 * Math.random(), Math.random() * height];
+  return [width / 3 * Math.random() * 0.8, Math.random() * height * 0.8];
 });
 
 // Random Delaunay triangulation to be scaled
@@ -100,7 +100,7 @@ rotation.append("path")
 
 // looping tween of polygons from target position to orignal shape
 figure.transition()
-      .delay(function(d, i) {return i * Math.round(5000 / source.length) + 100})
+      .delay(function(d, i) {return i * Math.round(7500 / source.length) + 100})
       .each(tween);
       
 function tween(_, i) {
@@ -112,7 +112,7 @@ function tween(_, i) {
 
   // rigid translation
   d3.select(this).transition()
-      .duration(300)
+      .duration(750)
       .ease("circle")
       .attrTween("transform", function(d) {
         var origin, target;
@@ -127,14 +127,14 @@ function tween(_, i) {
         if (count === source.length) {
           count = 0;
           figure.transition()
-                .delay(function(d, i) {return i * Math.round(5000 / source.length) + 100})
+                .delay(function(d, i) {return i * Math.round(7500 / source.length) + 1000})
                 .each(tween);
         }
       });
 
   // rigid rotation about polygon centroid, nested under translation group
   d3.select(this).select(".rotation").transition()
-    .duration(300)
+    .duration(750)
     .ease("circle")
     .attrTween("transform", function(d) {
       var originString, targetString;
