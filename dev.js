@@ -1,0 +1,1 @@
+export {default as triangulate} from "./src/geom/triangulate";

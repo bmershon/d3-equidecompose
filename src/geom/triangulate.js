@@ -1,12 +1,15 @@
-import voronoi from "d3-voronoi";
+import {voronoi} from "d3-voronoi";
+import {polygonCentroid, polygonContains} from "d3-polygon";
 
-// Returns the constrained Voroni triangulation of the given
-// simple convex polygon.
 export default function triangulate(vertices) {
-  var layout, triangles;
+  var layout,
+      triangles;
 
-  layout = voronoi(vertices);
-  triangles = layout.polygons();
+  layout = voronoi();
+
+  triangles = layout.triangles(vertices).filter(function(d) {
+    return polygonContains(vertices, polygonCentroid(d));
+  });
 
   return triangles;
 }
