@@ -48,7 +48,7 @@ The file *index.js* defines all the exports to be included in a `d3_equidecompos
 var A = [a, b, c, e, f, g, h, i, j];
 var B = [k, l, m, n]; // same area as A
 
-var decomposition = d3_equidecompose.polygons(A, B);
+var decomposition = d3_equidecomposePolygon(A, B);
 var source = decomposition.source(); // polygons placed in source polygon A
 var subject = decompositon.subject(); // polygons placed in subject polygon B
 ```
