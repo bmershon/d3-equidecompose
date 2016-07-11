@@ -17,24 +17,24 @@ The *node_modules/* directory is created by the node package manager to hold all
 
 There are two targets that can be built from the files in the *src/* directory:
 
-- The file *build/partials.js* is built from *partials.js* and defines exports used for testing partial functionality on a global module `partials`.
+- The file *build/dev.js* is built from *dev.js* and defines exports used for testing partial functionality on a global module `dev`.
 - The file *build/d3-equidecompose.js* is built from *index.js* and defines exports for this module's default global `d3_equidecompose`.
 
-#### Partials
+#### A separate build target
 
-The file *partials.js* defines all the exports to be included in a global called `partials`. This module makes available functionality that would not otherwise be exported in the d3-equidecompose module. For development purposes, this global lets *partial* functionality be tested.
+The file *dev.js* defines all the exports to be included in a global called `dev`. This module makes available functionality that would not otherwise be exported in the d3-equidecompose module. For development purposes, this global lets *dev* functionality be tested.
 
-*Using a partial (development) build of the d3-equidecompose functions.*
+*Using a developmental build of the d3-equidecompose functions.*
 ```html
-<script src="partials.js"></script>
+<script src="evscript>
 
-var foo = partials.foo;
+var foo = dev.foo;
 ```
 
-To rebuild *partials.js*:
+To rebuild *dev.js*:
 
 ```
-npm run partials
+npm run dev
 ```
 
 #### d3_equidecompose
@@ -62,9 +62,9 @@ npm run pretest
 ## Testing
 
 - `npm run test` automatically runs the `pretest` script, which builds everything in `index.js` and then runs the tests in the *test/* directory.
-- `npm run preflight` first runs the `partials` script, which builds everything in `partials.js` and runs the tests in the *preflight/* directory.
+- `npm run preflight` first runs the `dev` script, which builds everything in `partials.js` and runs the tests in the *preflight/* directory.
 
-The *partials.js* build target and *preflight/* directory are designed for building and testing during early stages of development, when smaller components that are not exposed in the production module need to be tested independently.
+The *dev.js* build target and *preflight/* directory are designed for building and testing during early stages of development, when smaller components that are not exposed in the production module need to be tested independently.
 
 ## API Reference
 
