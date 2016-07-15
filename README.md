@@ -1,6 +1,6 @@
 # d3-equidecompose
 
-[<img alt="Star to Nonagon Equidecomposition"src="https://github.com/bmershon/d3-equidecompose/blob/master/img/star-to-nonagon.png">](#)
+[<img alt="Star to Nonagon Equidecomposition"src="https://github.com/bmershon/d3-equidecompose/blob/master/img/star-to-nonagon-teaser.png">](#)
 
 *This is an active project for [Chris Tralie's](http://ctralie.com) Digital 3D Geometry (MATH 290) course taught at Duke University during Spring 2016. The project was developed by [Brooks Mershon](http://brooksmershon.com) and Joy Patel.* 
 
