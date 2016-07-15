@@ -72,7 +72,7 @@ The *dev.js* build target and *preflight/* directory are designed for building a
 
 #### Mesh to Mesh
 
-<a name="equidecompose" href="#equidecompose">#</a> d3_equidecompose.<b>mesh</b>(source [,subject])
+<a name="equidecompose" href="#equidecompose">#</a> d3_equidecompose.<b>equidecomposeMesh</b>(source [,subject])
 
 ..
 
@@ -86,7 +86,7 @@ The *dev.js* build target and *preflight/* directory are designed for building a
 
 #### Polygon to Polygon
 
-<a name="equidecompose" href="#equidecompose">#</a> d3_equidecompose.<b>polygons</b>(source [,subject])
+<a name="equidecompose" href="#equidecompose">#</a> d3_equidecompose.<b>equidecompose</b>(source [,subject])
 
 Creates a decomposition of the specified **source** polygon into the **subject** polygon with the same area. If a subject is not specified, it defaults to a square of the same area as the source whose centroid coincides with the centroid of the source.
 
