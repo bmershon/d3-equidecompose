@@ -20,7 +20,7 @@ The *node_modules/* directory is created by the node package manager to hold all
 There are two targets that can be built from the files in the *src/* directory:
 
 - The file *build/foo.js* is built from *foo.js* and defines exports used for testing partial functionality on a global module `foo`.
-- The file *build/d3-equidecompose.js* is built from *index.js* and defines exports for this module's default global `d3_equidecompose`.
+- The file *build/scissors.js* is built from *index.js* and defines exports for this module's default global `scissors`.
 
 #### A separate build target
 
@@ -39,13 +39,13 @@ To rebuild *foo.js*:
 npm run foo
 ```
 
-#### d3_equidecompose
+#### scissors
 
-The file *index.js* defines all the exports to be included in a `d3_equidecompose` global module.
+The file *index.js* defines all the exports to be included in a `scissors` global module.
 
 *Using the scissors module.*
 ```html
-<script src="d3-equidecompose.js"></script>
+<script src="scissors.js"></script>
 
 var A = [a, b, c, e, f, g, h, i, j];
 var B = [k, l, m, n]; // same area as A
