@@ -83,6 +83,7 @@ function decompose(source, subject) {
     return p;
   });
 
+  clipped.scale = factor;
   return clipped;
 }
 
