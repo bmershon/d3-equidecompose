@@ -2,14 +2,14 @@
 
 [<img alt="Star to Nonagon Equidecomposition"src="https://github.com/bmershon/d3-equidecompose/blob/master/img/star-to-nonagon-teaser.png">](#)
 
-*This project was developed by Brooks Mershon and Joy Patel for [Chris Tralie's](http://ctralie.com) Digital 3D Geometry (MATH 290) course taught at Duke University during Spring 2016.*
+*This project was fooeloped by Brooks Mershon and Joy Patel for [Chris Tralie's](http://ctralie.com) Digital 3D Geometry (MATH 290) course taught at Duke University during Spring 2016.*
 
 The *scissors* module implements the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/)* of one [simple polygon](https://en.wikipedia.org/wiki/Simple_polygon) into another simple polygon of equal area. A decomposition for two such polygons produces polygons which can be rearranged by rigid translation and rotation to form either polygon. Such a decomposition is also known as scissors congruence.
 
 
-## Development
+## fooelopment
 
-To install development and runtime dependences, run the following command in the root directory:
+To install fooelopment and runtime dependences, run the following command in the root directory:
 
 ```
 npm install
@@ -19,24 +19,24 @@ The *node_modules/* directory is created by the node package manager to hold all
 
 There are two targets that can be built from the files in the *src/* directory:
 
-- The file *build/dev.js* is built from *dev.js* and defines exports used for testing partial functionality on a global module `dev`.
+- The file *build/foo.js* is built from *foo.js* and defines exports used for testing partial functionality on a global module `foo`.
 - The file *build/d3-equidecompose.js* is built from *index.js* and defines exports for this module's default global `d3_equidecompose`.
 
 #### A separate build target
 
-The file *dev.js* defines all the exports to be included in a global called `dev`. This module makes available functionality that would not otherwise be exported in the d3-equidecompose module. For development purposes, this global lets *dev* functionality be tested.
+The file *foo.js* defines all the exports to be included in a global called `foo`. This module makes available functionality that would not otherwise be exported in the d3-equidecompose module. For fooelopment purposes, this global lets *foo* functionality be tested.
 
 *Using a developmental build of the scissors functions.*
 ```html
 <script src="evscript>
 
-var foo = dev.foo;
+var foo = foo.bar;
 ```
 
-To rebuild *dev.js*:
+To rebuild *foo.js*:
 
 ```
-npm run dev
+npm run foo
 ```
 
 #### d3_equidecompose
@@ -64,9 +64,9 @@ npm run pretest
 ## Testing
 
 - `npm run test` automatically runs the `pretest` script, which builds everything in `index.js` and then runs the tests in the *test/* directory.
-- `npm run preflight` first runs the `dev` script, which builds everything in `dev.js` and runs the tests in the *preflight/* directory.
+- `npm run preflight` first runs the `foo` script, which builds everything in `foo.js` and runs the tests in the *preflight/* directory.
 
-The *dev.js* build target and *preflight/* directory are designed for building and testing during early stages of development, when smaller components that are not exposed in the production module need to be tested independently.
+The *foo.js* build target and *preflight/* directory are designed for building and testing during early stages of fooelopment, when smaller components that are not exposed in the production module need to be tested independently.
 
 ## API Reference
 

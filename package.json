@@ -22,10 +22,10 @@
     "url": "https://github.com/scissors.git"
   },
   "scripts": {
-    "dev": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -f umd -g d3-polygon:d3,d3-array:d3,d3-voronoi:d3 -n dev -o build/dev.js -- dev.js",
+    "foo": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -f umd -g d3-polygon:d3,d3-array:d3,d3-voronoi:d3 -n foo -o build/foo.js -- foo.js",
     "pretest": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -f umd -g d3-polygon:d3,d3-array:d3,d3-voronoi:d3 -n scissors -o build/scissors.js -- index.js",
     "prepublish": "npm run test && uglifyjs build/scissors.js -c -m -o build/scissors.min.js",
-    "preflight": "npm run dev && tape 'preflight/**/*-test.js'",
+    "preflight": "npm run foo && tape 'preflight/**/*-test.js'",
     "test": "tape 'test/**/*-test.js' && eslint index.js src"
   },
   "dependencies": {

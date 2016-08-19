@@ -1,0 +1,1 @@
+export {default as stack} from "./src/equidecompose/stack";
