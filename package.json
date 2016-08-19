@@ -1,5 +1,5 @@
 {
-  "name": "scissor",
+  "name": "scissors",
   "version": "0.2.0",
   "description": "Compute a layout for cutting up polygon and rearranging the pieces to form another polygon of equal area.",
   "keywords": [
@@ -10,21 +10,21 @@
     "equidecomposability",
     "equidecompose"
   ],
-  "homepage": "https://github.com/bmershon/scissor",
+  "homepage": "https://github.com/bmershon/scissors",
   "license": "MIT",
   "author": {
     "name": "Brooks Mershon and Joy Patel"
   },
-  "main": "build/scissor.js",
+  "main": "build/scissors.js",
   "jsnext:main": "index",
   "repository": {
     "type": "git",
-    "url": "https://github.com/scissor.git"
+    "url": "https://github.com/scissors.git"
   },
   "scripts": {
     "dev": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -f umd -g d3-polygon:d3,d3-array:d3,d3-voronoi:d3 -n dev -o build/dev.js -- dev.js",
-    "pretest": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -f umd -g d3-polygon:d3,d3-array:d3,d3-voronoi:d3 -n scissor -o build/scissor.js -- index.js",
-    "prepublish": "npm run test && uglifyjs build/scissor.js -c -m -o build/scissor.min.js",
+    "pretest": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -f umd -g d3-polygon:d3,d3-array:d3,d3-voronoi:d3 -n scissors -o build/scissors.js -- index.js",
+    "prepublish": "npm run test && uglifyjs build/scissors.js -c -m -o build/scissors.min.js",
     "preflight": "npm run dev && tape 'preflight/**/*-test.js'",
     "test": "tape 'test/**/*-test.js' && eslint index.js src"
   },
