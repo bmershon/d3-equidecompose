@@ -20,6 +20,7 @@ export default function stack(boxes) {
   if (boxes.length < 2) {
     stacked = boxes.slice();
     stacked.square = stacked[0].rectangle;
+    return stacked;
   }
 
   previous = boxes[0];
