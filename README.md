@@ -7,9 +7,9 @@
 The *scissors* module implements the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/)* of one [simple polygon](https://en.wikipedia.org/wiki/Simple_polygon) into another simple polygon of equal area. A decomposition for two such polygons produces polygons which can be rearranged by rigid translation and rotation to form either polygon. Such a decomposition is also known as scissors congruence.
 
 
-## fooelopment
+## development
 
-To install fooelopment and runtime dependences, run the following command in the root directory:
+To install development and runtime dependences, run the following command in the root directory:
 
 ```
 npm install
