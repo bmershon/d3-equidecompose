@@ -5,10 +5,11 @@ import scale from "../vector/scale";
 import sub from "../vector/sub";
 import polygon from "../polygon/polygon";
 
-// Takes in list of polygon collections, each arranged in a rectangle
-// of equal width. Returns a list of polygon collections that have been arranged
-// to fit in a square. Returned list has property `square` which denotes the bounding
-// vertices for the stacked collections.
+// Takes in a list of polygon collections, each arranged in a rectangle
+// of equal width and returns a list of polygon collections that have been
+// arranged to fit in a square.
+// The returned list of collections has property `square` which
+// denotes the bounding vertices for the stacked collections.
 export default function stack(boxes) {
   var previous, current,
       A, B, C, D,
@@ -36,8 +37,12 @@ export default function stack(boxes) {
     T = sub(pivot, snap);
     current.rectangle = polygon(current.rectangle).translate(T);
 
-    direction = cross(pivot, previous.rectangle[2], current.rectangle[1])[2] > 0 ? 1 : -1;
-    theta = -1 * direction * degree(angle(pivot, previous.rectangle[2], current.rectangle[1]));
+    direction = cross(pivot, previous.rectangle[2], current.rectangle[1])[2] > 0
+        ? -1
+        : 1;
+        
+    theta = degree(angle(pivot, previous.rectangle[2], current.rectangle[1]));
+    theta *= direction;
 
     // Translate collection of polygons forming a rectangle of a given width.
     // Align a vertex and pivot rectangle to fit flush with previous collection.

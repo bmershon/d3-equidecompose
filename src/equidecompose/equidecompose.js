@@ -8,7 +8,7 @@ export function equidecompose(source, subject) {
   return decomposition(sourceTriangles, subjectTriangles);  
 }
 
+// In-place reversal of clockwise winding produced by earcut.
 function orient(triangles) {
-  // In-place reversal of clockwise winding produced by earcut.
   return triangles.map(function(d) { return d.reverse(); });
 }
