@@ -74,28 +74,30 @@ The *foo.js* build target and *preflight/* directory are designed for building a
 
 <a name="equidecompose" href="#equidecompose">#</a> scissors.<b>equidecomposeMesh</b>(source [,subject])
 
-..
-
-<a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>source</b>()
-
-..
-
-<a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subject</b>()
-
-..
-
-#### Polygon to Polygon
-
-<a name="equidecompose" href="#equidecompose">#</a> scissors.<b>equidecompose</b>(source [,subject])
-
-Creates a decomposition of the specified **source** polygon into the **subject** polygon with the same area. If a subject is not specified, it defaults to a square of the same area as the source whose centroid coincides with the centroid of the source.
+Creates a decomposition of the specified **source** mesh into the **subject** mesh with the same area. Input meshes are assumed to be triangulations of polygons with counterclockwise winding.
 
 If the subject polygon does not have the same area as the subject polygon, the decomposition will be computed as if the subject were scaled about its centroid so that the source and subject are of equal area.
 
 <a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>source</b>()
 
-Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the subject polygon.
+Returns an array of polygons with counterclockwise winding represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the subject polygon.
 
 <a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subject</b>()
 
-Returns an array of polygons represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the source polygon.
+Returns an array of polygons with counterclockwise winding represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the source polygon.
+
+#### Polygon to Polygon
+
+<a name="equidecompose" href="#equidecompose">#</a> scissors.<b>equidecompose</b>(source [,subject])
+
+Creates a decomposition of the specified **source** polygon into the **subject** polygon with the same area. Input polygons are triangulated using the earcut method.
+
+If the subject polygon does not have the same area as the subject polygon, the decomposition will be computed as if the subject were scaled about its centroid so that the source and subject are of equal area.
+
+<a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>source</b>()
+
+Returns an array of polygons with counterclockwise winding represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the subject polygon.
+
+<a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subject</b>()
+
+Returns an array of polygons with counterclockwise winding represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the source polygon.
