@@ -1,10 +1,10 @@
-import {default as rotation} from "../matrix/rotation";
-import {default as identity} from "../matrix/identity";
-import {default as translation} from "../matrix/translation";
-import {default as scale} from "../vector/scale";
-import {default as multiply} from "../matrix/multiplyMatVec";
-import {default as Multiply} from "../matrix/multiplyMatMat";
+import identity from "../matrix/identity";
+import multiply from "../matrix/multiplyMatVec";
+import Multiply from "../matrix/multiplyMatMat";
 import {polygonCentroid, polygonContains} from "d3-polygon";
+import rotation from "../matrix/rotation";
+import scale from "../vector/scale";
+import translation from "../matrix/translation";
 
 // Polygon constructor
 function Polygon() {

@@ -4,7 +4,7 @@ import scale from "../vector/scale";
 export default function(transform){
   var undone;
   
-  if (transform.rotate && transform.pivot) { // pivot required
+  if (transform.rotate && transform.pivot) {
     undone = {rotate: -transform.rotate, pivot: transform.pivot};
   } else if (transform.translate) {
     undone = {translate: scale(-1, transform.translate)};

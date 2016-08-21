@@ -1,7 +1,7 @@
-import {default as add} from "../vector/add";
-import {default as sub} from "../vector/sub";
-import {default as scale} from "../vector/scale";
-import {default as inDelta} from "./inDelta";
+import add from "../vector/add";
+import scale from "../vector/scale";
+import sub from "../vector/sub";
+import inDelta from "./inDelta";
 
 //  Returns point of intersection of AB and CD 
 //  or null if segments do not intersect.

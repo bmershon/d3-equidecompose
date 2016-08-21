@@ -1,16 +1,16 @@
-import {default as angle} from "../vector/angle";
-import {default as sub} from "../vector/sub";
-import {default as scale} from "../vector/scale";
-import {default as length} from "../vector/length";
-import {default as cross} from "../vector/cross";
-import {default as degree} from "../matrix/degree";
-import {default as triangle2Rectangle} from "./triangle2Rectangle";
-import {default as rectangle2Rectangle} from "./rectangle2Rectangle";
-import {default as clipCollection} from "../polygon/clipCollection";
+import angle from "../vector/angle";
+import clipCollection from "../polygon/clipCollection";
+import cross from "../vector/cross";
+import degree from "../matrix/degree";
+import length from "../vector/length";
 import polygon from "../polygon/polygon";
-import {default as stack} from "../equidecompose/stack";
-import {polygonArea} from "d3-polygon";
-import {sum} from "d3-array";
+import { polygonArea } from "d3-polygon";
+import rectangle2Rectangle from "./rectangle2Rectangle";
+import scale from "../vector/scale";
+import stack from "../equidecompose/stack";
+import sub from "../vector/sub";
+import { sum } from "d3-array";
+import triangle2Rectangle from "./triangle2Rectangle";
 
 // Takes in source and subject meshes, returns a decomposition layout.
 function decompose(source, subject) {

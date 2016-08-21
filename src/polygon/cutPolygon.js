@@ -1,4 +1,4 @@
-import {default as intersect} from "./intersect";
+import intersect from "./intersect";
 import polygon from "./polygon";
 
 // Returns array of polygons resulting from cutting

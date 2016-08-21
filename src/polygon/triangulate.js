@@ -1,4 +1,3 @@
-import {polygonCentroid, polygonContains} from "d3-polygon";
 import earcut from "earcut"; // External Mapbox earcut module.
 
 export default function triangulate(vertices) {

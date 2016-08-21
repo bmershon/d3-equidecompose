@@ -1,7 +1,6 @@
 import normalize from "./normalize";
 
-// Returns a vector pointing along the z-axis 
-// with length ||AB x AC||.
+// Returns a vector pointing along the z-axis with length ||AB x AC||.
 export default function cross(a, b, c) {
   var u, v, z, res;
 

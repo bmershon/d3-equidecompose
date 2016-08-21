@@ -1,6 +1,6 @@
-import {default as add} from "../vector/add";
-import {default as sub} from "../vector/sub";
-import {default as scale} from "../vector/scale";
+import add from "../vector/add";
+import scale from "../vector/scale";
+import sub from "../vector/sub";
 
 var infinity = [1e12, 1e12];
 

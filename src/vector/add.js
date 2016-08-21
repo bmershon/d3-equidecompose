@@ -1,4 +1,4 @@
-import {default as pairwise} from "./pairwise";
+import pairwise from "./pairwise";
 
 export default function(a, b) {
   return pairwise(a, b, function(x, y){

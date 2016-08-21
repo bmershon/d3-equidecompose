@@ -1,4 +1,4 @@
-import {default as cutPolygon} from "./cutPolygon";
+import cutPolygon from "./cutPolygon";
 
 export default function(a, b, collection) {
   var N = collection.length,

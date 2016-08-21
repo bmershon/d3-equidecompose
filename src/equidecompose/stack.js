@@ -1,8 +1,8 @@
-import {default as angle} from "../vector/angle";
-import {default as sub} from "../vector/sub";
-import {default as scale} from "../vector/scale";
-import {default as cross} from "../vector/cross";
+import angle from "../vector/angle";
+import cross from "../vector/cross";
 import degree from "../matrix/degree";
+import scale from "../vector/scale";
+import sub from "../vector/sub";
 import polygon from "../polygon/polygon";
 
 // Takes in list of polygon collections, each arranged in a rectangle

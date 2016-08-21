@@ -1,10 +1,10 @@
-import {default as sub} from "../vector/sub";
-import {default as length} from "../vector/length";
-import {default as normalize} from "../vector/normalize";
-import {default as scale} from "../vector/scale";
-import {default as add} from "../vector/add";
-import {default as intersect} from "../polygon/intersect";
-import {default as cutCollection} from "../polygon/cutCollection";
+import add from "../vector/add";
+import cutCollection from "../polygon/cutCollection";
+import length from "../vector/length";
+import intersect from "../polygon/intersect";
+import normalize from "../vector/normalize";
+import scale from "../vector/scale";
+import sub from "../vector/sub";
 import {polygonArea, polygonCentroid, polygonContains} from "d3-polygon";
 
 // Takes in a collection of polygons forming a rectangle and produces

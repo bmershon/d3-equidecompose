@@ -1,8 +1,8 @@
-import {default as row} from "./row";
-import {default as column} from "./column";
-import {default as dot} from "../vector/dot";
+import column from "./column";
+import dot from "../vector/dot";
+import row from "./row";
 
-//  Multiplies matrix A by matrix B.
+// Multiplies matrix A by matrix B and returns the resulting matrix.
 export default function(A, B) {
   var i, j,
       res = [[0, 0, 0],

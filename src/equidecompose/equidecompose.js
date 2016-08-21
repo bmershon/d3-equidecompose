@@ -1,11 +1,14 @@
-import {default as decomposition} from "./decomposition";
-import {default as triangulate} from "../polygon/triangulate.js";
+import decomposition from "./decomposition";
+import triangulate from "../polygon/triangulate.js";
 
 export function equidecompose(source, subject) {
-  return decomposition(orient(triangulate(source)), orient(triangulate(subject)));  
+  var sourceTriangles = orient(triangulate(source)),
+      subjectTriangles = orient(triangulate(subject));
+  
+  return decomposition(sourceTriangles, subjectTriangles);  
 }
 
 function orient(triangles) {
-  // Earcut produces triangles with clockwise winding: reverse.
+  // In-place reversal of clockwise winding produced by earcut.
   return triangles.map(function(d) { return d.reverse(); });
 }

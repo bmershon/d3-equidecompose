@@ -1,4 +1,4 @@
-import {default as identity} from "./identity";
+import identity from "./identity";
 
 export default function(delta) {
   var dx = delta[0];
