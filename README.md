@@ -70,11 +70,11 @@ The *foo.js* build target and *preflight/* directory are designed for building a
 
 ## API Reference
 
-#### Mesh to Mesh
+#### Polygon to Polygon
 
-<a name="equidecompose" href="#equidecompose">#</a> scissors.<b>equidecomposeMesh</b>(source [,subject])
+<a name="equidecompose" href="#equidecompose">#</a> scissors.<b>equidecompose</b>(source [,subject])
 
-Creates a decomposition of the specified **source** mesh into the **subject** mesh with the same area. Input meshes are assumed to be triangulations of polygons with counterclockwise winding.
+Creates a decomposition of the specified **source** polygon into the **subject** polygon with the same area. Input polygons are triangulated using the earcut method.
 
 If the subject polygon does not have the same area as the subject polygon, the decomposition will be computed as if the subject were scaled about its centroid so that the source and subject are of equal area.
 
@@ -86,11 +86,11 @@ Returns an array of polygons with counterclockwise winding represented as arrays
 
 Returns an array of polygons with counterclockwise winding represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the source polygon.
 
-#### Polygon to Polygon
+#### Mesh to Mesh
 
-<a name="equidecompose" href="#equidecompose">#</a> scissors.<b>equidecompose</b>(source [,subject])
+<a name="equidecompose" href="#equidecompose">#</a> scissors.<b>equidecomposeMesh</b>(source [,subject])
 
-Creates a decomposition of the specified **source** polygon into the **subject** polygon with the same area. Input polygons are triangulated using the earcut method.
+Creates a decomposition of the specified **source** mesh into the **subject** mesh with the same area. Input meshes are assumed to be triangulations of polygons with counterclockwise winding.
 
 If the subject polygon does not have the same area as the subject polygon, the decomposition will be computed as if the subject were scaled about its centroid so that the source and subject are of equal area.
 
