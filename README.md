@@ -96,7 +96,7 @@ Returns an array of polygons with counterclockwise winding represented as arrays
 
 Returns an array of polygons with counterclockwise winding represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the source polygon.
 
-<a name="decomposition_sort" href="#decomposition_filter">#</a> <i>decomposition</i>.<b>sort</b>([comparator])
+<a name="decomposition_sort" href="#decomposition_sort">#</a> <i>decomposition</i>.<b>sort</b>([comparator])
 
 A comparator function which takes two input arrays representing the respective positions of two polygons may be passed into *decomposition*.filter() in order to change the output ordering of subject and source polygons. Subject and source polygons will remain in correspondence with one another regardless of the provided comparator function. If no comparator is passed in, the current comparator is returned.
 
