@@ -72,7 +72,7 @@ The *foo.js* build target and *preflight/* directory are designed for building a
 
 #### Polygon to Polygon
 
-<a name="equidecompose" href="#equidecompose">#</a> scissors.<b>equidecompose</b>(source [,subject])
+<a name="equidecompose" href="#equidecompose">#</a> scissors.<b>equidecompose</b>(source, subject)
 
 Creates a decomposition of the specified **source** polygon into the **subject** polygon with the same area. Input polygons are triangulated using the earcut method.
 
@@ -88,7 +88,7 @@ Returns an array of polygons with counterclockwise winding represented as arrays
 
 #### Mesh to Mesh
 
-<a name="equidecompose" href="#equidecompose">#</a> scissors.<b>equidecomposeMesh</b>(source [,subject])
+<a name="equidecompose" href="#equidecompose">#</a> scissors.<b>equidecomposeMesh</b>(source, subject)
 
 Creates a decomposition of the specified **source** mesh into the **subject** mesh with the same area. Input meshes are assumed to be triangulations of polygons with counterclockwise winding.
 
