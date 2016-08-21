@@ -74,7 +74,7 @@ The *foo.js* build target and *preflight/* directory are designed for building a
 
 <a name="equidecompose" href="#equidecompose">#</a> scissors.<b>equidecompose</b>(source, subject)
 
-Creates a decomposition of the specified **source** polygon into the **subject** polygon with the same area. Input polygons are triangulated using the earcut method.
+Creates a *decomposition* of the specified **source** polygon into the **subject** polygon with the same area. Input polygons are triangulated using the earcut method.
 
 If the subject polygon does not have the same area as the subject polygon, the decomposition will be computed as if the subject were scaled about its centroid so that the source and subject are of equal area.
 
@@ -82,7 +82,7 @@ If the subject polygon does not have the same area as the subject polygon, the d
 
 <a name="equidecompose" href="#equidecompose">#</a> scissors.<b>equidecomposeMesh</b>(source, subject)
 
-Creates a decomposition of the specified **source** mesh into the **subject** mesh with the same area. Input meshes are assumed to be triangulations of polygons with counterclockwise winding.
+Creates a *decomposition* of the specified **source** mesh into the **subject** mesh with the same area. Input meshes are assumed to be triangulations of polygons with counterclockwise winding.
 
 If the subject polygon does not have the same area as the subject polygon, the decomposition will be computed as if the subject were scaled about its centroid so that the source and subject are of equal area.
 
