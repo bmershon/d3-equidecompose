@@ -78,14 +78,6 @@ Creates a decomposition of the specified **source** polygon into the **subject**
 
 If the subject polygon does not have the same area as the subject polygon, the decomposition will be computed as if the subject were scaled about its centroid so that the source and subject are of equal area.
 
-<a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>source</b>()
-
-Returns an array of polygons with counterclockwise winding represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the subject polygon.
-
-<a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subject</b>()
-
-Returns an array of polygons with counterclockwise winding represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the source polygon.
-
 #### Mesh to Mesh
 
 <a name="equidecompose" href="#equidecompose">#</a> scissors.<b>equidecomposeMesh</b>(source, subject)
@@ -94,6 +86,8 @@ Creates a decomposition of the specified **source** mesh into the **subject** me
 
 If the subject polygon does not have the same area as the subject polygon, the decomposition will be computed as if the subject were scaled about its centroid so that the source and subject are of equal area.
 
+### Decomposition
+
 <a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>source</b>()
 
 Returns an array of polygons with counterclockwise winding represented as arrays of positions. Each polygon is positioned within the source polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the subject polygon.
@@ -101,3 +95,18 @@ Returns an array of polygons with counterclockwise winding represented as arrays
 <a name="decomposition_subjects" href="#decomposition_subjects">#</a> <i>decomposition</i>.<b>subject</b>()
 
 Returns an array of polygons with counterclockwise winding represented as arrays of positions. Each polygon is positioned within the subject polygon used to create a decomposition, and its index within the returned array matches the corresponding index of the source polygon.
+
+<a name="decomposition_sort" href="#decomposition_filter">#</a> <i>decomposition</i>.<b>sort</b>([comparator])
+
+A comparator function which takes two input arrays representing the respective positions of two polygons may be passed into *decomposition*.filter() in order to change the output ordering of subject and source polygons. Subject and source polygons will remain in correspondence with one another regardless of the provided comparator function. If no comparator is passed in, the current comparator is returned.
+
+```
+var source = decomposition
+    .filter(comparator)
+    .source();
+
+// Polygons returned in descending order of area.
+function comparator(a, b) {
+  return -(d3.polygonArea(a) - d3.polygonArea(b));
+}
+```
