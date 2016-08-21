@@ -102,7 +102,7 @@ A comparator function which takes two input arrays representing the respective p
 
 ```
 var source = decomposition
-    .filter(comparator)
+    .sort(comparator)
     .source();
 
 // Polygons returned in descending order of area.
