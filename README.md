@@ -80,7 +80,7 @@ If the subject polygon does not have the same area as the subject polygon, the d
 
 #### Mesh to Mesh
 
-<a name="equidecompose" href="#equidecompose">#</a> scissors.<b>equidecomposeMesh</b>(source, subject)
+<a name="equidecompose_mesh" href="#equidecompose_mesh">#</a> scissors.<b>equidecomposeMesh</b>(source, subject)
 
 Creates a *decomposition* of the specified **source** mesh into the **subject** mesh with the same area. Input meshes are assumed to be triangulations of polygons with counterclockwise winding.
 
