@@ -2,6 +2,8 @@ import {default as add} from "../vector/add";
 import {default as sub} from "../vector/sub";
 import {default as scale} from "../vector/scale";
 
+var infinity = [1e12, 1e12];
+
 //  Returns point of intersection of AB and CD,
 //  possibly occuring at infinity.
 export default function(a, b, c, d) {
@@ -14,7 +16,7 @@ export default function(a, b, c, d) {
   denom = u[0] * (-v[1]) - (-v[0]) * u[1];
   
   // Check for parallel lines
-  if (denom === 0) return [Infinity, Infinity];
+  if (denom === 0) return [infinity, infinity];
 
   s = (q[0] * (-v[1]) - (-v[0]) * q[1]) / (denom);
 

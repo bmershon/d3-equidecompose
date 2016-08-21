@@ -3,7 +3,7 @@ import {default as sub} from "../vector/sub";
 import {default as scale} from "../vector/scale";
 import {default as cross} from "../vector/cross";
 import degree from "../matrix/degree";
-import polygon from "../geom/polygon";
+import polygon from "../polygon/polygon";
 
 // Takes in list of polygon collections, each arranged in a rectangle
 // of equal width. Returns a list of polygon collections that have been arranged

@@ -1,10 +1,11 @@
 import {default as decomposition} from "./decomposition";
-import {default as triangulate} from "../geom/triangulate.js";
+import {default as triangulate} from "../polygon/triangulate.js";
 
 export function equidecompose(source, subject) {
-  return decomposition(triangulate(source), triangulate(subject));  
+  return decomposition(orient(triangulate(source)), orient(triangulate(subject)));  
 }
 
-export function equidecomposeMesh(source, subject) {
-  return decomposition(source, subject);
+function orient(triangles) {
+  // Earcut produces triangles with clockwise winding: reverse.
+  return triangles.map(function(d) { return d.reverse(); });
 }

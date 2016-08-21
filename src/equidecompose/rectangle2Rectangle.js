@@ -3,8 +3,8 @@ import {default as length} from "../vector/length";
 import {default as normalize} from "../vector/normalize";
 import {default as scale} from "../vector/scale";
 import {default as add} from "../vector/add";
-import {default as intersect} from "../geom/intersect";
-import {default as cutCollection} from "../geom/cutCollection";
+import {default as intersect} from "../polygon/intersect";
+import {default as cutCollection} from "../polygon/cutCollection";
 import {polygonArea, polygonCentroid, polygonContains} from "d3-polygon";
 
 // Takes in a collection of polygons forming a rectangle and produces

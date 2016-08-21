@@ -3,9 +3,9 @@ import {default as add} from "../vector/add";
 import {default as sub} from "../vector/sub";
 import {default as scale} from "../vector/scale";
 import {default as project} from "../vector/project";
-import {default as intersect} from "../geom/intersect";
+import {default as intersect} from "../polygon/intersect";
 import {default as degree} from "../matrix/degree";
-import polygon from "../geom/polygon";
+import polygon from "../polygon/polygon";
 import {polygonArea as area} from "d3-polygon";
 
 export default function(P) {

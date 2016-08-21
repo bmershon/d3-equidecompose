@@ -1,6 +1,7 @@
 import polygon from "./polygon";
-import {default as infiniteIntersection} from "./infiniteIntersection";
+import {default as infiniteIntersect} from "./infiniteIntersect";
 import {default as right} from "./right"
+import {default as ccw} from "./counterClockwise";
 import {default as undo} from "../equidecompose/undo";
 
 // Sutherland-Hodgeman algorithm for convex subject and clip polygons.
@@ -15,7 +16,8 @@ export default function(subject, clip){
       undone, transforms;
 
   // Ensure clip polygon is traversed in clockwise order.
-  clip = clip.clone().reverse();
+  clip = ccw(clip.clone()).reverse();
+  ccw(subject);
   outputList = subject.slice(0);
 
   for (i = 0, n = clip.length; i < n; i++) {    
@@ -33,12 +35,12 @@ export default function(subject, clip){
 
       if (eInside){
         if (!sInside){ // exit clip region
-          intersection = infiniteIntersection(S, E, clip[i], clip[end]);
+          intersection = infiniteIntersect(S, E, clip[i], clip[end]);
           outputList.push(intersection);
         }
         outputList.push(E);
       } else if (sInside) { // enter clip region
-        intersection = infiniteIntersection(S, E, clip[i], clip[end]);
+        intersection = infiniteIntersect(S, E, clip[i], clip[end]);
         outputList.push(intersection);
       }
       S = E;
