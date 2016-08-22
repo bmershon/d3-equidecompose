@@ -86,7 +86,7 @@ Creates a *decomposition* of the specified **source** mesh into the **subject** 
 
 If the subject polygon does not have the same area as the subject polygon, the decomposition will be computed as if the subject were scaled about its centroid so that the source and subject are of equal area.
 
-#### **Decomposition**
+#### *Decomposition*
 
 <a name="decomposition_sources" href="#decomposition_sources">#</a> <i>decomposition</i>.<b>source</b>()
 
