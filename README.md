@@ -1,6 +1,8 @@
 # scissors
 
-[<img alt="Square to Hexagon equidecomposition"src="https://github.com/bmershon/d3-equidecompose/blob/master/img/correspondences-teaser.png">](http://bl.ocks.org/bmershon/29eb32dbf49408e92924ee63b01cb772)
+[<img width="50%" alt="Square to Hexagon equidecomposition"src="https://github.com/bmershon/d3-equidecompose/blob/master/img/correspondences-teaser.png">](http://bl.ocks.org/bmershon/29eb32dbf49408e92924ee63b01cb772)
+
+[<img width="50%" alt="Square to Hexagon equidecomposition"src="https://github.com/bmershon/d3-equidecompose/blob/master/img/square-to-triangle-teaser.png">](http://bl.ocks.org/bmershon/29eb32dbf49408e92924ee63b01cb772)
 
 *This project was developed by Brooks Mershon and Joy Patel for [Chris Tralie's](http://ctralie.com) Digital 3D Geometry (MATH 290) course taught at Duke University during Spring 2016.*
 
