@@ -1,13 +1,12 @@
 # scissors
 
-[<img alt="Square to Hexagon equidecomposition"src="https://github.com/bmershon/d3-equidecompose/blob/master/img/correspondences-teaser.png">](http://bl.ocks.org/bmershon/29eb32dbf49408e92924ee63b01cb772)
-
-[<img alt="Square to Hexagon equidecomposition"src="https://github.com/bmershon/d3-equidecompose/blob/master/img/square-to-triangle-teaser.png">](http://bl.ocks.org/bmershon/671778fb88cf6c1e8bcb1b20ebb5a385)
-
 *This project was developed by Brooks Mershon and Joy Patel for [Chris Tralie's](http://ctralie.com) Digital 3D Geometry (MATH 290) course taught at Duke University during Spring 2016.*
 
 The *scissors* module implements the *[equidecomposition](http://www.ctralie.com/Teaching/COMPSCI290/Lectures/Intro/)* of one [simple polygon](https://en.wikipedia.org/wiki/Simple_polygon) into another simple polygon of equal area. A decomposition for two such polygons produces polygons which can be rearranged by rigid translation and rotation to form either polygon. Such a decomposition is also known as scissors congruence.
 
+[<img alt="Square to Hexagon equidecomposition"src="https://github.com/bmershon/d3-equidecompose/blob/master/img/correspondences-teaser.png">](http://bl.ocks.org/bmershon/29eb32dbf49408e92924ee63b01cb772)
+
+[<img alt="Square to Hexagon equidecomposition"src="https://github.com/bmershon/d3-equidecompose/blob/master/img/square-to-triangle-teaser.png">](http://bl.ocks.org/bmershon/671778fb88cf6c1e8bcb1b20ebb5a385)
 
 ## development
 
