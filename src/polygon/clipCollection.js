@@ -6,7 +6,7 @@ import clipPolygon from "./clipPolygon";
 export default function(A, B){
   var result = [], clipped, i, j;
 
-  // clip every polygon in A against every polygon in B
+  // Clip every polygon in A against every polygon in B.
   for (i = 0; i < A.length; i++) {
     for (j = 0; j < B.length; j++) {
       clipped = clipPolygon(ccw(A[i]), ccw(B[j]));
