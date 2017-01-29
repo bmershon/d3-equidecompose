@@ -10,7 +10,7 @@ export default function(subject, clip){
       clipped,
       i, j, n,
       end, edge, 
-      E, S, // two subject vertices
+      E, S, // Two subject vertices.
       eInside, sInside,
       intersection,
       undone, transforms;
@@ -49,10 +49,10 @@ export default function(subject, clip){
 
   clipped = polygon(outputList);
   
-  // subject polygon's original transform history
+  // Subject polygon's original transform history.
   transforms = subject.transforms.slice(0);
     
-  // append reversed (and undone) transfer history of clip polygon
+  // Append reversed (and undone) transfer history of clip polygon.
   clipped.target = clip.transforms.slice(0);
   undone = clip.transforms.slice(0).reverse(0).map(undo);
   transforms = transforms.concat(undone);

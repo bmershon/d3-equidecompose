@@ -23,7 +23,7 @@ export default function(a, b, P) {
     f = P[i];
 
     // compare floating-point positions by reference
-    if      ((a === e || b === e) && !(points.length && Object.is(points[0], e))) 
+    if ((a === e || b === e) && !(points.length && Object.is(points[0], e))) 
       x = e;
     else if ((a === f || b === f) && !(points.length && !Object.is(points[0], f)))
       x = f;
