@@ -1,11 +1,15 @@
 import add from "../vector/add";
 import cutCollection from "../polygon/cutCollection";
-import length from "../vector/length";
 import intersect from "../polygon/intersect";
+import length from "../vector/length";
 import normalize from "../vector/normalize";
+import {
+  polygonArea,
+  polygonCentroid,
+  polygonContains
+} from "d3-polygon";
 import scale from "../vector/scale";
 import sub from "../vector/sub";
-import {polygonArea, polygonCentroid, polygonContains} from "d3-polygon";
 
 // Takes in a collection of polygons forming a rectangle and produces
 // a new collection forming a rectangle of the given width.
@@ -40,7 +44,6 @@ export default function(collection, width) {
   A = add(B, scale(height, normalize(sub(E, B))));
   C = add(B, scale(width, normalize(sub(F, B))));
   D = add(A, sub(C, B));
-
 
   // halving the canonical rectangle for the escalator method
   while (l > 2 * width) {
@@ -118,9 +121,7 @@ export default function(collection, width) {
     }
   });
 
-  polygons.rectangle = (isWide([B, C, D, A]))
-                      ? [B, C, D, A]
-                      : [C, D, A, B];
+  polygons.rectangle = (isWide([B, C, D, A])) ? [B, C, D, A] : [C, D, A, B];
 
   return polygons;
 }

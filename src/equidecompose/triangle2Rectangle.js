@@ -1,12 +1,12 @@
-import {default as angle} from "../vector/angle";
 import {default as add} from "../vector/add";
-import {default as sub} from "../vector/sub";
-import {default as scale} from "../vector/scale";
-import {default as project} from "../vector/project";
-import {default as intersect} from "../polygon/intersect";
+import {default as angle} from "../vector/angle";
 import {default as degree} from "../matrix/degree";
+import {default as intersect} from "../polygon/intersect";
+import {default as project} from "../vector/project";
 import polygon from "../polygon/polygon";
 import {polygonArea as area} from "d3-polygon";
+import {default as scale} from "../vector/scale";
+import {default as sub} from "../vector/sub";
 
 export default function(P) {
   var index = 0,
@@ -19,7 +19,7 @@ export default function(P) {
 
   if (area(P) == 0) return [];
 
-  // Find largest angle in triangle T
+  // Find largest angle in triangle T.
   for (i = 0; i < 3; i++) {
     theta = 0;
     theta = angle(P[i % 3], P[(i + 1) % 3], P[(i + 2) % 3]);
