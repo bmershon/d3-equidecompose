@@ -64,13 +64,6 @@ To rebuild *scissors.js*:
 npm run pretest
 ```
 
-## Testing
-
-- `npm run test` automatically runs the `pretest` script, which builds everything in `index.js` and then runs the tests in the *test/* directory.
-- `npm run preflight` first runs the `foo` script, which builds everything in `foo.js` and runs the tests in the *preflight/* directory.
-
-The *foo.js* build target and *preflight/* directory are designed for building and testing during early stages of development, when smaller components that are not exposed in the production module need to be tested independently.
-
 ## API Reference
 
 #### Polygon to Polygon
