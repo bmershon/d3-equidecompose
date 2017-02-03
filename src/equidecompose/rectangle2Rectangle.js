@@ -27,6 +27,10 @@ export default function(collection, width) {
   area = Math.abs(polygonArea(rectangle));
   height = area / width; // square side length
 
+  collection = collection.map(function(d) {
+    return d.clone();
+  });
+
   // Bounding rectangle for incoming collection.
   B = rectangle[0];
   F = rectangle[1];
@@ -108,7 +112,8 @@ export default function(collection, width) {
 
   // Slide new polygons using elevator method.
   polygons.forEach(function(d) {
-    var centroid, T;
+    var centroid,
+        T;
 
     centroid = polygonCentroid(d);
 

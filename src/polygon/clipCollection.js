@@ -10,7 +10,7 @@ export default function(A, B){
   for (i = 0; i < A.length; i++) {
     for (j = 0; j < B.length; j++) {
       clipped = clipPolygon(ccw(A[i]), ccw(B[j]));
-      if (clipped.length != 0) result.push(clipped);
+      if (clipped.length > 2) result.push(clipped);
     } 
   }
 
